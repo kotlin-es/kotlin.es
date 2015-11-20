@@ -1,0 +1,153 @@
+---
+layout: post
+title:  "Kotlin M14"
+date:   2015-10-01 00:00:00 +0100
+category: articles
+categories: releases
+tags: releases
+author: soywiz
+permalink: "/2015/10/kotlin-m14/"
+---
+
+Con la versión final cada vez más cerca, hemos empezado a reducir el tiempo entre versiones. Y ahora presentamos la M14, que trae los siguientes cambios:
+
+* Soporte para anotaciones sobre la clase vinculada al archivo
+* Nueva API de Java API para la librería estándar
+* * Modificador `operator` para operadores
+* Ahora a los campos de respaldo (backing fields) se accede a través de la variable sintética field
+
+# Lenguaje
+Estamos terminando con los cambios en el lenguaje, así que no hay ningún cambio dramático en la M14.
+
+**NOTA:** Con esta versión eliminamos todas las características y funciones deprecadas,
+así que aseguraos de lanzar *Code Cleanup* antes de instalar la M14.
+
+# Campos de respaldo (Backing fields)
+La vieja sintaxis `$propertyName` está deprecada. Para acceder al campo de respaldo dentro
+de un getter/setter, utilizad la variable sintética `field`:
+
+{% highlight kotlin %}
+var prop: Int = 1
+    get() {
+        notifyRead(field)
+        return field
+    }
+    set(v) {
+        notifyWrite(field, v)
+        field = v
+    }
+{% endhighlight %}
+
+Si hay otra propiedad en el mismo ámbito que se llama también `field`, debemos calificarla utilizando “this.”.
+
+Las propiedades ver con un campo de respaldo y un setter personalizado requieren ser inicializadas en la declaración (no en el constructor), porque dichos inicializadores escriben sobre el campo de respaldo directamente, obviando el setter.
+
+En los casos (probablemente raros) en los que este modelo no es suficientemente flexible, por favor, considera utilizar propiedades de respaldo (el refactoring correspondiente está disponible) o usar propiedades delegadas.
+
+
+# Operadores
+Como anunciamos [previamente](http://blog.jetbrains.com/kotlin/2015/09/call-for-feedback-upcoming-changes-in-kotlin/),
+Kotlin M14 espera que las funciones llamadas mediante la notación de operador
+(ejemplo: `plus`, `iterator` etc) se marquen con el modificador `operator`.
+Nota: cuando extendemos `Any`, `Iterable` o `Comparable`, se heredan los modificadores operator
+automáticamente, así que no hay necesidad de preocuparse por ellos. Cuando se quiera utilizar
+un método de Java con la notación de operador, por favor usa una función de extensión marcada
+con `operator`:
+
+{% highlight kotlin %}
+operator fun JavaClass.plus(other: JavaClass): JavaClass = this.plus(other)
+{% endhighlight %}
+
+Usa Code Cleanup para añadir modificadores a todos los operadores usados en tu proyecto automáticamente.
+Nota: Las funciones infix se migrarán al mismo esquema próximamente.
+
+
+# Constantes en tiempo de compilación
+
+A partir de la M14 tenemos que utilizar el modificador `const` para ser capaces de utilizarlas
+en anotaciones y verlos como campos en Java.
+
+{% highlight kotlin %}
+const val MAX = 239
+{% endhighlight %}
+
+*Code Cleanup* os asistirá añadiendo `const` por vosotros.
+
+
+
+# Anotar clases de archivo
+
+Desde la M13, las funciones de libres y las propiedades de cada archivo se ponen en archivos
+de clase separados por defecto ([aquí](http://blog.jetbrains.com/kotlin/2015/09/kotlin-m13-is-out/)
+los detalles). Ahora podemos anotar dichas clases aplicando una anotación de archivo:
+
+{% highlight kotlin %}
+// FILE: foo.kt
+@file:MyClassAnnotation
+package bar
+fun baz() {}
+{% endhighlight %}
+
+se compilará a
+
+{% highlight kotlin %}
+// Pseudo-Java
+@MyClassAnnotation
+    public final class FooKt {
+    public static void baz() {...}
+}
+{% endhighlight %}
+
+# Migración de las viejas fachadas de paquete
+
+Ahora que ya hemos transicionado al [nuevo layout de clases](http://blog.jetbrains.com/kotlin/2015/06/improving-java-interop-top-level-functions-and-properties/),
+es hora de retirar el viejo. Desde la M14 el viejo sistema de fachadas de paquetes y el IDE ayuda a migrar
+el código Java al nuevo sistema a través del Code Cleanup.
+
+**NOTA:** eliminaremos las fachadas de paquete muy pronto, así que aseguraos de migrar vuestro código.
+
+La librería estándar (previamente la clase `kotlin.KotlinPackage`) también se está migrando
+al nuevo esquema: más detalles abajo.
+
+
+# Otros cambios del lenguaje
+
+* `private` en las funciones libres ahora son privadas al archivo
+* `internal` se comprueba en tiempo de compilación (no solo en el IDE)
+* `private` en las interfaces ahora son realmente privadas
+* equals en las data classes comparan las arrays llamando a su método `.equals()` (que funciona por identidad)
+* Se prohiben `lateinit val`
+* many cases of inheritance and other degrees of freedom are prohibited for data classed (see this blog post)
+* protected and internal members are prohibited in interfaces
+* _, __, ___ are forbidden as in identifiers, i.e. we can use _foo, but not _ alone (reserved for future use)
+* identityEquals() function is deprecated in favor of ===
+
+# Standard Library changes
+
+For the Java standpoint, Kotlin’s standard library is now organized into
+utility classes, each dedicated to its own data types and/or operations. For example:
+
+* ArraysKt — operations on arrays, extensions for arrays, array factory methods
+* CharsKt — extensions for Char and Char.Companion, most of them should be hidden
+* CollectionsKt — operations on iterables, collections and lists, list factory methods
+* ComparisonsKt — operations on comparators, comparator factory methods, and functions for performing comparisons
+
+See more in the API docs.
+
+# IDE Changes
+
+As usual, the IDE helps you migrate seamlessly from M13 via *Code cleanup*.
+Also there are several new handy features in M14:
+
+* As mentioned above, there in some cases we need private backing properties. You can easily introduce them via *intention action*: ![](/images/m14/bpCover.png)
+* Also you can move property initialization from constructor body or initializer block to property declaration: ![](/images/m14/mtdCover.png)
+* One of the long-expected features is completion for overriding functions and properties: ![](/images/m14/overrideCover.png)
+Since M13 the IDE optimizes imports on the fly. Add unambiguous imports on the fly feature is also supported now. Give it a try: ![](/images/m14/ImportOnTheFly.png)
+
+# Installation
+
+[*IntelliJ IDEA 15 Public Preview*](https://www.jetbrains.com/idea/nextversion/) has Kotlin M14 bundled, so you don’t need to install it at all.
+
+*IntelliJ IDEA 14.1* — simply update your plugin as usual.
+
+P.S. Join our [Slack channels](http://kotlinslackin.herokuapp.com/) to discuss Kotlin and your experience with it!
