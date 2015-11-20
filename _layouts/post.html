@@ -2,38 +2,50 @@
 layout: default
 # https://github.com/Shopify/liquid/wiki/Liquid-for-Designers
 ---
-<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+<div class="row">
+    <div class="col-xs-12 col-md-8">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
-    <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>
+            <header class="post-header">
+                <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
 
-    {% assign authorInfo = site.data.authors[page.author] %}
+                <p class="post-meta">
+                    <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date:
+                        "%b %-d, %Y" }}
+                    </time>
 
-    {% if page.author %} •
+                    {% assign authorInfo = site.data.authors[page.author] %}
+
+                    {% if page.author %} •
     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
     	<span itemprop="name">
-    		<a href="{{ authorInfo.web }}" target="_blank"><img src="http://www.gravatar.com/avatar/{{ authorInfo.email_md5|downcase }}.jpg?s=16" width="16" height="16" />	{{ authorInfo.name }}
-    		</a>
+    		<a href="{{ authorInfo.web }}" target="_blank"><img
+                    src="http://www.gravatar.com/avatar/{{ authorInfo.email_md5|downcase }}.jpg?s=16" width="16"
+                    height="16"/> {{ authorInfo.name }}
+            </a>
 		</span>
 	</span>
-    {% endif %}
-    </p>
-  </header>
+                    {% endif %}
+                </p>
+            </header>
 
-  <div class="post-content" itemprop="articleBody">
-    {{ content }}
-  </div>
+            <div class="post-content" itemprop="articleBody">
+                {{ content }}
+            </div>
 
-  <div id="fb-root"></div>
-  <script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5&appId=810514079008986";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+            <div id="fb-root"></div>
+            <script>
+                (function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5&appId=810514079008986"; fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+            </script>
 
-  <div class="fb-comments" data-href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}" data-numposts="5"></div>
+            <div class="fb-comments"
+                 data-href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}"
+                 data-numposts="5"></div>
 
-</article>
+        </article>
+
+    </div>
+    <div class="col-xs-6 col-md-4">
+        {% include side.html %}
+    </div>
+</div>
