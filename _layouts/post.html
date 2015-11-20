@@ -19,9 +19,10 @@ layout: default
                     {% if page.author %} •
     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
     	<span itemprop="name">
-    		<a href="{{ authorInfo.web }}" target="_blank"><img
-                    src="http://www.gravatar.com/avatar/{{ authorInfo.email_md5|downcase }}.jpg?s=16" width="16"
-                    height="16"/> {{ authorInfo.name }}
+    		<a href="{{ authorInfo.web }}" target="_blank">
+                <img src="http://www.gravatar.com/avatar/{{ authorInfo.email_md5|downcase }}.jpg?s=16" width="16"
+                     height="16"/>
+                {{ authorInfo.name }}
             </a>
 		</span>
 	</span>
@@ -36,11 +37,14 @@ layout: default
             <div id="fb-root"></div>
             <script>
                 (function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5&appId=810514079008986"; fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+
             </script>
 
             <div class="fb-comments"
                  data-href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}"
-                 data-numposts="5"></div>
+                 data-numposts="5"
+            >
+            </div>
 
         </article>
 
