@@ -2,7 +2,7 @@
 layout: page
 title: Roadmap
 permalink: /roadmap/
-author: "Carlos Ballesteros Velasco"
+author: soywiz
 #http://www.tablesgenerator.com/markdown_tables
 ---
 
