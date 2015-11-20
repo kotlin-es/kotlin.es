@@ -1,0 +1,55 @@
+---
+layout: post
+title:  "Kotlin M11"
+date:   2015-03-19 00:00:00 +0100
+category: articles
+categories: releases
+tags: releases
+author: soywiz
+permalink: "/2015/03/kotlin-m11/"
+---
+
+# Múltiples constructores
+
+Los desarrolladores de Android llevaban mucho tiempo esperándolo. Porque la herencia estándar de las vistas de Android requiere tener más de un constructor. A partir de la M11 es posible hace esto:
+
+{% highlight kotlin %}
+class MyView : View {
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
+        // ...
+    }
+
+    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0) {}
+}
+{% endhighlight %}
+
+Esta característica está documentada en la [documentación de usuario](http://kotlinlang.org/docs/reference/classes.html#constructors) y en la [especificación del lenguaje](https://github.com/JetBrains/kotlin/blob/master/spec-docs/secondary-constructors.md).
+
+# Nuevo keyword para bloques de inicialización
+
+Otro cambio también relacionado con la construcción de objetos, es que a partir de ahora hay que añadir el keyword **init** en los bloques de inicialización de objetos.
+
+Debido a que el lenguaje soporta una lambda después de una llamada, el compilador se podía confundir en determinados casos. Por ejemplo:
+
+
+{% highlight kotlin %}
+class Foo {
+    val bar = baz() // Aquí se produce un ERROR
+
+    {
+        // inicializador pre-M11
+    }
+}
+{% endhighlight %}
+
+La nueva sintaxis es la siguiente:
+
+{% highlight kotlin %}
+class Foo {
+    val bar = baz()
+
+    init {
+        // inicializador
+    }
+}
+{% endhighlight %}

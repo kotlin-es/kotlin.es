@@ -1,0 +1,331 @@
+---
+layout: post
+title:  "Kotlin M13"
+date:   2015-09-16 00:00:00 +0100
+category: articles
+categories: releases
+tags: releases
+author: soywiz
+permalink: "/2015/09/kotlin-m13/"
+---
+
+Este post es una traducción de su artículo original en inglés.
+
+Tras un largo verano, el equipo de Kotlin, tiene un montón de novedades sobre la M13:
+
+* Nuevo demonio de compilación para mejorar el tiempo de compilación
+* Propiedades ```lateinit``` para soportar inyección de dependencias y otras frameworks
+* Clases ```sealed``` para expresar jerarquías cerradas
+* Especificación y comprobación de targets de anotación
+* Los pares get/set de Java ahora se ven como propiedades en Kotlin
+* Mayor seguridad de tipos para la interoperatibilidad con Java: tomando en cuenta las anotaciones ```@NotNull``` (ver este post en inglés [blog post](http://blog.jetbrains.com/kotlin/2015/04/upcoming-change-more-null-safety-for-java/))
+* Separación sintáctica entre los modificadores y las anotaciones (ver este post en inglés [blog post](http://blog.jetbrains.com/kotlin/2015/08/modifiers-vs-annotations/))
+* Reflexión completamente funcional de clases, funciones y propiedades
+* Ahora se comprueba el acceso a los ```internal``` fuera de un módulo (más detalles abajo)
+* Nuevo layout de archivos ```.class``` para las funciones y propiedades libres
+* Y más cosas (seguir leyendo para más información)
+
+# Cambios en el lenguaje
+
+Estamos terminando de completar el lenguaje y haciendo los cambios necesarios para finalizar la sintaxis así como añadiendo pequeñas cosas que todavía faltan para casos de uso críticos. Algunos de esos cambios implican romper algo de código, y como de costumbre os ayudamos en todo lo posible con la migración.
+
+Nótese que con la versión 1.0 hacia la que estamos enfocados, se centrará en el soporte con la JVM. Se incluirá el backend de JavaScript, pero se considerará como experimental. Debido a eso, hay algunos cambios que afectan a JavaScript en esta release. Tenemos intención de retomar el trabajo con JS tras la 1.0.
+
+
+# Propiedades Late-init (inicialización retrasada)
+
+Uno de los mayores problemas de usar Kotlin con frameworks que inyectan valores en campos Java (por ejemplo: inyección de dependencias, mocking, serialización y otros frameworks) solía ser la imposibilidad de tener una propiedad de un tipo no-nulo que no se inicializaba en el constructor.
+
+Con la M13, introducimos propiedades ```lateinit```.
+
+{% highlight kotlin %}
+class Example {
+    @Inject
+    lateinit val foo: Foo
+    @Inject
+    lateinit var bar: Bar
+}
+{% endhighlight %}
+
+Tanto foo como bar no están inicializados, pero también se declaran
+como tipos no nulos. Si tratamos de leerlos antes de que se
+inicialicen, se lanzará una excepción, pero en cuanto se
+inicialicen mediante el framework de inyección de dependencias
+(Guice, Dagger o Spring, por ejemplo), se pueden leer como
+propiedades normales.
+
+Dichas propiedades también se pueden usar para otros casos de uso
+(como la inicialización setUp de JUnit). Nótese que tanto los
+```val```'s como los ```var```'s se pueden marcar como ```lateinit```.
+No se pueden asignar libremente por código, pero un framework puede
+inyectar valores en ellos sin ningún impedimento, porque los campos
+correspondientes de la JVM no son marcados como ```final```.
+
+Más información en la documentación del lenguaje.
+
+Clases selladas (Sealed classes)
+Mucha gente pregunta si Kotlin soporta tipos de datos algebraicos
+(Algebraic Data Types (ADTs)). La respuesta siempre ha sido “Sí,
+los ADT se pueden expresar como clases en Kotlin, y when es
+prácticamente tan bueno como el pattern matching”. Ahora hemos
+añadido más seguridad tipada a dichos tipos: con las clases
+selladas podemos asegurarnos de que se contemplan todos los
+casos en los when.
+
+{% highlight kotlin %}
+package pets
+
+import pets.Pet.*
+
+sealed class Pet(val name: String) {
+    class Dog(name: String): Pet(name)
+    class Cat(name: String): Pet(name)
+}
+
+fun Pet.saySomething(): String {
+    return when (this) {
+        is Dog -> "woof"
+        is Cat -> "meow"
+    }
+}
+{% endhighlight %}
+
+Nótese que en el ejemplo no se quiere un else en el when. Debido a que Pet es una clase sellada, el compilador sabe que no hay más subclases además de Dog y Cat. Así que puede garantizar de que todos los casos se han comprobado y no se requiere de un else. Por ello, si olvidas cubrir algún caso, el compilador informará con un error y te recordará que debes hacerlo o añadir un else.
+
+Por el momento, únicamente las clases anidadas dentro de la clase sellada pueden extenderla, pero posteriormente relajaremos esta restricción y permitiremos subclases dentro del mismo archivo.
+
+Para más información, consulta la [documentación](http://kotlinlang.org/docs/reference/classes.html#sealed-classes).
+
+# Las anotaciones requieren “@”
+En la M13 se han separado sintácticamente los modificadores y las anotaciones
+([más información en este post en inglés](http://blog.jetbrains.com/kotlin/2015/08/modifiers-vs-annotations/)). Ahora requerimos @ para todas  las anotaciones. Y se espera que todas las clases de las anotaciones empiecen por mayúscula (que permite una mayor uniformidad con Java).
+
+Por ello, se ha renombrado anotaciones como @Throws o @Volatile. También hemos renombrado @platformName a @JvmName y @platformStatic a @JvmStatic.
+
+Y estas anotaciones han pasado a ser modificadores:
+
+* **data**
+* inline-related
+** **inline**
+** **noinline**
+** **crossiniline** — en vez de ```@inlineOption(ONLY_LOCAL_RETURNS)```
+* **tailrec** — en vez de @tailRecursive
+* **external** — en vez de @native
+
+Este cambio es transparente para la mayor parte de los usuarios
+para los casos en que los modificadores hayan mantenido su
+antiguo nombre.
+
+La antigua sintaxis y las clases se han deprecado,
+
+La acción de limpieza del IDE ([Code Cleanup](http://blog.jetbrains.com/idea/2014/07/try-intellij-idea-14-eap-138-1283-4-with-code-cleanup-android-studio-beta-features-and-more/))
+os ayudará a mirar el código.
+
+# Targets de anotaciones y otras opciones
+
+Kotlin ahora soporta las siguientes opciones para anotaciones (expresadas como anotaciones en las annotation classes):
+
+* ```@Retention``` – quién puede ver esta anotación: RUNTIME (valor por defecto), BINARY (solo en los archivos .class) o SOURCE
+* ```@Target``` – dónde es aplicable la anotación
+* ```@MustBeDocumented``` – indica que esta anotación es parte del API del elemento anotado, y por lo tanto se debe mostrar en la documentación generada
+* ```@Repeatable``` – indica que la anotación se puede usar varias veces en un mismo elemento
+
+Más información en la [documentación](http://kotlinlang.org/docs/reference/annotations.html#annotation-declaration).
+
+Adicionalmente, ahora podemos especificar un target opcional para la anotación:
+
+{% highlight kotlin %}
+class Example(
+@field:MyFieldAnnotation(...)
+val foo: Foo
+)
+{% endhighlight %}
+
+**NOTA: este cambio puede romper código**. Antes de la M13 cuando
+anotábamos parámetros del constructor primario, las anotaciones
+se aplicaban tanto a los parámetros como a los campos en los que
+se almacenaban. Ahora solo se guardan para el primero aplicable:
+parámetro, propiedad o campo. Esto presenta algunos problemas
+cuando se usa Jackson. Pero hay una forma fácil de arreglarlo:
+usar el módulo especial de [Jackson para Kotlin](http://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-kotlin).
+
+Más información en la [documentación](http://kotlinlang.org/docs/reference/annotations.html#annotation-use-site-targets).
+
+# Visibilidades
+
+Hemos reformado nuestro modelo de visibilidad. A partir de ahora:
+
+* `private` en propiedades y funciones libres significa “visible únicamente desde este archivo”
+* ya no requerimos explícitamente tipo de retorno para declaraciones públicas
+* la visibilidad por defecto (sin modificador) ha pasado de `internal` a `public`
+* hemos habilitado por fin las comprobaciones que impiden el uso de declaraciones internal fuera de un módulo
+* Puede resultar controvertido que hayamos elegido public como visibilidad por defecto en Kotlin. Siendo Kotlin un lenguaje fuertemente tipado, elegir la opción más segura, private, por defecto puede parecer más lógica. Y somos completamente conscientes de que hay bastantes argumentos válidos en esta dirección. Pero Kotlin también es un lenguaje pragmático. Así que trataremos de explicar brevemente por qué creemos que public es la visibilidad correcta.
+
+In bases de código Java rales (donde las decisiones sobre public/private son explícitas),
+public ocurre mucho más amenudo que private (de 2.5 a 5 veces más a menudo en las bases
+de código que hemos examinado, [incluyendo el compilador Kotlin y IntelliJ IDEA](https://youtrack.jetbrains.com/issue/KT-3240#comment=27-1110881)). Esto
+significa que haríamos escribir public por todas partes y que haría que Kotlin fuese mucho
+más ceremonial, y perderíamos parte del precioso terreno que hemosganado a Java en cuando
+a la brevedad. Y nuestra propia experiencia nos dice que el public explícito rompe el
+flujo de muchos SDLs muy a menudo.  Así que por todo eso hemos decidido mantenerlo como
+nuestro por defecto para mantener nuestro código limpio.
+
+NOTA: `internal` se sigue soportando, pero ahora se debe explicitar.
+
+
+# Cambios varios
+
+* Soporte para referencias llamables sobrecargadas: ahora puedes usar `::foo` aunque `foo` esté sobrecargado, y la firma adecuada se elegirá en función del contexto
+* [Ahora se puede usar super, sin especificar el tipo cuando no hay ambigüedad](https://youtrack.jetbrains.com/issue/KT-5963)
+* [Comprobación estricta de nulabilidad con parametros tipados](https://youtrack.jetbrains.com/issue/KT-153)
+* Las funciones sin parámetros por defecto se prefieren para la resolución de sobrecarga (lo que es bueno para evolucionar APIs)
+* Se añade la anotación `@HiddenDeclaration` para ocultar declaraciones a clientes manteniéndolos en los binarios (también para evolucionar APIs con mayor facilidad)
+
+
+# Cambios con la interoperabilidad con Java
+
+## Los pares get/set de Java aparecen ahora como propiedades
+
+La gente llevaba mucho tiempo pidiendo esta característica, y nos ha llevado algún tiempo
+ver cómo plantearla bien. Ahora al usar clases Java que definen propiedades por convención
+(ejemplo: getFoo() y opcionalmente setFoo()), Kotlin define automáticamente propiedades de extensión:
+
+{% highlight kotlin %}
+// Java:
+class JBean {
+    public Foo getFoo() { return ...; }
+    public void setFoo(Foo foo) { ... }
+}
+
+// Kotlin
+fun demo(bean: JBean) {
+    println(bean.foo) // 'foo' is automatically defined
+}
+{% endhighlight %}
+
+
+Acceder a dichas propiedades está optimizado, así que bean.foo se compila a bean.getFoo() sin ninguna llamada intermedia.
+
+# Nuevo layout de archivos .class para declaraciones de primer nivel
+
+Hace algunos meses anunciamos este cambio y ahora ya está hecho:
+
+* Por defecto, cada archivo de código de Kotlin (ej. *myFile.kt*) produce un archivo .classde con el mismo nombre, capitalizado y con el sufijo “Kt”: `MyFileKt`
+* Las funciones y propiedades de primer nivel en dicho archivo se acceden en Java con ese mismo nombre de clase (en vez del problemático FooPackage)
+* Como consecuencia, dos archivos en el mismo paquete no pueden tener el mismo nombre (o los archivos .class colisionarán)
+* Ahora puedes especificar la anotación `@file:JvmName("CustomName")` en un archivo de código para cambiar el nombre de la clase generada
+* Varios archivos pueden compartir el mismo nombre de JVM si se marcan adicionalmente con la anotación @file:JvmMultifileClass
+
+Para hacer que este cambio funcione, hemos tenido que introducir un nuevo archivo de recurso
+que se requiere para compilar código Kotlin contra binarios de Kotlin. Se llama
+```META-INF/<module_name>.kotlin_module```. **Aseguramos de que esos archivos .kotlin_module**
+**no se descarten en vuestro proceso de empaquetado.** También, aseguraos  de que los nombres
+de módulo no colisionen en vuestro proyecto.
+
+en Maven usamos el groupId y artifactId para los nombres de módulo, pero podéis utilizar
+
+{% highlight kotlin %}
+<configuration>
+    <moduleName>com.example.mymodule</moduleName>
+</configuration>
+{% endhighlight %}
+
+## En Gradle:
+Es el nombre del proyecto + la tarea de construcción, y para persronalizar:
+
+{% highlight kotlin %}
+compileKotlin {
+    kotlinOptions.moduleName = "com.example.mymodule"
+}
+{% endhighlight %}
+
+## en Ant y la línea de comandos
+
+Debes especificar los módulos explícitamente:
+
+{% highlight kotlin %}
+<kotlinc modulename="com.example.mymodule"/>
+{% endhighlight %}
+
+{% highlight kotlin %}
+$ kotlinc-jvm -module-name com.example.mymodule
+{% endhighlight %}
+
+Más información [aquí](http://kotlinlang.org/docs/reference/java-interop.html#package-level-functions).
+
+# Null-safety con interoperabilidad con Java
+
+Anunciamos esto [hace algún tiempo](http://blog.jetbrains.com/kotlin/2015/04/upcoming-change-more-null-safety-for-java/). Ahora podemos usar @NotNull y @Nullable en Java y Kotlin los reconoce de forma que un uso incorrecto emite errores en vez de warnings.
+
+Como consecuencia, usar las colecciones de Java se ha vuelto mucho más seguro: ya no podemos poner un null en un `ArrayList<String>`.
+
+[Los tipos de plataforma](http://blog.jetbrains.com/kotlin/2014/10/making-platform-interop-even-smoother/) se mantienen en su sitio, porque las anotaciones faltan a menudo o a veces son incorrectas (violando reglas de herencia, por ejemplo), así que por defecto no se imponen null-checks estáticos en código Java.
+
+
+# Librerías
+
+También hemos estado desarrollando activamente librerías de Kotlin. La M13 trae por fin
+una librería de reflexión completamente funcional: ya podemos introspeccionar clases,
+sus miembros, parámetros, etc. Habrá un post en el blog sobre esto próximamente.
+
+La librería estándar ha recibido varias adiciones convenientes incluyendo:
+
+* + y - para sets y otras colecciones
+* mejorado delegados para propiedades
+
+Más sobre esto en otro post.
+
+# Herramientas
+
+**Demonio de compilación**. Anunciamos [el soporte para el demonio de Gradle](http://blog.jetbrains.com/kotlin/2015/08/gradle-daemon-support-for-faster-compilation/)
+hace algún tiempo y vuestro feedback ha sido positivo: los tiempos de compilación parecen
+haber bajado en un factor de tres. Seguimos trabajando en el rendimiento de compilación,
+y desde la M13 se utiliza un demonio similar al de gradle en IntelliJ IDEA también.
+Esta característica está marcada como “experimental” por el momento, así que tienes que
+activar checkbox en el diálogo de preferencias para activarlo:
+
+Build, execution, deployment -> Compiler -> Kotlin compiler -> Keep compiler process
+alive between invocations (experimental)
+
+**La compilación incremental** es otra dirección que estamos tomando para mejorar
+los tiempos de compilación de Kotlin. M13 trae:
+
+* compilación incremental para funciones inline: ahora si cambias el cuerpo de una función inline, only solo se recompilan las clases que la utilizaban;
+* cambios en miembros privados ya no causan la recompilación de otros archivos
+
+# IDE
+
+Hemos mejorado también la experiencia del IDE. Para no extendernos demasiado, hemos
+destacado solo algunas de las características que no son tan fáciles de descubrir:
+
+(En el post original podéis ver los gifs animados)
+
+* El IDE sugiere nombre y tupo de los parámetros mientras se escribe: ![](/images/m13/functionParametersCover.png))
+* Como hemos mencionado arriba, hemos introducido propiedades sintéticas en lugar de los pares get/set de Java. Pero si todavía intentas acceder a los métodos set y get por la costumbre, el autocompletado seguirá funcionando. ![](/images/m13/getCover.png))
+* Si quieres iterar sobre una colección, simplemente escribe su expresión y con una intención especial,  lo puedes convertir fácilmente en un for de la misma forma que en Java: ![](/images/m13/iterateCover.png))
+* Otra intención permite añadir/borrar índices de los bucles for: ![](/images/m13/withIndex.png))
+* Los named arguments pueden mejorar drásticamente la legibilidad del código. El IDE de Kotlin IDE ahora permite alternar entre named arguments: ![](/images/m13/addArgs.png))
+* Ahora también funciona la característica de destacar los imports sin usar. Y ahora también es posible de activar la opción de optimizar los imports sobre la marcha: ![](/images/m13/cover.png))
+* Ahora el depurador soporta Smart Step Into (⇧F7) para las expresiones lambda así como destacar la expresión lambda que se está ejecutando actualmente: ![](/images/m13/stepInto.png)) *NB: Esta funcionalidad solo está disponible en IntelliJ IDEA 15 EAP (from ver. 142.4465) y solo para las expresiones lambda no inline.*
+* El depurador proporciona **Step Over (F8)** y **Step Out (⇧F8)** para funciones inline junto a la habilidad de ver todas las variables locales dentro de **Evaluate Expressions**
+* El conversor Java2Kotlin ya soporta Method References de Java 8
+* Soporte para **Pull Members Up/Down**
+* Elementos ejecutables como main(..), tests, etc se marcan con iconos que pueden abrir un desplegable para run confugrations (solo para IntelliJ IDEA 15 EAP)
+
+# Instalación
+
+En IntelliJ IDEA 14.1 simplemente actualiza el plugin a través
+del gestor de plugins (como de costumbre).
+
+En IntelliJ IDEA 15 EAP tiene Kotlin M12 integrado, así que
+para actualizar a M13 tienes que
+
+* Descargar el plugin zip
+* Abrir Preferences -> Plugins and choose Install plugin from disk… to install it
+* Reiniciar el IDE
+
+Mejoraremos el proceso en las siguiente EAPs de IntelliJ IDEA.
+
+Y como de costumbre, el compilador standalone se puede encontrar [aquí](https://github.com/JetBrains/kotlin/releases/tag/build-0.13.1513).
+
+¡Que tengáis un buen Kotlin!
