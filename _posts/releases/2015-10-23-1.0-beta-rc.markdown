@@ -1,0 +1,410 @@
+---
+layout: post
+title:  "Kotlin 1.0-beta-rc"
+date:   2015-10-23 00:00:00 +0100
+category: articles
+categories: releases
+tags: releases
+author: soywiz
+permalink: "/2015/10/kotlin-1-0-beta-rc/"
+---
+
+Nos complace presentar el candidato a beta de Kotlin. Pronto saldrá la versión 1.0 beta. Por lo pronto, el formato binario se ha finalizado, así que no hay planes de ningún cambio a nivel de lenguajemás, y solo se harán unos pocos cambios en la librería estándar.
+
+En este post vamos a describir los cambios desde la M14, incluyendo:
+
+* imports desde objetos
+* nuevas interfaces de colección más seguras
+* inlining de las constantes Java
+* soporte mejorado para los estáticos de Java
+* y más
+
+# Cambios del lenguaje
+
+Vamos a empezar a desplegar algunos cambio de ruptura con características importantes nuevas.
+
+# Funciones operator e infix
+
+Desde la M14, Kotlin requiere el modificador `operator` sobre las funciones que se usan para hacer sobrecarga de operadores. A partir de ahora se requiere lo mismo para funciones infix:
+
+{% highlight kotlin %}
+operator Foo.plus(other: Foo): Foo { ... } 
+fun testPlus() = Foo() + Foo()
+
+infix fun Foo.bar(other: Foo): Foo { ... }
+fun testInfix() = Foo() bar Foo()
+{% endhighlight %}
+
+Ahora, hemos relajado este requisito para las funciones java:
+**cualquier función Java con una firma adecuada se puede usar**
+**como operador**, pero no como infix.
+
+Se han cambiado algunos nombres de operador para evitar ambigüedades:
+
+* ahora deberíamos utilizar `unaryPlus` y `unaryMinus` en vez de solamente `plus` y `minus` para funciones unarias ejemplo. `-Foo()` es ahora `Foo().unaryMinus()`;
+* para las propiedades delegadas, se debería usar `getValue` y `setValue` en vez de solamente `get` y `set`.
+
+La acción de *Code cleanup* os ayudará a migrar vuestro código.
+
+Ahora también se comprueba la firma de las funciones operator en la declaración.
+Algunas de esas comprobaciones se puede relajar en el futuro, pero creemos que lo
+que tenemos ahora es un buen punto de entrada.
+
+# Imports desde objects
+
+Kotlin ahora soporta importar miembros individuales de objetos por nombre
+(pero no importar todos los miembros mediante un “*"):
+
+{% highlight kotlin %}
+import mypackage.MyObject.foo
+
+val test = foo("...")
+{% endhighlight %}
+
+En este ejemplo importamos todos los miembros llamados foo del objeto con nombre mypackage.MyObject
+Para importar de los companion objetos de clases, tenemos que especificar su nombre cualificado:
+
+{% highlight kotlin %}
+import mypackage.MyClass.Companion.foo
+{% endhighlight %}
+
+# Mayor riqueza en @Deprecated
+
+Hemos migrado mucho código últimamente :) Así que la anotación `@Deprecated` de kotlin
+se ha vuelto muy potente: no solo requiere un mensaje y permite especificar un
+reemplazo mediante `ReplaceWith("...")`, ahora también hemos introducido un level:
+`WARNING`, `ERROR` or `HIDDEN`.
+
+* `WARNING` es el por defecto y funciona como de costumbre: se producen warnings en las llamadas, y el IDE los tacha
+* `ERROR` es igual, pero durante la compilación se produce un error en vez de un warning
+* `HIDDEN` es lo que era previamente `@HiddenDeclaration`: simplemente hace que sea invisible a los clientes durante la compilación.
+
+# Smart casts para las var locales capturadas
+
+Los smart casts ahora funcionan incluso con los var que son capturados en lambdas, siempre que no muten en esos lambdas:
+
+{% highlight kotlin %}
+var a: Any? = ...
+
+val mapped = users.map {
+    "${it.name}: $a"
+}
+
+if (a is String) {
+    println(a.length) // This works now
+}
+{% endhighlight %}
+
+# Múltiples funciones main() en el mismo paquete
+
+Ahora podemos definir una función `main()` con la firma estándar en cada archivo
+(con la excepción de `@file:JvmMultileClass`). Esto es muy útil cuando estamos
+experimentando con código:
+
+{% highlight kotlin %}
+// FILE: a.kt
+package foo
+
+fun main(args: Array&lt;String&gt;) {
+    println("a.kt")
+}
+
+// FILE: b.kt
+package foo
+
+fun main(args: Array&lt;String&gt;) {
+    println("b.kt")
+}
+{% endhighlight %}
+
+# Varargs y el operador de difusión (spread operator)
+
+Recapitulando: cuando llamamos a una función `vararg`, ahora podemos usar
+el operador de difusión (spread operator) que convierte un array en un vararg:
+
+{% highlight kotlin %}
+fun foo(vararg args: String) { ... }
+
+fun bar(vararg args: String) {
+    foo(*args) // spread operator
+}
+{% endhighlight %}
+
+Se ha arreglado la semántica del operador de difusión de forma que siempre garantiza que un array que foo ve no se modificará o será observado “en el exterior”. Podemos asumir que una copia defensiva se hace cada vez que se usa el operador de difusión (lo cierto es que en un futuro podemos implementar algunas optimizaciones para reducir el copiado de memoria).
+
+Como resultado, los autores de las librerías de Kotlin pueden almacenar los varargs con seguridad sin necesidad de hacer ninguna copia defensiva ellos mismos.
+
+*NOTA:* Esta garantía no se da cuando se llama a las funciones de Kotlin desde Kava, porque ahí no se usan operadores de difusión. Esto significa que si se crea una función con intención de que se tanto con Kotlin como en Java, el contrato que tiene con los clientes Java debería incluir una nota que indique que se debe copiar el array antes de pasarlo a la función.
+
+
+# El target de anotaciones “sparam” se ha renombrado a “setparam”
+
+Para anotar los parámetros seters de una propiedad, usad `setparam` en vez de `sparam`:
+
+{% highlight kotlin %}
+@setparam:Inject
+var foo: Foo = ...
+{% endhighlight %}
+
+
+# Anotación @UnsafeVariance
+
+A veces necesitamos suprimir [las comprobaciones de variancia en declaraciones](https://kotlinlang.org/docs/reference/generics.html#declaration-site-variance).
+Por ejemplo, para hacer que `Set.contains` sea typesafe mientras mantenemos los
+set de covariancia en solo lectura, teníamos que hacer:
+
+{% highlight kotlin %}
+interface Set&lt;out E> : Collection&lt;E> {
+    fun contains(element: @UnsafeVariance E): Boolean
+}
+{% endhighlight %}
+
+Eso pasa algo de responsabilidad al que implementa `contains`, porque con
+esta comprobación eliminada el tipo actual del `element` puede ser cualquier
+caso durante el runtime, pero a veces es necesario alcanzar firmas
+convenientes. Más adelante hay más información sobre la seguridad de tipos
+en colecciones.
+
+Así que hemos introducido la anotación `@UnsafeVariance` para los tipos con
+este fin. El nombre es largo a posta, de forma que avisa de alguna forma y
+trata de prevenir su abuso.
+
+# Variedades de comprobaciones y restricciones
+
+Se han añadido muchas comprobaciones y algunas restricciones que pueden
+desaparecer más adelante.
+
+**Declaraciones de parámetros de tipo.** Hemos decidido restringir la sintaxis
+de las declaraciones de los parámetros de tipo de forma que sean todas sinsitentes,
+así que:
+
+* `fun foo&lt;T>()` está deprecado y se sustituye por fun `&lt;T> foo()`:
+* Todas las restricciones de los parámetros de tipo deben ocurrir en “where” o dentro de “<…>”:
+
+{% highlight kotlin %}
+fun &lt;T: Any> foo() {} // OK
+fun &lt;T> foo() where T: Serializable, T: Comparable&lt;T> {} // OK
+fun &lt;T: Serializable> foo() where T: Comparable&lt;T> {} // Inválido
+{% endhighlight %}
+
+**Comprobación dinámica de tipos en arrays**. Los tipos de los elementos
+de los Array están reificados en Java, pero sus propiedades específicas
+de Kotlin, como la nulabilidad, no lo están. Así que hemos eliminado el
+trato especial de los arrays que permitían comprobaciones como is `Array&lt;String>`,
+y ahroa las arrays funcionan como el resto de clases genéricas: ahora podemos
+comprobar is `Array&lt;*>` y castear a as `Array&lt;String>` se como sin comprobar
+(unchecked). Hemos añadido la función específica de JVM `isArrayOf&lt;T>()`
+que comprueba que un array concreto puede contener elementos del tipo `T` en Java:
+
+{% highlight kotlin %}
+val a: Any? = ...
+
+if (a is Array<*> && a.isArrayOfy&lt;String>()) {
+    println((a as Arrayy&lt;String>)[0])
+}
+{% endhighlight %}
+
+**Propiedades delegadas**. Las convenciones para las propiedades delegadas
+ahora usan `KProperty&lt;*>` en vez de `PropertyMetadata` en `getValue` y `setValue`:
+
+{% highlight kotlin %}
+fun Foo.getValue(thisRef: Bar, property: KProperty<*>): Baz? {
+    return myMap[property.name]
+}
+{% endhighlight %}
+
+*Code cleanup* os ayudará a migrar.
+
+**Referencias callable**. Ahora se prohíbe algunos usos de ::,
+que habilitaremos después cuando implementemos *bound references*.
+Más notablemente, `::foo` ya se debería usar para cuando foo sea un
+miembro de una clase. Solo se debería usar `MyClass::foo`. También
+hemos dejado de soportar temporalmente referencias a objetos.
+Mientras tanto podemos usar lambdas.
+
+**Expresiones If**. Hemos unificado las semánticas de `if` y `when`
+requiriendo un `else` cuando `if` se usa como expresión:
+
+{% highlight kotlin %}
+val foo = if (cond) bar // ERROR: else is required
+{% endhighlight %}
+
+**Funciones que devuelven Nothing**. Cuando una función lanza una
+excepción o está en un bucle infinito, su tipo de retorno puede ser
+`Nothing`, lo que significa que nunca devuelve de forma normal.
+Para que hacer las herramientas sean más inteligentes,
+requerimos que dichas funciones especifiquen siempre su valor de
+retorno de forma explícita:
+
+{% highlight kotlin %}
+fun foo() = throw MyException() // Must specify return type explicitly
+
+fun bar(): Nothing = throw MyException() // OK
+fun baz() { throw MyExcepion() } // OK
+fun goo(): Goo { throw MyExcepion() } // OK
+{% endhighlight %}
+
+Esto ahora es warning que se promocionará a error cuando migremos
+nuestro código con *Code cleanup*.
+
+**Comprobaciones de visibilidad** estaba restringidas de forma que,
+por ejemplo, una declaración pública no expusiese un tipo local,
+privado o interno. Tanto el IDE como el compilador comprueban el
+acceso a declaraciones internas. Más información [aquí](https://github.com/JetBrains/kotlin/releases/tag/build-1.0.0-beta-1038).
+
+# Colecciones
+
+El mayor cambio de esta versión es que hemos hecho limpieza en las
+colecciones y otras APIs del core de forma que por ejemplo, size es
+ahora una propiedad y contains ahora es type-safe: ahora recibe E en
+vez de Any?. Hemos hecho un esfuerzo enorme tratando de que la librería
+se sienta como Kotlin mientras mantenemos la compatibilidad con Java.
+Hay algo de magia en el compilador tras todo esto, pero estamos satisfechos
+con el resultado.
+
+Ejemplo:
+
+{% highlight kotlin %}
+val strs = setOf("1", "abc")
+
+if (1 in strs) { // 'strs' is a set of strings, can't contain an Int
+    println("No!")
+}
+{% endhighlight %}
+
+El código análogo funciona en Java, porque `Set&lt;E>.contains`
+(que es en lo que se transforma el `in`) recibe `Object`, en vez de `E`,
+el elemento del set. Esto es propenso a errores, así que hemos decidido
+hacer que las interfaces de colección de Kotlin sean más seguras
+(mientras mantenemos la compatibilidad completa con las colecciones de Java).
+Como resultado, nuestro contains recibe E, y el ejemplo de arriba
+es inválido en Kotlin.
+
+De momento, el compilador de Kotlin informa con un aviso de deprecación
+sobre el in en eel ejemplo de arriba, porque hemos proporcionado
+extensiones transicionales en la librería estándar que ayudarán a
+todos a migrar, pero pronto esto dejará de ser un warning y será un error.
+Nuevamente Code cleanup es nuestro amigo aquí: reemplazará 1 in strs con
+`strs.containsRaw(1)` que es una nueva función en la librería estándar
+que podremos usar cuando realmente necesitemos el comportamiento de Java:
+podemos comprobar la pertenencia de cualquier objeto en cualquier set
+utilizando containsRaw.
+
+El resumen:
+
+* `Collection.contains`, `Map.get` y otros métodos de otras colecciones ahora son más seguros de usar
+* Ahora podemos usar `containsRaw`, `getRaw`, etc para obtener el comportamiento sin tipar
+* `Collection.size`, `Array.size`, `String.length`, `Map.Entry.key` etc pasan a ser propiedades
+* `List.remove(Int)` se ha renombrado a `removeAt(int)` para evitar colisionar con `withList&lt;Int>.remove` que elimina por objeto y no por índice
+* *Code cleanup* migrará el código
+
+Todas las colecciones Java normales funcionan sin cambios: el compilador
+ya sabe cómo encontrar una “propiedad” `size` en un `java.util.ArrayList`.
+
+# Interoperabilidad con Java
+
+Hay muchos cambios importantes que conciernen a cómo se ven las declaraciones de Kotlin en Java y al revés.
+
+# Las constantes inlining en librerías
+
+A partir de ahora hacemos inlining de constantes Java (campos public static final fields de tipos primitivos y cadenas) que vienen de librerías. Esto ayudará a los desarrolladores Android que han sufrido incompatibilidades de las APIs:
+
+{% highlight kotlin %}
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { ... }
+{% endhighlight %}
+
+Ahora funcionará con el runtime de Android (que solía fallar en runtimes previos a Lollipop).
+
+# Runtime más liviano
+
+Acabamos de empezar con esto, pero ya se han construido los cimientos para reducir el tamaño de la librería kotlin-runtime. Con esta versión hemos reducido 200KB (desde la M14), pero todavía hay más cosas que podemos hacer para hacerla más pequeño sin romper compatibilidad.
+
+# Métodos estáticos, campos y clases
+
+Ahora Kotlin es muy amigable con los statics de Java:
+
+* Ahora podemos usar herencia de clases anidadas, métodos estáticos y campos de clases Java dentro de subclases de Kotlin
+* Ahora podemos acceder a métodos estáticos heredados de Java y campos a través del nombre de subclase: `SubClass.SUPER_CLASS_CONSTANT`
+* Ahora podemos acceder a los miembros de los companion objects de superclases dentro de subclases de Kotlin
+* Pero el único nombre que se puede usar para estas cosas es el nombre completamente calificado *su nombre canónico*, ejemplo: no podemos usar `SubClass.SupersInnerClass`.
+
+Esto resuelve muchos problemas que solíamos tener con muchos frameworks muy centrados en herencia como Android.
+
+# Las reglas de herencia de interfaces son compatibles con Java 8
+
+Para que hacer que Kotlin esté a prueba de future, hemos añadido ciertos requisitos que casan con los de Java 8, para ser capaces de compilar luego cuerpos de función en las interfaces Kotlin como métodos por defecto.
+
+En algunos casos esto supone que Kotlin requiera más overrides explícitos de los que solía, y tristemente, métodos de Any ya no se pueden implementar en interfaces (no funcionaría en Java 8).
+
+Nota: la implementación defecto de los métodos de interfaz son accesibles en Java mediante miembros estáticos de `MyIntf.DefaultImpls`.
+
+
+# Nombres más apropiados para getters booleanos
+
+Cuando en Kotlin llamamos por ejemplo a una propiedad `isValid`, su getter de Java, a partir de ahora será `isValid()` y no `getIsValid()` como venía siendo.
+
+# @JvmField y objetos
+
+Hemos hecho que la estrategia para generar campos puros (en oposición a pares get/set) sean más predecibles: a partir de ahora solo las propiedades anotadas con @JvmField, lateinit o const se exponen como campos para los clientes Java. En versiones más antiguas usábamos heurísticas para crear campos estáticos en objetos de feorma incondicional, que está aen contra de nuestro diseño inicial de tener APIs compatibles a nivel binario por defecto.
+
+También, las instancias de singleton ahora son accesibles mediante el nombre INSTANCE (en vez de INSTANCE$).
+
+Hemos prohibido el uso de @JvmField en interfaces, porque no podemos garantizar semánticas de una inicialización adecuada para dichos casos.
+
+# Int es serializable
+
+Ahora el tipo `Int` y otros tipos básicos son `Serializable` en la JVM. Esto debería ayudar a varios frameworks.
+
+# Fin de las “fachadas de paquete”
+
+Las clases como `KotlinPackage` han desparecido. Hemos terminado la transición
+a un nuevo layout de clases-archivo, y hemos eliminado las ya deprecadas
+“fachadas de paquete”. Usad `FileNameKt` y/o `@file:JvmName`
+(con el `@file:JvmMultifileClass` opcional).
+
+# Ahora se manglean los internal
+
+Ya que Java todavía no tiene visibilidad internal, hemos hemos mangleado
+los nombres de las declaraciones internal para evitar colisiones inesperadas
+en overrides cuando extendemos una clase de otro módulo. Técnicamente,
+los miembros interno están disponibles en Java, pero su nombre es horrible,
+que es un precio a pagar para una evolución predecible de las librerías.
+
+
+# Otras cosas deprecadas y restricciones
+
+* `@Synchronized` y `@Volatile` ya no son aplicables para declaraciones abstractas
+* Como paso final para deshacernos de las anotaciones externas, se ha deprecado `@KotlinSignature` y se eliminará
+* Los tipos genericos cuyos argumentos contienen `Nothing` se compilan a tipos raw Java, ya que Java no tiene su equivalente a Nothing
+
+# Cambios en el IDE
+
+* Ahora **Parameter Info** funciona en casi todos lados, incluyendo en llaves, *this* y *supercalls* ![](/images/1.0-beta-rc/parameterInfo.png)
+* Ahora el completado también funciona con referencias llamables (después de ::) ![](/images/1.0-beta-rc/completion.png)
+* Podemos generar fácilmente métodos **equals()** y **hashCode()** ![](/images/1.0-beta-rc/EqualsHashcode.png)
+* También el IDE ayuda ahora a generar **Constructores secundarios** basándose en el constructor de la clase superior y de los métodos sin inicializar ![](/images/1.0-beta-rc/secondaryConstructor.png)
+* Soporte para “import *” configurables para importar métodos estáticos de clases Java y enums ![](/images/1.0-beta-rc/ConfigurableImports.png)
+* Por último, pero no por ello peor, la experiencia de tests unitarios ahora es mucho más agradable. Lista de mejoras: acción “Create Test”, los tests ahora son ejecutables a través de los gutter icon, la navegación entre los tests y los sujetos de prueba (⇧⌘T/⇧^T) y también quickfixes para añadir dependencias de JUnit y TestNG cuando haga falta ![](/images/1.0-beta-rc/UnitTests.png)
+
+# Librerías
+
+Gracias a los cambios mencionados antes con las semánticas del operador de difusión,
+`listOf()` ahora es más eficiente, porque ya no tiene que hacer una copia
+defensiva del array de entrada.
+
+Se ha mejorado el API de Regex, así que ahora podemos decir `regex in string`
+en vez de `regex.hasMatch(string)`.
+
+# Herramientas
+
+* Se ha habilitado por defecto ahora el demonio de compilación en el IDE
+* Ahora se soporta compilación en paralelo para módulos independientes en el demonio de compilación
+* Opciones relacionadas con anotaciones externas se han eliminado de herramientas como Maven y Gradle
+
+# Instalación
+
+Kotlin está integrado en [*IntelliJ IDEA 15 RC*](https://confluence.jetbrains.com/display/IDEADEV/IDEA+15+EAP).
+Y para [*IntelliJ IDEA 14*](https://www.jetbrains.com/idea/download/), por favor,
+actualizad a través del *Plugin Manager*.
+
+*¡Felices Kotlin!*
