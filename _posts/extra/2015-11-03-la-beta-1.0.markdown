@@ -1,0 +1,142 @@
+---
+layout: post
+title:  "La Beta 1.0"
+date:   2015-10-27 00:00:00 +0100
+category: blog
+tags:
+author: soywiz
+permalink: /2015/11/la-beta-1-0/
+---
+
+Artículo original: [http://blog.jetbrains.com/kotlin/2015/11/the-kotlin-language-1-0-beta-is-here/](http://blog.jetbrains.com/kotlin/2015/11/the-kotlin-language-1-0-beta-is-here/)
+
+¡Nos complace presentar la **Beta de Kotlin 1.0** para la JVM y Android!
+
+Recapitulando: [Kotlin] es un **lenguaje de programación moderno** en el que [JetBrains] lleva trabajando algún tiempo.
+
+Esta entrada pretende indicar en qué punto estamos ahora y hacia dónde nos dirigimos. Podéis ver los cambios de esta versión [aquí](https://github.com/JetBrains/kotlin/releases/tag/build-1.0.0-beta-1103).
+
+
+# La historia de Kotlin
+
+Kotlin fue concebido en 2010. Tras diez años de desarrollo en Java, teníamos la sensación de que se podía mejorar significativamente la productividad que teníamos en JetBrains  usando un lenguaje moderno para la JVM junto con Java. Tras haber evaluado otras opciones disponibles, decidimos que necesitábamos un lenguaje nuevo. Y teníamos la habilidad y los recursos para crear dicho lenguaje. Nuestra principal línea de negocio se basa en crear herramientas para desarrolladores, y el principio que nos guiaba es que para hacer los productos más increíbles para los usuarios teníamos que crear herramientas increíbles que necesitábamos nosotros mismos. Esto ha sido así con InteliiJ IDEA, ReSharper y otros IDEs, así como con TeamCity y otros productos de servidor, así que hemos partido del mismo principio para otra herramienta: un lenguaje de programación.
+
+Diseñamos Kotlin como un **lenguaje moderno** para la industria,
+y teníamos unos cuantos requisitos específicos para él.
+En primer lugar, nuestros proyectos viven y crecen bastante
+(muchos millones de línea de código), así que necesitábamos **tipado estático**
+para ser capaces de mantener semejante base de código durante años.
+En aquel entonces, todo el código estaba escrito en Java,
+así que necesitábamos **un mecanismo para de migrar fácilmente**,
+de forma que pudiésemos introducir el nuevo lenguaje gradualmente en
+nuestra base de código Java afectando lo mínimos posible al resto del código.
+También, siendo JetBrains, no queríamos comprometer la **calidad de las herramientas**:
+buscábamos un nuevo lenguaje que nos hiciese más productivos,
+y creemos que gran parte de eso depende de las herramientas.
+Finalmente, necesitábamos un lenguaje **fácil de aprender y de comprender**:
+en nuestros equipos no separamos a “gente que escribe librerías” de
+“gente que usa librerías”, y queremos que todos nuestros desarrolladores
+sean igual de productivos con el lenguaje que usen. Semejante proyecto
+implica tomar muchas decisiones, y ya sabíamos desde el principio que es
+imposible hacerlo todo perfecto con el primer intento. Es por eso que
+estuvimos un periodo de tiempo considerable experimentando y validando las
+decisiones clave: ya que estaba siendo usado por adoptadores tempranos
+tanto dentro como fuera de JetBrains obteníamos feedback y hacíamos cambios
+continuamente (¡muchas gracias a nuestra comunidad por todos los comentarios
+que nos habéis hecho!). Esto nos dio perspectiva de un montón de casos de
+uso y ahora creemos que seremos capaces de
+mantener **compatibilidad hacia atrás tras la 1.0**.
+
+JetBrains ha estado usando Kotlin en producción con [IntelliJ IDEA](https://www.jetbrains.com/idea/),
+[YouTrack](https://www.jetbrains.com/youtrack/) y otros productos ya bastante tiempo. En estos momentos,
+ya tenemos más de **250.000 líneas de código en Kotlin en producción**
+además de casi la misma cantidad en el [proyecto kotlin](https://github.com/JetBrains/kotlin)
+en sí. Mientras que algunos de nuestros proyectos están escritos íntegramente
+en Kotlin (account.jetbrains.com), otros se han ido incluyendo en
+nuestras bases de código Java, como teníamos planeado inicialmente.
+Hemos llegado a un nivel de interoperabilidad que introducir kotlin
+es transparente para las clases Java: Se puede llamar a Java desde
+Kotlin y al revés, se puede tener código de ambos lenguajes mezclados
+en un mismo proyecto, teniendo como resultado archivos .class totalmente
+compatibles con las herramientas de java.
+
+Kotlin nos está sirviendo bien y tenemos un
+**equipo dedicado de 20** personas desarrollándolo.
+
+Aún cuando no hemos llegado a la 1.0 todavía, **otras compañías y desarrolladores individuales ya están usando Kotlin en producción**
+en desde backends a aplicaciones Android.
+Tenemos constancia de
+[Expedia](https://twitter.com/fleurchild/status/636965650536108032),
+[Prezi.com](https://github.com/JetBrains/kotlin-web-site/blob/master/_data/companies-using-kotlin.yml) y
+[muchos otros](https://github.com/JetBrains/kotlin-web-site/blob/master/_data/companies-using-kotlin.yml)
+(sentíos libres de añadir vuestra compañía haciendo una PR [aquí](https://github.com/JetBrains/kotlin-web-site/blob/master/_data/companies-using-kotlin.yml)).
+
+El número de líneas de código Kotlin en repositorios públicos de GitHub ha crecido exponencialmente hasta ahora (sin incluir los repositorios de JetBrains):
+
+![](/images/sobre-la-beta-1.0/Kotlin-GitHub-LOC.png)
+
+# ¿Qué feeling tiene Kotlin?
+
+Por nuestra propia experiencia con el lenguaje y a partir de la información que tenemos de otros usuarios feeling de Kotlin es el siguiente:
+
+* Se escribe menos código
+* Tiene mejor legilibilidad
+* Proporciona mayor seguridad tipada
+* Ofrece un mayor poder de expresión
+* Buena interoperabilidad y experiencia agradable con las herramientas
+
+# ¿Qué parte es Beta?
+
+Aún cuando lo estamos usando activamente en producción, Kotlin aún está en beta. Lo que significa para ti:
+
+* Estamos ultimando los detalles para una versión final oficial
+* Hemos finalizado el formato binario
+* Ya hemos hechos todos los cambios mayores del lenguaje
+
+# Compatibilidad
+
+Kotlin no permanecerá en beta mucho tiempo y la 1.0 va a llegar pronto.
+
+Nuestro objeto es hacer que la experiencia de los usuarios sea lo mejor posible, y eso incluye compatibilidad entre versiones de Kotlin. Tras la 1.0 todos los cambios en el lenguaje y librerías tendrán **compatibilidad hacia atrás**:
+
+* **Las versiones nuevas de los compiladores funcionarán con binarios antiguos** (pero no al revés como pasa con javac 1.6 que no es capaz de leer clases generadas con javac 1.8 )
+* **Los binarios antiguos seguirán funcionando con los nuevos en runtime** (aunque el código nuevo puede requerir nuevas dependencias)
+
+Todo lo indicado arriba aplica únicamente al soporte de JVM/Android. El soporte de JavaScript sigue siendo experimental por el momento y tendrá su propia versión más adelante.
+
+# Algunos hechos adicionales sobre Kotlin
+
+* Es **Open Source** (bajo la licencia [Apache 2.0 License](https://github.com/JetBrains/kotlin/blob/master/license/LICENSE.txt)): tanto el compilador como las librerías de runtime como todo el tooling incluyendo el IDE
+* Propicia el estilo de **programación funcional** (aún siendo un lenguaje multi-paradigma)
+* Es compilado estáticamente y no introduce ningún tipo de penalización de rendimiento en el runtime con respecto a Java
+* Soporte eficiente y seguro de concurrencia a través de Quasar
+* Está incluído en IntelliJ IDEA 15 (tanto en la versión ultimate como en la versión de la comunidad) y disponible directamente sin instalar nada
+* Tiene plugins para **Android Studio**, **Eclipse**, **Maven**, **Gradle** y Ant (sin mencionar IntelliJ IDEA y TeamCity)
+* Incluye un **REPL** (Read Eval Print Loop)
+* Hay una comunidad activa y con ganas de ayudar que está haciendo librerías increíbles
+* Ya hay dos libros escritos sobre kotlin: [Kotlin in Action](https://www.manning.com/books/kotlin-in-action) y [Kotlin for Android Developers](https://leanpub.com/kotlin-for-android-developers).
+
+# Frameworks, interoperabilidad y migración
+
+Virtualmente cualquier framework de Java o Android funciona sin ningún problema con Kotlin. Entre otros, eso incluye Spring MVC, Vaadin, Vert.x y Jackson. Muchos frameworks de Android requieren procesado de anotaciones que están disponibles en Kotlin a través de kapt y soporta Dagger 2, DataBinding, DBFlow, ButrerKnife, AndroidAnnotations y otros.
+
+Kotlin tiene sus propios frameworks y librerías desarrolladas por JetBrains y la comunidad. Algunos ejemplos: Anko, RxKotlin, funKtilnale, kohesive, kovenant, la herramienta de Kobalt y mucho más.
+
+Hay un conversor integrado en el IDE que ayuda a migrar el código de Java a Kotlin. Y otro online disponible en [http://try.kotlinlang.org/](http://try.kotlinlang.org/)
+
+# Pruébalo
+
+* **Aprende**: [**Koans**](http://try.kotlinlang.org/koans)/[Playground](http://try.kotlinlang.org/)/, [Tutorials](https://kotlinlang.org/docs/tutorials/), [Language docs](https://kotlinlang.org/docs/reference/)
+* **Instálalo**
+** **IntelliJ IDEA 15** ([Ultimate o Community](https://www.jetbrains.com/idea/download/)): basta con que crees un Kotlin o añadas un archivo Kotlin en un proyecto Java
+** **Android Studio**: instala el plugin a través del gestor de plugins (Plugin Manager)
+** **Eclipse**: instala el plugin a través del [Marketplace](https://marketplace.eclipse.org/content/kotlin-plugin-eclipse)
+** **Línea de comandos**: descarga el compilador [aquí](https://github.com/JetBrains/kotlin/releases/tag/build-1.0.0-beta-1103)
+* **Comunidad**: [Foro](https://devnet.jetbrains.com/community/kotlin), [Slack](http://kotlinlang.slack.com/) ([obtener invitación](http://kotlinslackin.herokuapp.com/)), StackOverflow, [GitHub](https://github.com/JetBrains/kotlin) (se aceptan PRs)
+* **Noticias**: [Blog](http://blog.jetbrains.com/kotlin/), [Twitter](https://twitter.com/kotlin)
+* [Issue tracker](https://youtrack.jetbrains.com/issues/KT)
+
+***¡Que tengáis un buen Kotlin!***
+
+[Kotlin]: http://kotlinlang.org/
+[JetBrains]: http://jetbrains.com/
