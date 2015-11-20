@@ -1,0 +1,105 @@
+---
+layout: post
+title:  "Kotlin 1.0 Beta 2"
+date:   2015-11-16 00:00:00 +0100
+category: blog
+tags:
+author: soywiz
+permalink: /2015/11/kotlin-1-0-beta-2/
+---
+
+Hoy el equipo de Kotlin ha liberado la segunda beta de kotlin 1.0, que corresponde con la versión: **1.0.0-beta-2423**.
+
+Con las betas están terminando de refinar cosas, así que la mayor parte de los cambios en esta versión son corrección de bugs, y pequeños cambios en la librería estándar.
+
+Podéis encontrar el artículo original en inglés, [aquí](http://blog.jetbrains.com/kotlin/2015/11/kotlin-1-0-beta-2-is-out/).
+
+# Cambios en el lenguaje
+
+Ahora estamos forzando herencia simple en las restricciones de los parámetros de tipo: la misma T no puede tener como límite superior `List&lt;Int>` y `List&lt;String>` al mismo tiempo. Esta prohibición ya ocurría en clases y ahora se hace la misma comprobación para los parámetros de tipo.
+
+Hemos mejorado las advertencias en los casos en los que sea imposible realizar un smartcast:
+
+{% highlight kotlin %}
+class C {
+    var x: String? = ""
+    fun foo(): String {
+        if (x != null) return x // ERROR: smart cast to String is impossible,
+        // because 'x' is a member variable
+    }
+}
+{% endhighlight %}
+
+También, el compilador es lo bastante inteligente para avisarnos cuando un valor va a ser siempre null en un determinado sitio:
+
+{% highlight kotlin %}
+var x: Foo? = ...
+if (x != null) return
+x?.bar() // WARNING: bar() will never run, because x is always null here
+{% endhighlight %}
+
+# Cambios en la librería estándar
+
+Hemos hecho limpieza en las APIs de la librería estándar. Los cambios
+más visibles en esta ocasión tienen que ver con rangos. Queríamos que
+los casos básicos como `if (x in 1..10)` o `for (i in 1..10)` permaneciesen
+sin cambios, pero internamente hemos hecho algunos ajustes en el nombrado
+y en la jerarquía:
+
+* Hemos eliminado las progresiones Double y Float
+* Hemos deprecado las progresiones Byte y Short y ahora el operador .. sobre ellos devuelve un IntRange
+* Hemos renombrado Range&lt;T> a ClosedRange&lt;T> y la propiedad end, pasa a llamarse endInclusive
+* Hemos deprecado Progression&lt;T> en favor de implementaciones específicas: IntProgression, LongProgression, CharProgression
+* Hemos renombrado las propiedades start y end a first y last.
+
+También hemos generalizado las extensiones de cadenas para funcionar con CharSequence en los casos que ha sido posible.
+
+Ahora la extensión filterIsInstance requiere explicitar su parámetro de tipo:
+
+{% highlight kotlin %}
+foo(list.filterIsInstance()) // error: what is the type the checks are done for?!
+foo(list.filterIsInstance&lt;Bar>()) // OK: we are checking for Bar
+{% endhighlight %}
+
+# Otros cambios:
+
+* Añadido:
+** Ordenado e inversión in-situ para MutableLists y Arrays
+** Comparadores naturalOrder y reverseOrder
+** mapNotNull, mapIndexedNotNull, filterIndexed
+** String.toByte()
+* Deprecado (Code Cleanup para migrar el código):
+** Function.toGenerator
+** toLinkedList
+* Eliminado:
+** join, merge
+** Delegates.lazy
+** FileTreeWalk.filter, File.recurse, Buffered.lines y lineIterator
+** assert, check y require con el argumento message no-lazy
+
+# Dokka
+
+Dokka, la herramienta de generación de documentación para los proyectos
+Kotlin, ha alcanzado una release completa. Dokka soporta proyectos
+mezclados y comprender comentarios KDoc en código Kotlin y comentarios
+JavaDoc en código Java. Dokka  tiene plugins para Gradle, Maven y Ant,
+así que puedes lo integrar fácilmente el sistema de build de tu proyecto.
+Descarga Dokka y obtén más información en la página del proyecto Dokka.
+
+Dokka, the new documentation generation tool for Kotlin projects, has
+finally reached a full release. Dokka supports mixed-language projects
+and understands [KDoc comments](https://kotlinlang.org/docs/reference/kotlin-doc.html) in Kotlin code and JavaDoc comments in Java
+code. Dokka has plugins for Gradle, Maven and Ant, so you can easily integrate
+it with the build system of your project. Download Dokka and find more
+information on the [Dokka project site](http://github.com/kotlin/dokka).
+
+# Cambios en el IDE
+
+* El completado ahora funciona para miembros estáticos de Java y miembros de objetos. Simplemente pulsa `Ctrl+Space` dos veces: ![](/images/1.0-beta2/staticCompletion.png)
+* Completion inside string templates has been added. For using it type "`$name.`" ![](/images/1.0-beta2/completion.png)
+* Ahora puedes elegir la posición exacta de un breakpoint mientras depuras expresiones dentro de lambdas: ![](/images/1.0-beta2/breakpoints.png)
+* Y finalmente, hemos añadido un puñado de intenciones para importar estáticos de Java, miembros de objeto y entradas de enums. Y hay un análogo a * en los imports estáticos de las clases Java o elementos de los enum ![](/images/1.0-beta2/imports.png)
+
+# Instalación
+
+IntelliJ IDEA 15 y Android Studio te sugerirán actualizar a Kotlin automáticamente. Y si esto no ocurre, siempre puedes forzarlo manualmente a través del *Plugin Manager*.
