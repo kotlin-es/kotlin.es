@@ -1,0 +1,19 @@
+---
+layout: post
+title:  "Nos pasamos a jekyll"
+date:   2015-11-20 18:47:00 +0100
+category: blog
+tags: blog
+author: soywiz
+permalink: /2015/11/nos-pasamos-a-jekyll/
+---
+
+Desde hoy nos pasamos de wordpress a [jekyll](https://jekyllrb.com/).
+Jekyll es mucho más sencillo que wordpress, se escribe con markdown y genera un blog estático
+que se puede publicar en cualquier sitio incluyendo github.
+De hecho, github permite tener repositorios con jekyll directamente sin tener que subir el contenido generado.
+
+Si queréis **escribir o corregir** algo en kotlin.es basta con que hagáis **un fork y una PR** al repositorio del blog:
+[https://github.com/kotlin-es/kotlin-es.github.io](https://github.com/kotlin-es/kotlin-es.github.io)
+
+Una vez mergeado, el blog se actualizará automáticamente.
