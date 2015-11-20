@@ -15,11 +15,11 @@ En la siguiente tabla podemos ver las versiones que han ido saliendo y sus fecha
 |Milestone|Versión|Fecha de salida|Cambios|En español|
 |-----------|:-------------:|:-----------:|---|---|
 |           |               |  **2015**   |   |   |
-| 1.0-beta1 | 1.0-beta-1103 |  02-11-2015 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/11/the-kotlin-language-1-0-beta-is-here/)  |   |
-| M14       | 0.14.449      |  01-10-2015 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/10/kotlin-m14-is-out/)  |   |
-| M13       | 0.13.1514     |  16-09-2015 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/09/kotlin-m13-is-out/)  |   |
-| M12       | 0.12.613      |  29-05-2015 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/05/kotlin-m12-is-out/)  |   |
-| M11       | 0.11.91       |  19-03-2015 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/03/kotlin-m11-is-out/)  |   |
+| 1.0-beta1 | 1.0-beta-1103 |  02-11-2015 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/11/the-kotlin-language-1-0-beta-is-here/)  | [kotlin.es](http://kotlin.es/2015/11/la-beta-1-0/)  |
+| M14       | 0.14.449      |  01-10-2015 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/10/kotlin-m14-is-out/)  | [kotlin.es](http://kotlin.es/2015/10/kotlin-m14/)  |
+| M13       | 0.13.1514     |  16-09-2015 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/09/kotlin-m13-is-out/)  | [kotlin.es](http://kotlin.es/2015/09/kotlin-m13/)  |
+| M12       | 0.12.613      |  29-05-2015 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/05/kotlin-m12-is-out/)  | [kotlin.es](http://kotlin.es/2015/08/kotlin-m12/) |
+| M11       | 0.11.91       |  19-03-2015 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/03/kotlin-m11-is-out/)  | [kotlin.es](http://kotlin.es/2015/03/kotlin-m11/)  |
 |           |               |  **2014**   |   |   |
 | M10       | 0.10.195      |  17-12-2014 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2014/12/m10-is-out/)  |   |
 | M9        | 0.9.66        |  15-10-2014 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2014/10/m9-is-here/)  |   |
