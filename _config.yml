@@ -8,12 +8,22 @@
 # Site settings
 title: Kotlin.es
 email: your-email@domain.com
-description: > # this means to ignore newlines until "baseurl:"
-  La primera comunidad de Kotlin en español
+description: La primera comunidad de Kotlin en español
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://kotlin.es/" # the base hostname & protocol for your site
+url: "http://kotlin.es" # the base hostname & protocol for your site
 twitter_username: kotlin-es
 github_username:  kotlin-es
+facebook_username: kotlin.es
 
 # Build settings
 markdown: kramdown
+
+gems:
+- jekyll-mentions
+- jemoji
+- jekyll-redirect-from
+- jekyll-sitemap
+- jekyll-feed
+
+# sudo gem install jekyll-mentions jemoji jekyll-redirect-from jekyll-sitemap jekyll-feed
+

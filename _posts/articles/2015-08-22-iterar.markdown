@@ -1,0 +1,149 @@
+---
+layout: post
+title:  "Iterar en #kotlin y un poco de historia"
+date:   2015-08-22 00:00:00 +0100
+category: articles
+tags: iterando
+author: soywiz
+permalink: /2015/08/iteraciones-un-poco-de-historia-y-en-kotlin/
+---
+
+# Iterando en lenguajes de pasada generación
+
+para repetir un código varias veces:
+
+El ***for*** es la estructura de control más flexible que suelen tener los lenguajes, permite definir un flujo completo de inicialización, condición de ejecución y actualización. El código de dentro del *for* se ejecuta de cero a más veces.
+
+{% highlight kotlin linenos %}
+for (inicialización; condición_ejecución; postincremento) { ... }
+{% endhighlight %}
+
+El ***while*** es como un for pero simplificado, no tiene ni inicialización ni actualización. Generalmente se usa cuando la actualización ya se incluye como parte de la condición. Por ejemplo si llamásemos a un método *getLastAndMoveNext()*.
+
+{% highlight kotlin linenos %}
+while (condición_dejecución) { ... }
+{% endhighlight %}
+
+El ***do…while*** es similar al *while*, pero el do while garantiza que el código de dentro se va a ejecutar al menos una vez. Es decir, que la comprobación se hace al final.
+
+{% highlight kotlin linenos %}
+do { ... } while (condición_dejecución)
+{% endhighlight %}
+
+# Evolución en lenguajes modernos
+
+En los lenguajes algo más modernos aparece el concepto de foreach y en algunos de ellos se elimina completamente el for tradicional como es el caso de Kotlin.
+
+El ***foreach*** se utiliza para iterar sobre una colección o un elemento iterable. No tenemos acceso al índice (generalmente) y únicamente nos interesa acceder a los elementos de uno en uno y generalmente en orden. Dependiendo del lenguaje hay diferentes sintaxis.
+
+En PHP (podemos acceder hasta a la clave): {% highlight php %}foreach ($array as $key => $value) { ... }{% endhighlight %}
+
+En Java: {% highlight java %}for (Type item : array) { ... }{% endhighlight %}
+
+En JavaScript: {% highlight javascript %}for (item of array) { ... }{% endhighlight %}
+
+En Kotlin: {% highlight kotlin %}for (item in array) { ... }{% endhighlight %}
+
+El ***for con rangos*** se utiliza en aquellos lenguajes de programación que tratan de reemplazar el for original, que pese a ser muy flexible, no es [DRY] y es propenso a errores. Generalmente lo que queremos es recorrer una lista en orden, o en el caso de números un rango específico en orden. Generalmente de menor a mayor y algunos casos saltando algunos elementos o similares.
+
+Típicamente: {% highlight kotlin %}for (n in 0 .. 10) { }{% endhighlight %}
+
+# Programación funcional
+
+Los lenguajes más modernos suelen ser multiparadigma. Y aceptar programación orientada a objetos y programación funcional. Así como la programación orientada a objetos es muy buena para modelar el mundo. La programación funcional es ideal para transformar colecciones.
+
+Desde JavaScript, pasando por Java 8, PHP, C#, Kotlin…
+
+Muchos lenguajes suelen ofrecer métodos utilitarios para manipular cosas iterables con mayor o menor elegancia.
+
+La programación funcional del hombre pobre podría ser la que ofrece PHP. Sin métodos de extensión, pero ofreciendo un amplio abanico de funciones para manipular colecciones aceptando callbacks. array_map, array_filter y array_reduce podrían ser las más típicas.
+
+Mientras que en lenguajes de origen orientado a objetos, bien mediante métodos integrados o bien mediante métodos de extensión, podemos escribir código teniendo el sujeto a la izquierda y las progresivas transformaciones a la derecha, leyéndose como en occidente.
+
+# Iterando en Kotlin
+
+En Kotlin se elimina el *for* tradicional y se opta por las versiones más modernas del for manteniendo una única sintaxis tanto para el for como para el foreach.
+
+{% highlight kotlin %}for (nombredevariable in iterable) { ... }{% endhighlight %}
+
+Iterando un array:
+
+{% highlight kotlin %}
+for (value in arrayOf("a", "b", "c")) {
+    println(value)
+}
+{% endhighlight %}
+
+Iterando sobre un rango de números:
+
+En Kotlin los rangos se hacen mediante el operador ```..``` , y son rangos inclusivos. Es decir, este for se ejecutaría varias veces y value tomaría los valores 2, 3, 4, 5, 6, 7. Nótese que el 7 está incluído.
+
+{% highlight kotlin %}
+for (value in 2 .. 7) {
+  println(value)
+}
+{% endhighlight %}
+
+Es decir que si queremos iterar sobre los índices de un array de forma manual (nótese el -1):
+
+{% highlight kotlin %}
+for (value in 0 .. array.length() - 1) { ... }
+{% endhighlight %}
+
+Para evitar esto que es algo engorroso, otros lenguajes suelen o no ser inclusivos u ofrecer otro operador, el operador ```...``` que se utiliza para estos casos. En Kotlin decidieron no complicar el lenguaje y deben haber considerado que el ```..```  y el ```...``` son difíciles de diferenciar a simple vista y podrían dar lugar a confusión.
+
+Para evitar esto que es algo engorroso, en Kotlin hay disponible una propiedad de extensión: indices (disponible en ```Array<T>```  y ```Collection<T>```). Así que el ejemplo anterior quedaría como:
+
+```
+for (value in array.indices) { ... }
+```
+
+**Editado:**
+
+A partir de la M13 está disponible el método de extensión until, que permite hacer rangos de enteros excluyendo el último elemento. Con lo que si quisiésemos iterar sobre los índices de un array también podríamos hacer:
+
+```
+for (value in 0 until array.length()) { ... }
+```
+
+# Iterando en Kotlin con programación funcional
+
+Kotlin dispone de métodos y propiedades de extensión. Es decir, a una clase ya definida o incluso a una interfaz, le añadimos métodos. Dichos métodos no se pueden heredar. Pero son realmente útiles para extender la funcionalidad de una clase o interfaz sin modificarla o para añadir métodos a posteriori sin añadir dependencias irracionales a la clase inicial.
+
+Los métodos de extensión funcionan como métodos estáticos, pero aparecen como miembros de la clase en el autocompletado a diferencia de los métodos estáticos que además de ser verbosos y aparecer en el orden inverso al lógico, no tienen ningún tipo de asistencia en los IDEs y son más difíciles de descubrir.
+
+Las colecciones de Kotlin disponen de los métodos típicos para manipular colecciones. Por ejemplo:
+
+```
+fun duplicateDoubles(items:Iterable<Int>) = items.filter { (it % 2) == 0 }.map { it * 2 }
+println(duplicateDoubles(arrayOf(1, 2, 3, 4, 5, 6, 7))
+```
+
+Así pues .filter y .map, nos permiten filtrar y mapear colecciones y generar otra colección. El ejemplo de arriba, selecciona primero los elementos pares de la colección y después, coge esos elementos filtrados y los multiplica uno a uno por dos y devuelve una colección con esas transformaciones.
+
+Con métodos de extensión se podría hacer algo así:
+
+```
+fun Iterable<Int>.duplicateDoubles() = this.filter { (it % 2) == 0 }.map { it * 2 }
+println(arrayOf(1, 2, 3, 4, 5, 6, 7).duplicateDoubles())
+```
+
+Aunque mi opinión es que hay que andar con ojo y crear solo los métodos de extensión que tengan sentido y dándoles la visibilidad correcta. O congestionaremos el espacio de nombres y lo llenaremos de basura.
+
+El método duplicateDoubles en Java tradicional quedaría algo así:
+
+```
+List<int> duplicateDoubles(List<int> items) {
+  final ArrayList<int> out = new ArrayList<int>();
+  for (item : items) {
+    if ((item % 2) == 0) out.add(item * 2)
+  }
+  return out;
+}
+```
+
+Con programación funcional queda mucho más conciso y es mucho más safe. En Java la variable local out puede ser inmutable, pero la colección no lo es. Dentro de un for podemos hacer muchas cosas y algunas ocultando la verdadera intención. Con la programación funcional se ve claramente cada paso de la transformación de la colección.
+
+En otro artículo trataremos a fondo los métodos de extensión sobre colecciones de Kotlin.
+
+[DRY]: (https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)

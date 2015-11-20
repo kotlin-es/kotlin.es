@@ -2,9 +2,11 @@
 layout: post
 title:  "Nulabilidad en #kotlin y #java"
 date:   2015-08-22 00:00:00 +0100
-categories: jekyll update
-author: "Carlos Ballesteros Velasco"
-permalink: /2015/08/nulabilidad-en-kotlin-y-en-java/
+category: articles
+categories: nulabilidad
+tags: nulabilidad
+author: soywiz
+permalink: "/2015/08/nulabilidad-en-kotlin-y-en-java/"
 ---
 
 Hoy vamos a hablar sobre la nulabilidad en Kotlin.

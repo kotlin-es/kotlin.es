@@ -1,0 +1,115 @@
+---
+layout: post
+title:  "Trabajando con listas y arrays en #kotlin"
+date:   2015-08-26 00:00:00 +0100
+category: articles
+tags: listas
+author: soywiz
+permalink: /2015/08/trabajando-con-listas-y-arrays-en-kotlin/
+---
+
+* TOC
+{:toc}
+
+# Construcción y propiedades
+
+En Kotlin hay diferentes formas de generar listas de objetos: arrays, listas inmutables, listas mutables, etc. Por un lado hay que distinguir la inmutabilidad de la colección de la inmutabilidad de la variable que la contiene.
+
+
+|arrayOf |listOf |arrayListOf |linkedListOf |
+|-----------|-------|---------------|-------------|
+|Descripción |Genera un array de objetos tradicional de java|Genera una lista inmutable|Genera una lista mutable | Genera una lista enlazada mutable |
+|Literales| arrayOf(1, 2, 3) | listOf(1,2, 3) | arrayListOf(1, 2, 3) | linkedListOf(1, 2, 3) |
+|toString()| [Ljava.lang.Integer; | ```[1, 2, 3]``` | ```[1, 2, 3]```  | ```[1, 2, 3]``` |
+|Concatenación a + b | sí | sí| sí | sí |
+|Inmutabilidad| no |sí| no| no| |
+|Modificar longitud| no |no| sí| sí|
+|Conversión| .toTypedArray() |.toList() |.toArrayList() | .toLinkedList() |
+|Tipo de estructura de datos| array nativo |array wrappeado| array wrappeado  |lista enlazada|
+|Conversión requiere reificación| <span style="color:red;">sí (*)</span> |no| no|no
+
+(*) Conversión requiere reificación:
+
+Hay que saber también que en Kotlin las declaraciones arrays no llevan corchetes como en Java u otros lenguajes, sino que se utiliza la clase Array<T>.
+
+Los arrays de primitivas tienen sus propias clases: **BooleanArray**, **ByteArray**, **CharArray**, **ShortArray**, **IntArray**, **FloatArray**, **DoubleArray**, y la forma de construir literales es mediante: *booleanArrayOf*, *byteArrayOf*, *charArrayOf*, *shortArrayOf*, *intArrayOf*, *floatArrayOf*, *doubleArrayOf*.
+
+**List<T> ofrece una interfaz inmutable** para la colección. También existe la interfaz MutableList<T> que ofrece la interfaz inmutable de List más métodos para mutar la colección. arrayListOf devuelve una MutableList<T>.
+
+Respecto a las propiedades de los arrays de tipos primitivos, son las mismas que las de arrayOf…
+
+![Ejemplo reificación 1](/images/reified1.png)
+
+![Ejemplo reificación 2](/images/reified2.png)
+
+![Ejemplo reificación 3](/images/reified3.png)
+
+Sobre la reificación hablaremos en otro artículo. Pero básicamente para poder utilizar toTypedArray, necesitamos tener información del tipo en tiempo de compilación. Con inline + reified T lo conseguimos. Pero la reificación hay que hacerla a todos los niveles. Así que en ciertas clases genéricas preferiremos utilizar listas y directamente no utilizar arrays.
+
+# Spread operator
+
+En Kotlin, como en muchos lenguajes modernos existe el operador de difusión (*spread operator*).
+
+Un caso directo del spread operator es **permitir la llamada a funciones con argumentos variables partiendo de arrays**:
+
+![Ejemplo spread 1](/images/spread1.png)
+
+![Ejemplo spread 2](/images/spread2.png)
+
+Como se puede ver en los ejemplos solo funciona con arrays y no con listas. Si tenemos información de los tipos en tiempo de compilación, podemos utilizar toTypedArray para hacer la conversión. En el caso de tipos primitivos tenemos toBoolArray, toByteArray, toCharArray, toShortArray, toIntArray, toLongArray, toFloatArray, toDoubleArray.
+
+También se puede utilizar para introducir, como una especie de **interpolación de cadenas, pero en literales de arrays**. De hecho esto es un caso concreto de las funciones vararg puesto que la declaración de las funciones utilizadas para los literales de arrays y listas es una función vararg.
+
+![Ejemplo spread 3](/images/spread3.png)
+
+# Manipulación de listas
+
+Aunque generalmente muchas de las operaciones que querramos realizar, se pueden hacer con programación funcional en Kotlin, y debido al inlining, no debería haber casi overhead por hacerla, en determinadas ocasiones querremos manipular listas de forma iterativa.
+
+Generalmente si queremos ir transformando una lista inmutable, lo que hacemos es tener la variable que la contiene mutable (**var** out), de forma que lo que en cad iteración lo que hacemos es reemplazar la variable con una nueva lista conteniendo la lista anterior con un nuevo elemento concatenado. Así pues, un ejemplo sería:
+
+![](/images/mutable1.png)
+
+En el caso de que utilicemos listas mutables, la variable que contiene la lista puede ser inmutable (**val** out), y lo que hacemos es manipular la colección. Los ArrayList implementan tanto la interfaz **List<T>** como **MutableList<T>**, por lo que podemos devolver la lista como inmutable simplemente porque no tiene acceso a los métodos mutables:
+
+![](/images/mutable2.png)
+
+# Acceso a elementos
+
+[Kotlin soporta operator overloading](http://kotlinlang.org/docs/reference/operator-overloading.html) (sobrecarga  de operadores). Los accesos a arrays se hacen mediante sobrecarga:
+
+![](/images/array-access.png)
+
+Así pues cualquier clase que defina un método **set** con dos argumentos (o más),  permitirá setear el acceso a un elemento con los corchetes. De la misma forma una clase que defina un método get con un argumento, permitirá acceder al elemento con corchetes.
+
+![](/images/set_method.png)
+
+# Creación de arrays de tamaño fijo:
+
+## Si queremos crear un array repleto nulos de un tipo en concreto:
+
+```arrayOfNulls<T>(longitud)```
+
+El tipo de esa expresión es ```Array<T?>```, y si una vez hemos rellenado el array entero y queremos otro array de no nulos, podemos hacer: ```array.map { it!! }.toTypedArray()``` y obtener un array sin nulos.
+
+## Los tipos básicos, permiten creación de arrays de tamaño fijo mediante el constructor:
+
+```BoolArray(longitud)```, ```ByteArray(longitud)```, ```ShortArray(longitud)```, ```CharArray(longitud)```, ```IntArray(longitud)```, ```LongArray(longitud)```, ```FloatArray(longitud)```, ```DoubleArray(longitud)```.
+
+Los arrays creados estarán inicializados con los valores por defecto de los tipos, 0 o false.
+
+## Si queremos un array no nulo de cierta cantidad de elementos:
+
+```Array<T>(longitud, init: (Int) -> T)```
+
+Por ejemplo: ```Array(10, { "${it * 2}" }) // Array<String>```
+
+El tipo de esa expresión es ```Array<T>```, y no es nulo porque nos hemos garantizado de pasar un inicializador para cada uno de los elementos. El inicializador se llamará con el índice de cada elemento de la lista.
+
+## Si queremos crear una lista de tamaño fijo con un rango concreto:
+
+```(10 .. 20).map { it * 2 }.toIntArray()```
+
+Aquí utilizamos el hecho de que un IntRange es iterable y por lo tanto mapeable mediante métodos de extensión.
+
+

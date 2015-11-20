@@ -1,0 +1,261 @@
+---
+layout: post
+title:  "Declaración de clases y construcción de objetos en #kotlin"
+date:   2015-08-29 00:00:00 +0100
+category: articles
+tags: clases objetos
+author: soywiz
+permalink: /2015/08/declaracion-de-clases-y-construccion-de-objetos-en-kotlin/
+---
+
+La declaración y construcción de clases y objetos en Kotlin es especialmente agradable. Esto es debido a varias decisiones de diseño de Kotlin:
+
+* El constructor principal permite declarar campos de forma dry incluyendo los setters y getters correspondientes
+* Acepta llamadas con named parameters
+* No utiliza el keyword ***new***
+* Al no diferenciarse una llamada de una construcción, muchos tipos ser opcionales y tener companion objects + invoke, se puede reemplazar una función por una clase o viceversa muy fácilmente. Con lo que hay bastante flexibilidad al respecto
+
+# Declaración de clases DRY
+
+Una de las características más agradables de kotlin y que tienen algunos lenguajes modernos como scala, kotlin o typescript, es la de que algunos o todos los argumentos del constructor sean campos de la clase. Para entender lo útil que es esto, veamos el siguiente ejemplo:
+
+**En Kotlin:**
+{% highlight kotlin %}
+class Test(var a:Int) { }
+{% endhighlight %}
+
+**En Java:**
+{% highlight java %}
+class Test {
+   private int a;
+   
+   Test(int a) {
+       this.a = a;
+   }
+ 
+   void setA(int a) {
+       this.a = a;
+   }
+ 
+   int getA() {
+       reeturn this.a;
+   }
+}
+{% endhighlight %}
+
+¿Cuántas veces aparece la “a”? DIEZ veces en un total de 15 líneas frente a una única línea en Kotlin. Es decir, que “a” o la palabra que elijamos va a aparecer DIEZ veces en cuanto hayan settes y getters de por medio. Y no solo eso, sino que aparece en los getters y setters con la primera letra en mayúsculas. Si multiplicamos diez por la cantidad de campos que tenga un pojo/value object, vemos que enseguida es insostenible y la cantidad de líneas para gestionar esto es elevadísima. Y acabamos teniendo archivos enormes que no hacen absolutamente nada. O lo que puede ser peor, archivos enormes con algún método que no sea getter ni setter camuflado por mucho que nos ayuden los IDEs.
+
+Esto además de no ser [DRY (don’t repeat yourself)](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself), nos mete ruido que muchas veces dificulta el entendimiento real de las cosas. Y es que la programación acaba siendo comunicación: con otros, o con tu yo del futuro que tenga que mantener un programa.
+
+# Sintaxis de la declaración de clases
+
+## Muy similar a declaración de funciones
+
+La declaración de ciertas clases es muy similar a la declaración de funciones, siendo los argumentos declarados, los argumentos del constructor principal
+
+{% highlight kotlin %}
+fun Test(a:Int, b:Int) { }
+class Test(a:Int, b:Int) { }
+{% endhighlight %}
+
+## Llaves opcionales
+
+Debido a que Kotlin es capaz de crear campos, getters y setters directamente en el constructor, y que el constructor principal aparece antes de las llaves, hay casos en que nuestras clases value object, quedarían completamente vacías, así que para evitar añadir más verbosidad, las llaves son opcionales.
+
+{% highlight kotlin %}
+class Test(val a:Int) { }
+class Test(val a:Int)
+{% endhighlight %}
+
+## Modificadores en el constructor
+
+{% highlight kotlin %}
+class Test(a:Int)
+class Test(val a:Int)
+class Test(var a:Int)
+class Test(private val a:Int)
+class Test(private var a:Int)
+{% endhighlight %}
+
+Cada argumento del constructor principal, permite especificar los modificadores:de acceso ```var```, ```val```, de visibilidad ```private```, ```protected```, ```internal```, ```public```. (además del ```vararg``` del que ya hablaremos en otro artículo)
+
+### Sin modificadores
+
+Si no colocamos ningún modificador, se tiene acceso a la variable del constructor en la declaración de los campos y en el inicializador principal init { }, pero no se tiene acceso en los métodos de la clase. Como en funciones normales en kotlin, un argumento sin modificadores es inmutable.
+
+### Modificador var
+
+Utilizar el modificador var, dará acceso al argumento del constructor dentro de los métodos de la clase, y creará setters y getters para dicho argumento, de forma que podremos mutar ese campo. Si no especificamos modificador de visibilidad, la visibilidad por defecto es public.
+
+### Modificador val
+
+El modificador val dará acceso al argumento dentro de los métodos de la clase como var, pero no creará con setter, de forma que dicho argumento será inmutable dentro y fuera de la clase.
+
+### Modificadores de visibilidad
+
+Los modificadores de visibilidad, limitan la visibilidad del argumento fuera de la clase y deben ir acompañados de var o de val para tener sentido, ya que únicamente ahí se crea un campo que pueda tener visibilidad y de la otra forma es solo un argumento del constructor.
+
+## Acceso de argumentos en la inicialización de los campos
+
+Muchas veces no necesitamos código de construcción cuando declaramos una clase, y muchas veces lo único que hacemos en el constructor es setear campos tal cual llegan de los argumentos o con pequeñas modificaciones. En Kotlin, tenemos acceso a los argumentos en la declaración de los campos.
+
+{% highlight kotlin %}
+class Person(val name:String) {
+   val upperCasedName = name.toUpperCase()
+}
+{% endhighlight %}
+
+## Inicialización del constructor principal
+
+En determinados casos en los que no podamos o no querramos inicializar todos los campos mediante programación funcional con una sola expresión, podemos recurrir al inicializador principal.
+
+{% highlight kotlin %}
+class Person(val name:String) {
+   var upperCasedName1:String? = null
+   var upperCasedName2:String = ""
+   var upperCasedName3:String by Delegates.notNull()
+   init {
+       upperCasedName1 = name.toUpperCase()
+       upperCasedName2 = name.toUpperCase()
+       upperCasedName3 = name.toUpperCase()
+   }
+}
+{% endhighlight %}
+
+Idealmente preferiremos siempre que podamos evitar el init, ya que nos obliga bien a forzar un campo nulo, a poner un valor por defecto sin mucho sentido, o a utilizar by *Delegates.notNull()* como ya veremos en otro artículo.
+
+## Constructores secundarios y primario privado
+
+Como en Java, Kotlin admite diferentes métodos con diferentes firmas. Una especie de pattern matching en tiempo de compilación basado únicamente en tipos y no en valores que suelen soportar la mayor parte de lenguajes compilados fuertemente tipados por el valor que aportan con un coste nulo en runtime.
+
+Debido a que el constructor primario, ocurre antes de las llaves y que tiene una sintaxis que no permite más constructores, Kotlin define otra sintaxis para definir otros constructores que no admiten la creación de campos en la clase y que deben llamar obligatoriamente al constructor primario.
+
+{% highlight kotlin %}
+class Test(val value:String) {
+    constructor(value:Int) : this("$value")
+}
+{% endhighlight %}
+
+Con la palabra clave reservada ```constructor```, podemos definir más argumentos. La sintaxis fuerza a poner después de la lista de argumentos : ```this(...)``` llamando así al constructor principal. Los parámetros se deben evaluar en expresiones sin poder utilizar sentencias. Aunque siempre podemos llamar a métodos estáticos para evaluar código más complejo.
+
+Podemos definir el constructor primario como ```private```, de forma que tengamos que llamar a un constructor secundario desde fuera:
+
+{% highlight kotlin %}
+class Test private(val value:String) {
+    constructor(value:Int) : this("$value")
+}
+{% endhighlight %}
+
+## invoke en object y companion object
+
+Por convención, en Kotlin, cualquier objeto que tenga un método invoke, se podrá llamar directamente como si fuera una función.
+
+{% highlight kotlin %}
+object IntToString {
+    fun invoke(a:Int):String = "$a"
+}
+{% endhighlight %}
+
+De esta forma podemos llamar a ```IntToString(10)``` o a ```IntToString.invoke(10)```.
+
+## interfaz y funciones libres asociadas
+
+Podemos sustituir una clase por una interfaz y una función que construya una intefaz asociada utilizando el mismo nombre para ambos:
+{% highlight kotlin %}
+interfaz Disposable { fun dispose() }
+fun Disposable():Disposable = throw Exception("Not implemented!")
+{% endhighlight %}
+
+## Herencia
+
+Kotlin permite herencia simple, e implementación de diversas interfaces, así como métodos de extensión. A diferencia de Java que define dos keywords: implements y extends. En Kotlin, la herencia se hace como en C++ y C#, con el símbolo “:”. Tanto clases como interfaces, se ponen después del : separados por comas. Y además se requiere llamar a un constructor de la clase que estamos heredando.
+
+{% highlight kotlin %}
+open class Base(val str:String) {
+}
+ 
+class Extended(str:String, val value:Int) : Base(str) {
+}
+{% endhighlight kotlin %}
+
+En Kotlin, **la norma es que todas las clases y métodos sean final**.
+
+Así pues si queremos heredar de una clase, debemos abrirla, con la palabra clave reservada ```open```, o declarándola como abstracta. El keyword ```final``` se sigue utilizando para explicitar o finalizar una herencia abierta.
+
+## Object y companion object como sustituto de static extensible
+
+Tanto en Kotlin como en Scala, no existe el concepto de static como tal. (Aunque podemos utilizar la anotación ```@platformStatic```). Lo que existe es el concepto de “object”. Un object es un singleton que utilizamos como si fuese estático, pero que al ser un objeto permite heredar e implementar interfaces. Aunque un object puede heredar de una clase, no puede marcarse como abierta o abstracta y otras clases no pueden extender de ese object. Solo hay una única instancia.
+
+En Kotlin:
+
+{% highlight kotlin %}
+object Test {
+   fun mymethod() { }
+}
+ 
+Test.mymethod()
+{% endhighlight %}
+
+En Java:
+
+{% highlight java %}
+public class Test {
+   static Test INSTANCE$ = new Test();
+   public void mymethod() { }
+}
+ 
+Test.INSTANCE$.mymethod();
+{% endhighlight kotlin %}
+
+Cuando tenemos una clase en la que queremos meter lo equivalente a campos y métodos estáticos, lo que hacemos es utilizar un companion object.
+
+{% highlight kotlin %}
+class Test {
+   companion object { val CONST = 10 }
+   fun nonStaticMethod() { }
+}
+ 
+Test.CONST
+Test().nonStaticMethod()
+{% endhighlight %}
+
+## Instanciación de clases
+
+Originalmente la construcción de objetos se hace mediante el keyword new. El keyword new ya estaba hasta en C++ y era una forma de comunicar de forma explícita que se había reservado memoria dinámica, cosa que no ocurría si no usábamos el new. Dicho keyword seguía presente en muchos lenguajes de programación y está empezando a desaparecer en lenguajes más modernos.
+
+Con los GC ampliamente extendidos y siendo cada vez más rápidos, y con factorías que también podían no hacer explícito la reserva de memoria, se ha ido viendo que cada vez tenía menos sentido y que es más un lastre que otra cosa.
+
+## Creación básica de objetos
+
+En Java: ```new Person("Carlos", "Ballesteros", "Velasco", 29)```
+En Kotlin: ```Person("Carlos", "Ballesteros", "Velasco", 29)```
+
+## Named arguments como sustituto de variables clarificadoras (explaining variables)
+
+En Java:
+
+{% highlight java %}
+String nombre = "Carlos";
+String primerApellido = "Ballesteros";
+String segundoApellido = "Velasco";
+int edad = 29;
+new Persona(nombre, primerApellido, segundoApellido, edad)
+{% endhighlight %}
+
+En Kotlin:
+
+{% highlight kotlin %}
+Persona(
+    nombre = "Carlos",
+    primerApellido = "Ballesteros",
+    segundoApellido = "Velasco",
+    edad = 29
+)
+{% endhighlight %}
+
+Los named arguments permiten explicitar el nombre del argumento. Con llamadas a métodos/constructores con muchos argumentos o con argumentos booleanos, es especialmente útil. Además nos evita tener que declarar variables convirtiendo una expresión potencial en un conjunto de sentencias forzadas para mantener la claridad, además de no ser DRY por necesitar el identificar en la declaración y en el uso y poder quedarse obsoletas si se cambian el nombre de los argumentos.
+
+Nota: **el orden de ejecución del código en *named orguments*** al menos hasta la **M12** no es el orden de la llamada, sino que **es el orden de la declaración de los argumentos**. De forma que si llamamos a named arguments en un orden diferente al declarado, y en los argumentos estamos utilizando llamadas a métodos no puros, se pueden producir algunos problemas, en los que el código no se ejecute en el orden que esperábamos.
+
+Actualización: En teoría este no era el comportamiento deseado, sino un bug y está reportado en el bug tracker de Kotlin: [https://youtrack.jetbrains.com/issue/KT-8987](https://youtrack.jetbrains.com/issue/KT-8987)
+
