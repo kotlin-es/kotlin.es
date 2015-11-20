@@ -56,7 +56,7 @@ Intentar acceder de forma normal a un miembro de un objeto de un tipo nulable es
  En estos casos tenemos varias opciones:
  Utilizar el operador de acceso con propagación de nulos ?. como sugiere el IDE y que tiene un quick-fix.
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 this.getName()?.endsWith(".$ext")}
 {% endhighlight %}
 
@@ -64,7 +64,7 @@ El tipo de la expresión es Boolean?, es decir que si endsWith devuelve un Boole
 
 También podemos utilizar el shortcut de casteo a tipo no nulo !! que es un operador unario colocado a la derecha.
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 this.getName()!!.endsWith(".$ext")
 {% endhighlight %}
 
@@ -72,7 +72,7 @@ Ahí estamos aseverando que this.getName() devuelve una cadena y no va a ser nul
 
 La otra opción es hacer uso del smart cast. Cuando hacemos una comprobación de un valor inmutable (val) sobre su nulidad, bien sea en una cláusula de guarda o en una rama de ifs o de whens, el compilador hace un smart cast de ese tipo que era nulable a no nulable. Por ejemplo:
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 val name = this.getName()
 if (name == null) return false
 name.endsWith(".$ext")
@@ -84,13 +84,13 @@ Ahí se ha producido un smart cast después de la cláusula de guarda indicando 
 
 En el caso de tener una expresión que pueda ser nula por propagación, podemos establecer un valor para cuando sea nula. De forma que el ejemplo de antes podría quedar así:
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 this.getName()?.endsWith(".$ext") ?: false
 {% endhighlight %}
 
 Para entender esta expresión, vamos a desglosarla (tipo y valor):
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 // De tipo String? (el nombre o null)
 this.getName() 
 
@@ -109,7 +109,7 @@ Hay determinados momentos en los que no podemos darle un valor inicial a una var
 
 ## lazy
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 class Test(val library: Library) {
    var a:Element? = null
 
@@ -122,7 +122,7 @@ class Test(val library: Library) {
 
 ->
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 class Test(val library: Library) {
    val a:Element by lazy { info.myelement }
 
@@ -136,7 +136,7 @@ En otras ocasiones, no tenemos acceso a las dependencias y no podemos utilizar l
 
 ## Delegates.notNull()
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 class Test {
    var a:Int? = null
 
@@ -148,7 +148,7 @@ class Test {
 
 ->
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 class Test {
    var a:Int by Delegates.notNull()
 

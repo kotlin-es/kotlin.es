@@ -12,7 +12,7 @@ Ha sido fuertemente **influenciado por lenguajes como Scala o C#**.
 
 # Ejemplos de Kotlin:
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 package hello
  
 fun main(args: Array<String>) {
@@ -47,7 +47,7 @@ Los ; son opcionales.
 
 Como en Swift, hay ***null-safety* gratuita a nivel de lenguaje**. Por defecto ningún tipo es nullable. Y tiene herramientas para trabajar con tipos *nulables*.
 
-{% highlight kotlin linenos  %}
+{% highlight kotlin %}
 var a:String = ""
 a = null; // No se permite
 var b:String? = ""
@@ -56,13 +56,13 @@ b = null; // Permitido
 
 **Todo son expresiones**, incluyendo los ifs y por ello el operador ternario no existe.
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 fun clamp(v:Int, min:Int, max:Int) = if (v < min) min else if (v > max) max else v
 {% endhighlight %}
 
 Tiene ***smart casts* basados en las ramas de código** como TypeScript, en *ifs* y en *when* (el equivalente a *match* y *switch* de otros lenguajes):
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 fun mymethod(a:Any) {
   if (a is String) {
     println(a.toUpperCase()) // Podemos poner toUpperCase directamente porque se sabe que a es de tipo cadena
@@ -72,7 +72,7 @@ fun mymethod(a:Any) {
 
 **Interpolación de cadenas** avanzada (no solo de variables como en php): *string interpolation*:
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 fun hello(name:String) = "Hello $name"
 fun returnDoublesAsString(items:Iterable<Int>) = "Sum is ${ items.map { it * 2 }.join(", ") }"
 {% endhighlight %}
@@ -81,7 +81,7 @@ Admite funciones sueltas a nivel de paquete.
 
 Como en Scala tiene clases object que acaban siendo singleton y que admiten herencia en vez de métodos estáticos. Utiliza companion object para hacer clases con mezcla de elementos estáticos y de instancia.
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 class Test {
   companion object { fun staticMethod() { } }
   val instanceConst = 10
@@ -90,14 +90,14 @@ class Test {
 
 Permite crear value objects en una sola línea y la omisión de las llaves { } cuando no hace falta:
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 data class MyClass(val a:Int, val b:Int, val c:Int)
 {% endhighlight %}
 
 Admite funciones de una línea sin return utilizando = en vez de llaves { }, permitiendo en este caso omitir el tipo de retorno.
 
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 fun sum(a:Int, b:Int) = a + b
 {% endhighlight %}
 
@@ -106,7 +106,7 @@ No hay distinción entre tipos primitivos y clases. Los lenguajes modernos suele
 Utiliza declaraciones muy parecidas a Scala de tres letras: var, val y fun. Var para declaraciones mutables, Val para declaraciones inmutables y Fun para funciones.
 
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 var mutable = 1
 val immutable = 2
 fun myfunc() { }
@@ -118,7 +118,7 @@ Admite varios traits por archivo. Puedes incluir varias clases, y funciones libr
 
 Los argumentos son inmutables, evitando que se puedan hacer cierto tipo de guarrerías.
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 fun plusOne(a:Int) {
     a++ // ¡No!
     return a
@@ -127,7 +127,7 @@ fun plusOne(a:Int) {
 
 A diferencia de Scala, tiene getters y setters reales y son DRY como en C#, aunque aún más porque permite en mayor medida la elisión de tipos. En lenguajes como ActionScript/TypeScript/Javascript necesitas repetir el nombre dos veces, y en el caso de HaXe, en algunos casos hasta tres veces con sintaxis muy bizarras. Así que es algo que se agradece bastante.
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 private var myValue:Int = 1
 val immutableDouble:Int get() = myValue * 2
 var double:Int
@@ -141,7 +141,7 @@ En Kotlin no se puede hacer que los métodos de extensión puedan cumplir una in
 
 Hay lo equivalente a Linq de .NET de base en Kotlin con los Iterables de Java. Aunque no son lazy como en .NET, pero es viable su desarrollo.
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 fun Int.double() = this * 2
 val v1 = 10
 val v2 = v1.double()

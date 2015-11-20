@@ -14,19 +14,19 @@ para repetir un código varias veces:
 
 El ***for*** es la estructura de control más flexible que suelen tener los lenguajes, permite definir un flujo completo de inicialización, condición de ejecución y actualización. El código de dentro del *for* se ejecuta de cero a más veces.
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 for (inicialización; condición_ejecución; postincremento) { ... }
 {% endhighlight %}
 
 El ***while*** es como un for pero simplificado, no tiene ni inicialización ni actualización. Generalmente se usa cuando la actualización ya se incluye como parte de la condición. Por ejemplo si llamásemos a un método *getLastAndMoveNext()*.
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 while (condición_dejecución) { ... }
 {% endhighlight %}
 
 El ***do…while*** es similar al *while*, pero el do while garantiza que el código de dentro se va a ejecutar al menos una vez. Es decir, que la comprobación se hace al final.
 
-{% highlight kotlin linenos %}
+{% highlight kotlin %}
 do { ... } while (condición_dejecución)
 {% endhighlight %}
 

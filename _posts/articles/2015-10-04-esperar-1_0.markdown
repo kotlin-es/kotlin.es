@@ -1,0 +1,45 @@
+---
+layout: post
+title:  "¿Qué podemos esperar de Kotlin 1.0?"
+date:   2015-10-04 00:00:00 +0100
+category: blog
+tags: release
+author: soywiz
+permalink: /2015/10/que-podemos-esperar-de-kotlin-1-0/
+---
+
+La primera versión de Kotlin se acerca. Se puede ver claramente por la frecuencia de las milestones y también si su plan es liberarlo junto al intelliJ 15, deberíamos estar a uno o dos meses como mucho de la versión final. Incluso en la preview pública de intelliJ 15 publicada el 1 de octubre han incluído la M14.
+
+Si investigamos un poco, veremos que [las versiones estables de intelliJ se suelen liberar a principio de noviembre o de diciembre](http://blog.jetbrains.com/idea/category/releases/) desde los últimos 7 años.
+
+| Versión   | Fecha         |
+|-----------|---------------|
+|intelliJ 14| [05-11-2014](http://blog.jetbrains.com/idea/2014/11/intellij-idea-14-is-released/)  |
+|intelliJ 13| [03-12-2013](http://blog.jetbrains.com/idea/2013/12/intellij-idea-13-is-released-work-miracles-in-java-and-beyond/)  |
+|intelliJ 12| [05-12-2012](http://blog.jetbrains.com/idea/2012/12/intellij-idea-12-is-available-for-download/)  |
+|intelliJ 11| [06-12-2011](http://blog.jetbrains.com/idea/2011/12/intellij-idea-11-is-out-get-ready-for-a-productivity-takeoff/)  |
+|intelliJ 10| [09-12-2010](http://blog.jetbrains.com/idea/2010/12/intellij-idea-10-released-new-decade-of-evolution-ahead/)  |
+|intelliJ  9| [08-12-2009](http://blog.jetbrains.com/idea/2009/12/intellij-idea-9-finally-out-with-great-new-features-a-performance-boost/)  |
+|intelliJ  8| [06-11-2008](http://blog.jetbrains.com/idea/2008/11/meet-jetbrains-release-of-the-year-intellij-idea-8/)  |
+|intelliJ  7| [15-10-2007](http://blog.jetbrains.com/idea/2007/10/intellij-idea-the-magnificent-seven/)  |
+|intelliJ  6| [02-10-2006](http://blog.jetbrains.com/idea/2006/10/double-volley-intellij-idea-60-and-teamcity-10/)  |
+|intelliJ  5| ???         |
+|intelliJ  4| (sin blog)    |
+|intelliJ  3|               |
+|intelliJ  2|               |
+|intelliJ  1|               |
+
+Así que es bastante probable, si no pasa nada muy raro, que la norma se repita y que estemos a como mucho 9 semanas de su salida. Lo que no ha fallado nunca, ha sido que release mayor se libere en el mismo año (contando los dos últimos digitos) que su número.
+
+La M14 se ha liberado con tan solo dos semanas de separación con respecto a la M13, y eso que estábamos acostumbrados a un ritmo de 2-3 meses. Con la M14 ya se han eliminado muchas características marcadas como deprecadas, y el ritmo de features nuevas decrementa al mismo ritmo que aumenta el de corrección de errores. Y con [un ritmo casi frenético de commits](https://github.com/JetBrains/kotlin/commits/M14?page=2).
+
+Hace un par de días mismo corrigieron el bug del orden de ejecución de los named arguments que reporté hace poco más de un mes: [KT-8987](https://youtrack.jetbrains.com/issue/KT-8987)
+
+Así que, ¡ya nos queda nada! Muy pronto los cambios estarán casi congelados, se irán mejorando los tiempos de todo y ya se empezarán a plantear mejoras del lenguaje para las siguientes iteraciones.
+
+Con lo que respecta a intelliJ 15, las pruebas que he hecho son bastante satisfactorias. Con una instalación limpia ya no veo el fatídico “Searching for compilable files” que tanto se veía en la 14 y que se llevaba gran parte de los tiempos de compilación para cada ejecución que se hacía.
+
+
+**Actualización:**
+Este año, la release ha caído a principios de noviembre:
+[intelliJ 15 - 02-11-2015](http://blog.jetbrains.com/idea/2015/11/intellij-idea-15-released-adds-kotlin-to-the-family-of-supported-jvm-languages/)  |
