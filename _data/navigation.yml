@@ -2,12 +2,16 @@
 
 - title: Inicio
   url: /
+  class: glyphicon glyphicon-home
+  fixed: true
 
 - title: Sobre kotlin
   url: /sobre-kotlin/
+  fixed: false
 
 - title: Roadmap
   url: /roadmap/
+  fixed: false
 
 #- title: Articles
 #  url: /articles/
