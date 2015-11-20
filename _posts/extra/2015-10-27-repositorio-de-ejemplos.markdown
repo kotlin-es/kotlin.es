@@ -18,20 +18,19 @@ A continuación os dejamos los índices del repositorio para que podáis ir dire
 que más os interese.
 
 
-**Índice:**
-
-* [Hello World](https://github.com/vicboma1/GettingStartedKotlin#hello-world)
-* [Variable Basics](https://github.com/vicboma1/GettingStartedKotlin#variable-basics)
-* [Static Values](https://github.com/vicboma1/GettingStartedKotlin#static-values)
-* [Strings](https://github.com/vicboma1/GettingStartedKotlin#strings)
-* [Boolean Operators](https://github.com/vicboma1/GettingStartedKotlin#boolean-operators)
-* [Conditional](https://github.com/vicboma1/GettingStartedKotlin#conditional)
-* [Control Flow](https://github.com/vicboma1/GettingStartedKotlin#control-flow)
-* [Function Basics](https://github.com/vicboma1/GettingStartedKotlin#function-basics)
-* [Class Basics](https://github.com/vicboma1/GettingStartedKotlin#class-basics)
-* [Data Classes](https://github.com/vicboma1/GettingStartedKotlin#data-classes)
-* [Interface](https://github.com/vicboma1/GettingStartedKotlin#interface)
-* [Herencia](https://github.com/vicboma1/GettingStartedKotlin#herencia)
-* [Extension Function Basics](https://github.com/vicboma1/GettingStartedKotlin#extension-function-basics)
-* [Null Safety](https://github.com/vicboma1/GettingStartedKotlin#null-safety)
-* [Infix Function](https://github.com/vicboma1/GettingStartedKotlin#infix-function)
+# Índice:
+* [Hello World](https://github.com/vicboma1/GettingStartedKotlin#hello-world){:target="_blank"}
+* [Variable Basics](https://github.com/vicboma1/GettingStartedKotlin#variable-basics){:target="_blank"}
+* [Static Values](https://github.com/vicboma1/GettingStartedKotlin#static-values){:target="_blank"}
+* [Strings](https://github.com/vicboma1/GettingStartedKotlin#strings){:target="_blank"}
+* [Boolean Operators](https://github.com/vicboma1/GettingStartedKotlin#boolean-operators){:target="_blank"}
+* [Conditional](https://github.com/vicboma1/GettingStartedKotlin#conditional){:target="_blank"}
+* [Control Flow](https://github.com/vicboma1/GettingStartedKotlin#control-flow){:target="_blank"}
+* [Function Basics](https://github.com/vicboma1/GettingStartedKotlin#function-basics){:target="_blank"}
+* [Class Basics](https://github.com/vicboma1/GettingStartedKotlin#class-basics){:target="_blank"}
+* [Data Classes](https://github.com/vicboma1/GettingStartedKotlin#data-classes){:target="_blank"}
+* [Interface](https://github.com/vicboma1/GettingStartedKotlin#interface){:target="_blank"}
+* [Herencia](https://github.com/vicboma1/GettingStartedKotlin#herencia){:target="_blank"}
+* [Extension Function Basics](https://github.com/vicboma1/GettingStartedKotlin#extension-function-basics){:target="_blank"}
+* [Null Safety](https://github.com/vicboma1/GettingStartedKotlin#null-safety){:target="_blank"}
+* [Infix Function](https://github.com/vicboma1/GettingStartedKotlin#infix-function){:target="_blank"}
