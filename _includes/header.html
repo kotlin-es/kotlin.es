@@ -29,9 +29,9 @@
                     <ul class="nav navbar-nav">
                         {% for my_page in site.data.navigation %}
                         {% if my_page.fixed == true %}
-                        <li class="active">
+                        <li class="{% if page.url == my_page.url %}active{% endif %}">
                             <a href="{{ my_page.url | prepend: site.baseurl }}">
-                                <span class="glyphicon glyphicon-home"></span>
+                                <span class="{{ my_page.class }}"></span>
                                 {{ my_page.title }}
                             </a>
                         </li>
@@ -45,9 +45,9 @@
                     <ul class="nav navbar-nav">
                         {% for my_page in site.data.navigation %}
                         {% if my_page.fixed != true %}
-                        <li class="active">
+                        <li class="{% if page.url == my_page.url %}active{% endif %}">
                             <a href="{{ my_page.url | prepend: site.baseurl }}">
-                                <span class="glyphicon glyphicon-home"></span>
+                                <span class="{{ my_page.class }}"></span>
                                 {{ my_page.title }}
                             </a>
                         </li>

@@ -1,4 +1,4 @@
-article .post-content img { width: 100%; }
+article .post-content img { max-width: 100%; }
 article .post-content .imgContainer { height: auto; width: 150px; }​
 
 article .post-content table {
@@ -7,4 +7,9 @@ article .post-content table {
 article .post-content td, article .post-content th {
     border: 1px solid #ccc;
     padding: 8px 16px;
+}
+
+article .post-content {
+    font-size: 1.1em;
+    line-height: 1.6em;
 }
