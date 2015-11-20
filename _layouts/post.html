@@ -10,8 +10,8 @@ layout: default
                 <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
 
                 <p class="post-meta">
-                    <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date:
-                        "%b %-d, %Y" }}
+                    <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+                        {{ page.date | date: "%b %-d, %Y" }}
                     </time>
 
                     {% assign authorInfo = site.data.authors[page.author] %}
@@ -37,6 +37,8 @@ layout: default
             <div id="fb-root"></div>
             <script>
                 (function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5&appId=810514079008986"; fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+
+
 
             </script>
 
