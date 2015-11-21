@@ -72,3 +72,8 @@ article.post {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
     padding: 8px 16px;
 }
+
+div.post-content td, div.post-content th {
+    padding: 8px 12px;
+    border: 1px solid #eee;
+}
