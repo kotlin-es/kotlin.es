@@ -142,5 +142,5 @@ Kotlin solventa problemas de Safety que Java no controla y permite un paradigma 
 * Pattern Matching, [http://kenbarclay.blogspot.com.es/2014/04/kotlin-pattern-matching.html](http://kenbarclay.blogspot.com.es/2014/04/kotlin-pattern-matching.html){:target="_blank"} 
 * FunKTionale – Mario Arias, [https://github.com/MarioAriasC/funKTionale](https://github.com/MarioAriasC/funKTionale){:target="_blank"} 
 * Ejemplos de decompiladores, [http://jd.benow.ca/](http://jd.benow.ca/){:target="_blank"} 
-* Stack (abstract data type), [https://en.wikipedia.org/wiki/Stack_(abstract_data_type)](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)){:target="_blank"} 
+* Stack (abstract data type), [https://lnkd.in/dtfzd-a](https://lnkd.in/dtfzd-a){:target="_blank"} 
 * GameBoy Emulator, Victor Bolinches, October 2014 – Actual, [https://github.com/vicboma1/emulators/tree/master/gameboyclassic](https://github.com/vicboma1/emulators/tree/master/gameboyclassic){:target="_blank"} 
