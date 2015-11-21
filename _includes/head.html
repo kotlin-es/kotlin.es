@@ -3,14 +3,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 
-    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
-    <meta name="description"
-          content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}"/>
+    {% if page.title %}
+        {% assign pageTitle = page.title %}
+    {% else %}
+        {% assign pageTitle = site.title %}
+    {% endif %}
+
+    {% assign cannonicalUrl = page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url %}
+
+    {% if page.excerpt %}
+        {% assign pageExcerpt = page.excerpt | strip_html | strip_newlines | truncate: 160 %}
+    {% else %}
+        {% assign pageExcerpt = site.description %}
+    {% endif %}
+
+    <title>{{ pageTitle }}</title>
+    <meta name="description" content="{{ pageExcerpt }}"/>
+
+    <meta property="og:title" content="{{ pageTitle }}" />
+    <meta property="og:site_name" content="Kotlin.es"/>
+    <meta property="og:url" content="{{ cannonicalUrl }}" />
+    <meta property="og:description" content="{{ pageExcerpt }}" />
+    <meta property="fb:app_id" content="714378208666518" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="es_ES" />
+
+    {% assign authorInfo = site.data.authors[page.author] %}
+
+    {% if authorInfo.facebook %}
+    <meta property="article:author" content="https://www.facebook.com/{{ authorInfo.facebook }}" />
+    {% endif %}
+    <meta property="article:publisher" content="https://www.facebook.com/kotlin.es" />
+    {% if page.icon %}
+    <meta property="og:image" content="{{ page.icon | prepend: site.baseurl }}" />
+    {% endif %}
 
     <link rel="stylesheet" href="{{ '/css/bootstrap.min.css' | prepend: site.baseurl }}"/>
     <link rel="stylesheet" href="{{ '/css/font-awesome.min.css' | prepend: site.baseurl }}"/>
     <link rel="stylesheet" href="{{ '/css/kotlin_es.css' | prepend: site.baseurl }}"/>
-    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}"/>
+    <link rel="canonical" href="{{ cannonicalUrl }}"/>
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}"
           href="{{ '/feed/' | prepend: site.baseurl | prepend: site.url }}"/>
 
