@@ -131,13 +131,9 @@ div.post-content td, div.post-content th {
     clear: both;
 }
 
-/*
 .post-list-entry {
-    width: 50%;
-    float: left;
-    padding: 8px;
+    margin-top: 16px;
 }
-*/
 
 .post-list-entry-content {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
