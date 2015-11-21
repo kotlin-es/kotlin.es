@@ -117,7 +117,11 @@ A continuación te dejamos los indices del repositorio:
 * [Generic functions](https://github.com/vicboma1/Kotlin-Koans#generic-functions){:target="_blank"}  <--- Nivel 5
 
 
-Se os recuerda a todos aquellos que programáis habitualmente en C/C++, Java, Scala, .Net o que queráis iniciar una nueva aventura con Kotlin, revisar esta entrada Repositorio Getting Started. Aquí se encuentran unas temáticas bastante fáciles a base de guía rápida.
+Se os recuerda a todos aquellos que programáis habitualmente en C/C++, Java, Scala, .Net o que queráis iniciar una nueva aventura con Kotlin, revisar esta entrada Repositorio Getting Started. 
+Aquí se encuentran unas temáticas bastante fáciles a base de guía rápida.
+
+Url : [http://kotlin.es/2015/10/repositorio-con-ejemplos-de-kotlin/](http://kotlin.es/2015/10/repositorio-con-ejemplos-de-kotlin/){:target="_blank"}
+
 
 ## Referencias :
 
