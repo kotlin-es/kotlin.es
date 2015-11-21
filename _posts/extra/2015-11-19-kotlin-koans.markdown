@@ -12,7 +12,7 @@ Con esta nueva publicación, se quiere acercar un poco más la sintaxis de Kotli
 
 Si navegamos a la página oficial de Kotlinlang.com tenemos la posibilidad de testear el lenguaje online a través de un editor interactivo que posee además una consola. Si visualizamos la parte izquierda de la web podemos ver como el segundo apartado recibe el nombre de Kotlin Koans.
 
-![Koans](/images/kotlinkoans/01.png)
+![Koans](/images/kotlinKoans/01.png)
 
 Dicho apartado no es más que una serie de ejercicios para ayudar a familiarizarnos con la sintaxis de Kotlin. Cada ejercicio ha sido creado como una prueba de test en su defecto, y su finalidad consiste en hacer pasar el test para validar los conocimientos adquiridos tras la descripción de la práctica realizada.
 
@@ -22,7 +22,7 @@ La primera temática recibe el nombre de Introducción y abarca los conceptos m�
 
 Luego pasamos a la temática de las Colecciones. Dicho punto hace hincapié en la utilización de los métodos de extensión que nos ofrece Kotlin a la hora de utilizar listas, arrays y listas enlazadas. El dominio en que promueve estos ejercicios es un escenario donde un cliente efectúa compras, hay una lista de resultados...
 
-![Koans](/images/kotlinkoans/02.png)
+![Koans](/images/kotlinKoans/02.png)
 
 Estos apartados harán que domines métodos de extensión como "flatMap", "sort", "sum","fold", "filter" y la posibilidad de componer tareas compuestas entre otras.
 
@@ -39,7 +39,7 @@ Todos estos ejercicios online tienen una ventaja y es que se puede pulsar un peq
 Por otro lado, se puede abrir una sesión con un cliente de Facebook, Github, Twiter, Google+ o JetBrains para almacenar en la nube todos los test resueltos.
 La anécdota de los ejercicios online es que tiene una especie de aviso cuando pasamos de nivel cada 8 ò 9 ejercicios con una ventana que felicita al usuario.
 
-![Koans](/images/kotlinkoans/03.png)
+![Koans](/images/kotlinKoans/03.png)
 
 
 La manera ideal de iterar estos ejercicios oficiales de Kotlin si deseas hacerlo bien es la siguiente:
