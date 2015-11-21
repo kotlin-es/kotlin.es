@@ -139,7 +139,7 @@ div.post-content td, div.post-content th {
 
 .post-list-entry-content {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-    padding: 6px 12px;
+    padding: 10px 12px;
 }
 
 .post-list-entry-info {
@@ -157,4 +157,18 @@ div.post-content td, div.post-content th {
 
 a.post-link {
     color: black !important;
+}
+
+.post-list-entry-header {
+    margin-top: 0;
+}
+
+.post-list-entry-icon {
+    float: left;
+    max-width:128px;
+}
+
+.post-entry-icon {
+    float: left;
+    max-width:128px !important;
 }

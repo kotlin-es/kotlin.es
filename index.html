@@ -11,14 +11,16 @@ layout: page
     {% for post in site.posts %}
       <div class="post-list-entry">
         <div class="post-list-entry-content">
-        <h2>
+          {% if post.icon %}
+          <img class="post-list-entry-icon" src="{{ post.icon }}" />
+          {% endif %}
+        <h2 class="post-list-entry-header">
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         </h2>
         <div class="post-list-entry-info">
           <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
           {% assign postAuthorInfo = site.data.authors[post.author] %}
           {% if post.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name"><a href="{{ postAuthorInfo.web }}" target="_blank">{{ postAuthorInfo.name }}</a></span></span>{% endif %}
-
         </div>
         <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 160 }}</p>
           <a href="{{ post.url | prepend: site.baseurl }}" class="btn btn-primary read-more-link">Leer más</a>

@@ -5,6 +5,7 @@ date:   2015-11-20 18:47:00 +0100
 category: blog
 tags: blog
 author: soywiz
+icon: /images/icons/jekyll.jpg
 permalink: /2015/11/nos-pasamos-a-jekyll/
 ---
 
