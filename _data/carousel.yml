@@ -7,3 +7,8 @@
   description: Hemos migrado a jekyll
   image: /images/carousel/jekyllrb.png
   url: /2015/11/nos-pasamos-a-jekyll/
+
+- title: Kotlin Koans
+  description: Repositorio de ejercicios online
+  image: /images/carousel/2015-11-19-kotlin-koans.png
+  url: /2015/11/kotlin-koans/
