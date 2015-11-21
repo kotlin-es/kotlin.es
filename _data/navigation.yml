@@ -3,14 +3,21 @@
 - title: Inicio
   url: /
   class: glyphicon glyphicon-home
-  fixed: true
+  fixed: false
 
 - title: Sobre kotlin
   url: /sobre-kotlin/
+  class: glyphicon glyphicon-info-sign
   fixed: false
 
 - title: Roadmap
   url: /roadmap/
+  class: glyphicon glyphicon-time
+  fixed: false
+
+- title: Eventos
+  url: /eventos/
+  class: glyphicon glyphicon-calendar
   fixed: false
 
 #- title: Articles
