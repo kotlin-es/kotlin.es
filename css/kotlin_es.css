@@ -1,3 +1,7 @@
+body {
+    cursor: default;
+}
+
 article .post-content img { max-width: 100%; }
 article .post-content .imgContainer { height: auto; width: 150px; }​
 
@@ -12,4 +16,17 @@ article .post-content td, article .post-content th {
 article .post-content {
     font-size: 1.1em;
     line-height: 1.6em;
+}
+
+#main-navbar {
+    border-top: 4px solid #4a679a;
+    font-size: 1em;
+    /*font-weight: 600;*/
+    text-transform: uppercase;
+}
+
+#main-navbar.navbar-inverse .navbar-nav>.active>a,
+#main-navbar.navbar-inverse .navbar-nav>.active>a:focus,
+#main-navbar.navbar-inverse .navbar-nav>.active>a:hover {
+    background: #4a679a;
 }

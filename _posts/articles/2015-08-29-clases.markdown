@@ -2,7 +2,7 @@
 layout: post
 title:  "Declaración de clases y construcción de objetos en #kotlin"
 date:   2015-08-29 00:00:00 +0100
-category: articles
+category: articulos
 tags: clases objetos
 author: soywiz
 permalink: /2015/08/declaracion-de-clases-y-construccion-de-objetos-en-kotlin/

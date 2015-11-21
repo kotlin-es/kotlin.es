@@ -4,13 +4,17 @@ title: Sobre Kotlin
 permalink: /sobre-kotlin/
 ---
 
+* TOC
+{:toc}
+
 Kotlin es un lenguaje de programación fuertemente tipado desarrollado por JetBrains (los creadores de IntelliJ IDEA).
 
 Ha sido fuertemente **influenciado por lenguajes como Scala o C#**.
 
 **Targetea a la JVM** (máquina virtual de Java 6) **y a Javascript** de forma nativa.
 
-# Ejemplos de Kotlin:
+
+# Ejemplos de Kotlin
 
 {% highlight kotlin %}
 package hello
@@ -24,14 +28,16 @@ Ecosistema de Kotlin:
 
 Es **100% interoperable con Java** y permite proyectos mixtos mezclando código Java con código Kotlin. Como targetea a Java 6, **es compatible con Android**. **Con iOS** utilizando RoboVM. Utilizando GWT se puede también mezclar código Java con Kotlin para targetear a **Javascript**. Y con código Kotlin puro se puede targetear a Javascript directamente sin GWT. Es probable que con IKVM se pueda targetear a .NET, incluyendo **Windows 10 y Windows Phone y Unity**.
 
-# Carencias:
+
+# Carencias
 Tiene muchas menos características que Scala, pero es **mucho más familiar**, y ha sido diseñado para poder tener un **tooling excelente** acompañado con **mejores tiempos de compilación que Scala**. De hecho uno de los motivos que les llevó a desarrollar en Kotlin es porque los tiempos de compilación de Scala eran inaceptables para ellos.
 
 A diferencia de Swift y por targetear a la JVM funciona con GC en vez de con ARC. Con sus ventajas y desventajas.
 
 No tiene aliasing de tipos, casteos implícitos, ni duck typing.
 
-# Casos de uso:
+
+# Casos de uso
 Kotlin es ideal para desarrollos basados en JVM y para hacer aplicaciones de Android.
 
 Kotlin es un lenguaje moderno y una buena elección en general.
@@ -40,7 +46,8 @@ Si te funciona bien Scala no ofrece muchos motivos.
 
 Si estás en Java u otros lenguajes de pasada generación, el salto es enorme y la productividad aumentará un montón. Además es ameno de escribir y de trabajar con él.
 
-# Características del lenguaje y bondades:
+
+# Características del lenguaje y bondades
 Es muy conciso.
 
 Los ; son opcionales.
@@ -105,7 +112,6 @@ No hay distinción entre tipos primitivos y clases. Los lenguajes modernos suele
 
 Utiliza declaraciones muy parecidas a Scala de tres letras: var, val y fun. Var para declaraciones mutables, Val para declaraciones inmutables y Fun para funciones.
 
-
 {% highlight kotlin %}
 var mutable = 1
 val immutable = 2
@@ -147,7 +153,8 @@ val v1 = 10
 val v2 = v1.double()
 {% endhighlight %}
 
-Conclusión:
+
+# Conclusión
 
 Kotlin es un lenguaje que sin ser perfecto, está muy bien y es mucho mejor que otras opciones más antiguas. Por ejemplo Groovy es muy poco familiar para programadores java y no es fuertemente tipado, y Scala tampoco es familiar y tiene tiempos de compilación elevados y una codebase compleja puede ser muy difícil de entender. Java directamente no lo meto en la lista porque es ultra verboso.
 

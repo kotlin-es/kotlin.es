@@ -4,54 +4,74 @@
 -->
 
 <aside>
-    <a href="{{ '/feed.xml' | prepend: site.baseurl | prepend: site.url }}" target="_blank" class="btn btn-success"><i class="fa fa-rss-square" style="font-size:1.1em;"></i> Feed RSS</a>
+    <div class="well">
+        <a href="https://kotlinlang.org/#get-kotlin" style="font-size:1.3em;">Última versión de kotlin</a> <span
+            class="badge">1.0.0-beta-2423</span>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 col-md-6">
+            <a href="{{ '/feed.xml' | prepend: site.baseurl | prepend: site.url }}" target="_blank"
+               class="btn btn-success" style="width:100%;margin:4px 0;"><i class="fa fa-rss-square"
+                                                                           style="font-size:1.1em;"></i>
+                Feed RSS</a>
+            <a href="https://plus.google.com/106409838381505161745" target="_blank" class="btn btn-danger"
+               style="width:100%; margin:4px 0;"><i class="fa fa-google-plus" style="font-size:1.1em;"></i> Google+</a>
+        </div>
+        <div class="col-xs-6 col-md-6">
+            <a href="https://twitter.com/intent/follow?screen_name=kotlin_es" target="_blank" class="btn btn-info"
+               style="width:100%; margin:4px 0;"><i class="fa fa-twitter" style="font-size:1.1em;"></i> Seguir en
+                twitter</a>
+
+            <a href="https://www.facebook.com/kotlin.es/" target="_blank" class="btn btn-primary"
+               style="width:100%; margin:4px 0;">
+                <i class="fa fa-facebook" style="font-size:1.1em;"></i> Facebook
+            </a>
+        </div>
+    </div>
 </aside>
 
-<div style="height:320px;margin-top: 16px;">
-    <aside id="twitter-follow-3" class="widget widget_twitter-follow clearfix">
-        <div class="twitter-follow"><a href="https://twitter.com/intent/follow?screen_name=kotlin_es"
-                                       class="twitter-follow-button" data-size="large">Follow @kotlin_es</a></div>
-    </aside>
-
-    <aside style="margin-top:16px;">
-        <!-- Inserta esta etiqueta en la sección "head" o justo antes de la etiqueta "body" de cierre. -->
-        <script type="text/javascript" id="twitter-wjs" async defer src="https://platform.twitter.com/widgets.js"
-                charset="utf-8"></script>
-
-        <!-- Inserta esta etiqueta en la sección "head" o justo antes de la etiqueta "body" de cierre. -->
-        <script src="https://apis.google.com/js/platform.js" async defer>{lang: 'es'}</script>
-
-        <!-- Inserta esta etiqueta donde quieras que aparezca widget. -->
-        <div class="g-page" data-href="//plus.google.com/u/0/106409838381505161745" data-layout="landscape"
-             data-rel="publisher"></div>
-    </aside>
-
-    <aside style="margin-top:16px;">
-        <div class="fb-page" data-href="https://www.facebook.com/kotlin-es" data-small-header="true"
-             data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"
-             data-show-posts="false">
-            <div class="fb-xfbml-parse-ignore">
-                <blockquote cite="https://www.facebook.com/kotlin-es"><a href="https://www.facebook.com/kotlin-es">Kotlin
-                    en español</a></blockquote>
-            </div>
-        </div>
-    </aside>
-</div>
+<h3>Autor:</h3>
+<aside>
+    <div class="well">
+        <a href="https://github.com/kotlin-es/kotlin-es.github.io" target="_blank" style="font-size:1.3em;">
+            <i class="fa fa-pencil-square"></i> Publica tu artículo en kotlin.es
+        </a>
+    </div>
+</aside>
 
 <h3>Enlaces:</h3>
-<div class="list-group">
-    <a class="list-group-item" href="http://kotlinlang.org/"><i class="fa fa-home"></i> Página oficial (en inglés)</a>
-    <a class="list-group-item" href="http://blog.jetbrains.com/kotlin/"><i class="fa fa-wordpress"></i> Blog oficial (en
-        inglés)</a>
-    <a class="list-group-item" href="https://github.com/JetBrains/kotlin"><i class="fa fa-github"></i> Kotlin en Github</a>
-    <a class="list-group-item" href="http://try.kotlinlang.org/"><i class="fa fa-sticky-note-o"></i> Prueba Kotlin en el
-        navegador</a>
-    <a class="list-group-item" href="http://kotlinslackin.herokuapp.com/"><i class="fa fa-slack"></i> Kotlin en
-        Slack</a>
-    <a class="list-group-item" href="https://devnet.jetbrains.com/community/kotlin?view=discussions"><i
-            class="fa fa-question"></i> Foros (en inglés)</a>
+<div class="well">
+    <h4>Kotlin.es:</h4>
+
+    <div class="list-group">
+        <a class="list-group-item" href="https://github.com/kotlin-es/kotlin-es.github.io" target="_blank">
+            <i class="fa fa-code-fork"></i> Repositorio del blog
+        </a>
+    </div>
+
+    <h4>Kotlin:</h4>
+
+    <div class="list-group">
+        <a class="list-group-item" href="http://kotlinlang.org/" target="_blank">
+            <i class="fa fa-home"></i> Página oficial
+        </a>
+        <a class="list-group-item" href="http://blog.jetbrains.com/kotlin/" target="_blank">
+            <i class="fa fa-wordpress"></i> Blog oficial
+        </a>
+        <a class="list-group-item" href="https://github.com/JetBrains/kotlin" target="_blank">
+            <i class="fa fa-github"></i> Kotlin en Github
+        </a>
+        <a class="list-group-item" href="http://try.kotlinlang.org/" target="_blank">
+            <i class="fa fa-flask"></i> Prueba Kotlin en el navegador
+        </a>
+        <a class="list-group-item" href="http://kotlinslackin.herokuapp.com/" target="_blank">
+            <i class="fa fa-slack"></i> Kotlin en Slack
+        </a>
+        <a class="list-group-item" href="https://devnet.jetbrains.com/community/kotlin?view=discussions"
+           target="_blank">
+            <i class="fa fa-question"></i> Foros
+        </a>
+    </div>
 </div>
 
-<h3><a href="/eventos">Próximos eventos</a></h3>
-
-<iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=AGENDA&amp;height=200&amp;wkst=2&amp;hl=es&amp;bgcolor=%23FFFFFF&amp;src=f4efui4ol23pq3r7q435vutu20%40group.calendar.google.com&amp;color=%23853104&amp;ctz=Europe%2FMadrid" style="border-width:0" width="370" height="200" frameborder="0" scrolling="no"></iframe>

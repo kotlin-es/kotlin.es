@@ -2,8 +2,7 @@
 layout: post
 title:  "Kotlin M12"
 date:   2015-08-22 00:00:00 +0100
-category: articles
-categories: releases
+category: releases
 tags: releases
 author: soywiz
 permalink: "/2015/08/kotlin-m12/"

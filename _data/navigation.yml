@@ -5,9 +5,14 @@
   class: glyphicon glyphicon-home
   fixed: false
 
-- title: Sobre kotlin
-  url: /sobre-kotlin/
-  class: glyphicon glyphicon-info-sign
+- title: Artículos
+  url: /articles/
+  class: fa fa-file-text-o
+  fixed: false
+
+- title: Releases
+  url: /releases/
+  class: fa fa-code-fork
   fixed: false
 
 - title: Roadmap
@@ -20,9 +25,11 @@
   class: glyphicon glyphicon-calendar
   fixed: false
 
-#- title: Articles
-#  url: /articles/
-#
+- title: Sobre kotlin
+  url: /sobre-kotlin/
+  class: glyphicon glyphicon-info-sign
+  fixed: false
+
 #- title: Projects
 #  url: /projects/
 #

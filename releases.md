@@ -1,13 +1,14 @@
 ---
 layout: page
+title: Releases
+permalink: /releases/
 ---
 
 <div class="home">
 
-  <h1 class="page-heading">Posts</h1>
-
   <ul class="post-list">
     {% for post in site.posts %}
+        {% if post.category == 'releases' %}
       <li>
         <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
@@ -15,6 +16,7 @@ layout: page
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         </h2>
       </li>
+      {% endif %}
     {% endfor %}
   </ul>
 

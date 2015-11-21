@@ -2,8 +2,8 @@
 layout: post
 title:  "Kotlin 1.0 Beta 2"
 date:   2015-11-16 00:00:00 +0100
-category: blog
-tags:
+category: releases
+tags: releases
 author: soywiz
 permalink: /2015/11/kotlin-1-0-beta-2/
 ---
