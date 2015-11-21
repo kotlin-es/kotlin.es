@@ -3,8 +3,9 @@ layout: post
 title:  "Kotlin Koans - Repositorio de ejercicios oficiales"
 date:   2015-11-19 08:00:00 +0100
 category: extra
-tags:
+tags: kotlin, koans, ejercicios, resueltos, repositorio, github
 author: vicboma1
+icon: /images/icons/kotlinkoans.png
 permalink: /2015/11/kotlin-koans/
 ---
 
