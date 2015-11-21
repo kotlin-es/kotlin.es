@@ -3,7 +3,8 @@ layout: post
 title:  "Repositorio con ejemplos de Kotlin"
 date:   2015-10-27 00:00:00 +0100
 category: blog
-tags:
+tags: ejemplos, repositorio, tutorial, getting, started
+icon: /images/icons/gettingstarted.png
 author: soywiz
 permalink: /2015/10/repositorio-con-ejemplos-de-kotlin/
 ---
