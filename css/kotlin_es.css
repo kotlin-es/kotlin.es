@@ -77,3 +77,40 @@ div.post-content td, div.post-content th {
     padding: 8px 12px;
     border: 1px solid #eee;
 }
+
+#carousel-example-generic .item {
+    height: 320px;
+    overflow: hidden;
+}
+
+#carousel-example-generic .item img {
+    width: 100%;
+    opacity: 1.0;
+    transform: scale(0.1);
+    transition: all .2s ease-in-out;
+}
+
+#carousel-example-generic .item a {
+    color: white !important;
+}
+
+#carousel-example-generic .item.active img {
+    opacity: 1.0;
+    transform: scale(1.0);
+    transition: all .2s ease-in-out;
+}
+
+#carousel-example-generic .item.next img, #carousel-example-generic .item.prev img {
+    opacity: 1.0;
+    transform: scale(0.7);
+    transition: all .2s ease-in-out;
+}
+
+/*
+#carousel-example-generic .item.active img,
+ #carousel-example-generic .item.next img,
+  #carousel-example-generic .item.prev img{
+    opacity: 1.0;
+    transition: opacity 5.0s;
+}
+*/
