@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="{{ '/css/font-awesome.min.css' | prepend: site.baseurl }}">
     <link rel="stylesheet" href="{{ '/css/kotlin_es.css' | prepend: site.baseurl }}">
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "
-    /feed.xml" | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}"
+          href="{{ '/feed.xml' | prepend: site.baseurl | prepend: site.url }}">
 
     <link rel="icon" href="/images/logo-64.png"/>
     <script>
@@ -23,5 +23,6 @@
 
     ga('create', 'UA-66637074-1', 'auto');
     ga('send', 'pageview');
+
     </script>
 </head>
