@@ -164,6 +164,7 @@ a.post-link {
 .post-list-entry-icon {
     float: left;
     max-width:128px;
+    margin-right: 12px;
 }
 
 .post-entry-icon {
