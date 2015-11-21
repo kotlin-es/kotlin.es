@@ -78,9 +78,17 @@ div.post-content td, div.post-content th {
     border: 1px solid #eee;
 }
 
+#carousel-example-generic {
+    background: black;
+}
+
 #carousel-example-generic .item {
     height: 320px;
     overflow: hidden;
+}
+
+#carousel-example-generic .item .carousel-caption {
+    background: rgba(0, 0, 0, 0.3)
 }
 
 #carousel-example-generic .item img {
@@ -96,13 +104,13 @@ div.post-content td, div.post-content th {
 
 #carousel-example-generic .item.active img {
     opacity: 1.0;
-    transform: scale(1.0);
+    transform: scale(1.2);
     transition: all .2s ease-in-out;
 }
 
 #carousel-example-generic .item.next img, #carousel-example-generic .item.prev img {
     opacity: 1.0;
-    transform: scale(0.7);
+    transform: scale(1.0);
     transition: all .2s ease-in-out;
 }
 

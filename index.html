@@ -6,16 +6,16 @@ layout: page
   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
-      <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-      <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-      <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+      {% for item in site.data.carousel %}
+      <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.index0 }}" class="{% if forloop.index0 == 0 %}active{% endif %}"></li>
+      {% endfor %}
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       {% for item in site.data.carousel %}
       <div class="item {% if forloop.index0 == 0 %}active{% endif %}">
-        <a href="{{ item.url }}"><img src="/images/kotlin-512.png" alt="{{ item.title }}"></a>
+        <a href="{{ item.url }}"><img src="{{ item.image }}" alt="{{ item.title }}"></a>
         <div class="carousel-caption">
           <a href="{{ item.url }}">
             <h3>{{ item.title }}</h3>
