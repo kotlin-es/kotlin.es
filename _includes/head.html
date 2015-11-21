@@ -35,7 +35,7 @@
     {% endif %}
     <meta property="article:publisher" content="https://www.facebook.com/kotlin.es" />
     {% if page.icon %}
-    <meta property="og:image" content="{{ page.icon | prepend: site.baseurl }}" />
+    <meta property="og:image" content="{{ page.icon | prepend: site.baseurl | prepend: site.url }}" />
     {% endif %}
 
     <link rel="stylesheet" href="{{ '/css/bootstrap.min.css' | prepend: site.baseurl }}"/>
