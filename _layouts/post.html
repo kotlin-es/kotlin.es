@@ -2,6 +2,8 @@
 layout: twocolumn
 # https://github.com/Shopify/liquid/wiki/Liquid-for-Designers
 ---
+{% assign authorInfo = site.data.authors[page.author] %}
+
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
     <header class="post-header" style="margin-bottom:32px;">
@@ -12,14 +14,12 @@ layout: twocolumn
                 {{ page.date | date: "%b %-d, %Y" }}
             </time>
 
-            {% assign authorInfo = site.data.authors[page.author] %}
 
             {% if page.author %} •
     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
     	<span itemprop="name">
     		<a href="{{ authorInfo.web }}" target="_blank">
-                <img src="http://www.gravatar.com/avatar/{{ authorInfo.email_md5|downcase }}.jpg?s=16" width="16"
-                     height="16"/>
+                <img src="http://www.gravatar.com/avatar/{{ authorInfo.email_md5|downcase }}.jpg?s=16" width="16" height="16"/>
                 {{ authorInfo.name }}
             </a>
 		</span>
@@ -33,8 +33,8 @@ layout: twocolumn
         <!-- Kotlin posts -->
         <ins class="adsbygoogle"
              style="display:block"
-             data-ad-client="ca-pub-3395905965441916"
-             data-ad-slot="4531796722"
+             data-ad-client="{% if authorInfo.adsense_client %}{{ authorInfo.adsense_client }}{% else %}ca-pub-3395905965441916{% endif %}"
+             data-ad-slot="{% if authorInfo.adsense_slot %}{{ authorInfo.adsense_slot }}{% else %}4531796722{% endif %}"
              data-ad-format="auto"></ins>
         <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
