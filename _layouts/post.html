@@ -1,22 +1,20 @@
 ---
-layout: default
+layout: twocolumn
 # https://github.com/Shopify/liquid/wiki/Liquid-for-Designers
 ---
-<div class="row">
-    <div class="col-xs-12 col-md-8">
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-            <header class="post-header">
-                <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
+    <header class="post-header" style="margin-bottom:32px;">
+        <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
 
-                <p class="post-meta">
-                    <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-                        {{ page.date | date: "%b %-d, %Y" }}
-                    </time>
+        <p class="post-meta">
+            <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+                {{ page.date | date: "%b %-d, %Y" }}
+            </time>
 
-                    {% assign authorInfo = site.data.authors[page.author] %}
+            {% assign authorInfo = site.data.authors[page.author] %}
 
-                    {% if page.author %} •
+            {% if page.author %} •
     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
     	<span itemprop="name">
     		<a href="{{ authorInfo.web }}" target="_blank">
@@ -26,32 +24,32 @@ layout: default
             </a>
 		</span>
 	</span>
-                    {% endif %}
-                </p>
-            </header>
+            {% endif %}
+        </p>
+    </header>
 
-            <div class="post-content" itemprop="articleBody">
-                {{ content }}
-            </div>
+    <div class="post-content" itemprop="articleBody">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Kotlin posts -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3395905965441916"
+             data-ad-slot="4531796722"
+             data-ad-format="auto"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
 
-            <div id="fb-root"></div>
-            <script>
-                (function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5&appId=810514079008986"; fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
-
-
-
-            </script>
-
-            <div class="fb-comments"
-                 data-href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}"
-                 data-numposts="5"
-            >
-            </div>
-
-        </article>
-
+        {{ content }}
     </div>
-    <div class="col-xs-6 col-md-4" style="border-left: 1px solid #f3f3f3;">
-        {% include side.html %}
+
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5&appId=810514079008986"; fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
+
+    <div class="fb-comments"
+         data-href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}"
+         data-numposts="5"
+    >
     </div>
-</div>
+
+</article>
