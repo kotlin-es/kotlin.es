@@ -7,9 +7,9 @@ layout: page
 
   <h1 class="page-heading">Posts</h1>
 
-  <div class="post-list">
+  <div class="row post-list">
     {% for post in site.posts %}
-      <div class="post-list-entry">
+    <div class="post-list-entry col-xs-12 col-md-6">
         <div class="post-list-entry-content">
           {% if post.icon %}
           <img class="post-list-entry-icon" src="{{ post.icon }}" />
