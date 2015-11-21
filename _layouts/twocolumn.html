@@ -1,15 +1,11 @@
 ---
 layout: default
 ---
-<article class="post">
-
-    <div class="row">
-        <div class="col-xs-12 col-md-8">
-            {{ content }}
-        </div>
-        <div class="col-xs-12 col-md-4" style="border-left: 1px solid #f3f3f3;">
-            {% include side.html %}
-        </div>
+<div class="row">
+    <div class="column-left col-xs-12 col-md-8">
+        {{ content }}
     </div>
-
-</article>
+    <div class="column-right col-xs-12 col-md-4">
+        {% include side.html %}
+    </div>
+</div>
