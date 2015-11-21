@@ -3,52 +3,28 @@ layout: page
 ---
 
 <div class="home">
-  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      {% for item in site.data.carousel %}
-      <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.index0 }}" class="{% if forloop.index0 == 0 %}active{% endif %}"></li>
-      {% endfor %}
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      {% for item in site.data.carousel %}
-      <div class="item {% if forloop.index0 == 0 %}active{% endif %}">
-        <a href="{{ item.url }}"><img src="{{ item.image }}" alt="{{ item.title }}"></a>
-        <div class="carousel-caption">
-          <a href="{{ item.url }}">
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.description }}</p>
-          </a>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-
-    <!-- Controls -->
-    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
+  {% include carousel.html %}
 
   <h1 class="page-heading">Posts</h1>
 
-  <ul class="post-list">
+  <div class="post-list">
     {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
+      <div class="post-list-entry">
+        <div class="post-list-entry-content">
         <h2>
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         </h2>
-      </li>
+        <div class="post-list-entry-info">
+          <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+          {% assign postAuthorInfo = site.data.authors[post.author] %}
+          {% if post.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name"><a href="{{ postAuthorInfo.web }}" target="_blank">{{ postAuthorInfo.name }}</a></span></span>{% endif %}
+
+        </div>
+        <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 160 }}</p>
+          <a href="{{ post.url | prepend: site.baseurl }}" class="btn btn-primary read-more-link">Leer más</a>
+          </div>
+      </div>
     {% endfor %}
-  </ul>
+  </div>
 
 </div>

@@ -102,6 +102,10 @@ div.post-content td, div.post-content th {
     color: white !important;
 }
 
+#carousel-example-generic .item img {
+    margin-top: -10%;
+}
+
 #carousel-example-generic .item.active img {
     opacity: 1.0;
     transform: scale(1.2);
@@ -122,3 +126,35 @@ div.post-content td, div.post-content th {
     transition: opacity 5.0s;
 }
 */
+
+.post-list {
+    clear: both;
+}
+
+.post-list-entry {
+    width: 50%;
+    float: left;
+    padding: 8px;
+}
+
+.post-list-entry-content {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    padding: 6px 12px;
+}
+
+.post-list-entry-info {
+    color: #aaa !important;
+    font-size: 0.8em;
+    padding-bottom: 8px;
+}
+.post-list-entry-info a {
+    color: #aaa !important;
+}
+
+.read-more-link {
+    font-size: 0.7em;
+}
+
+a.post-link {
+    color: black !important;
+}
