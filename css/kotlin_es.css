@@ -170,4 +170,5 @@ a.post-link {
 .post-entry-icon {
     float: left;
     max-width:128px !important;
+    margin-right: 12px;
 }
