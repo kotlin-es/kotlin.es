@@ -172,3 +172,7 @@ a.post-link {
     max-width:128px !important;
     margin-right: 12px;
 }
+
+.post-content {
+    overflow: hidden;
+}
