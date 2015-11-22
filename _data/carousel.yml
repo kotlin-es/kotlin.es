@@ -1,14 +1,16 @@
-- title: intelliJ 15
-  description: Ya disponible, ¡y con soporte para kotlin!
-  image: /images/carousel/intelliJ15.png
-  url: http://blog.jetbrains.com/idea/2015/11/intellij-idea-15-released-adds-kotlin-to-the-family-of-supported-jvm-languages/
+- title: Kotlin Koans
+  description: Repositorio de ejercicios online
+  image: /images/carousel/2015-11-19-kotlin-koans.png
+  url: /2015/11/kotlin-koans/
 
 - title: Jekyll
   description: Hemos migrado a jekyll
   image: /images/carousel/jekyllrb.png
   url: /2015/11/nos-pasamos-a-jekyll/
 
-- title: Kotlin Koans
-  description: Repositorio de ejercicios online
-  image: /images/carousel/2015-11-19-kotlin-koans.png
-  url: /2015/11/kotlin-koans/
+- title: intelliJ 15
+  description: Ya disponible, ¡y con soporte para kotlin!
+  image: /images/carousel/intelliJ15.png
+  url: http://blog.jetbrains.com/idea/2015/11/intellij-idea-15-released-adds-kotlin-to-the-family-of-supported-jvm-languages/
+
+
