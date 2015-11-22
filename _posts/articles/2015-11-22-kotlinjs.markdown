@@ -9,14 +9,17 @@ icon: /images/icons/js.png
 permalink: /2015/11/kotlinjs/
 ---
 
+Hoy vamos a hacer un pequeño tutorial sobre Kotlin generando JavaScript.
+Vamos a ver cómo crear un proyecto de Kotlin/JavaScript, cómo probarlo,
+cómo añadir librerías externas y cómo comunicarnos con JavaScript.
+En este artículo nos vamos a centrar en el lado de cliente,
+pero también se pueden hacer cosas con node.js.
+
+En próximos artículos veremos como utilizar la popular librería PIXI.js
+y como hacer una aplicación para móvil con Apache Cordova.
+
 * TOC
 {:toc}
-
-Hoy vamos a hacer un pequeño tutorial sobre Kotlin targeteando a JavaScript.
-Vamos a ver cómo crear un proyecto de JavaScript, cómo probarlo,
-cómo añadir librerías externas y cómo comunicarnos con JavaScript.
-En este artículo veremos cómo engancharlo en el lado de cliente,
-pero también se pueden hacer cosas con node.js.
 
 # Creando un nuevo proyecto
 
