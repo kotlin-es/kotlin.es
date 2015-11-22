@@ -1,0 +1,194 @@
+---
+layout: post
+title:  "Kotlin JavaScript"
+date:   2015-11-22 00:00:00 +0100
+category: articulos
+tags: javascript
+author: soywiz
+icon: /images/icons/js.png
+permalink: /2015/11/kotlinjs/
+---
+
+* TOC
+{:toc}
+
+Hoy vamos a hacer un pequeño tutorial sobre Kotlin targeteando a JavaScript.
+Vamos a ver cómo crear un proyecto de JavaScript, cómo probarlo,
+cómo añadir librerías externas y cómo comunicarnos con JavaScript.
+En este artículo veremos cómo engancharlo en el lado de cliente,
+pero también se pueden hacer cosas con node.js.
+
+# Creando un nuevo proyecto
+
+Vamos a utilizar intelliJ 15 community edition para el tutorial.
+
+En primer lugar crearemos un nuevo proyecto de Kotlin / JavaScript
+como podemos ver en la figura.
+
+![](/images/kotlinjs/kotlin_js_new_project1.png)
+
+En la siguiente pantalla tendremos que elegir el nombre del proyecto
+y deberemos elegir una librería de Kotlin JS. Si no tenemos ninguna configurada
+Pulsaremos en el botón `Create...` que hay a la derecha.
+
+![](/images/kotlinjs/kotlin_js_new_project2.png)
+
+Podemos indicarle que copie los archivos .js a la carpeta o que
+use la librería del plugin. Al final cuando generemos la salida
+los copiará. Así que podemos elegir uno indistintamente según
+nos interese.
+
+![](/images/kotlinjs/kotlin_js_new_project3.png)
+
+Debería quedar algo así:
+
+![](/images/kotlinjs/kotlin_js_new_project4.png)
+
+# Configurando un html y probando el entorno
+
+Lo siguiente que necesitaremos es una función `main` y un `index.html`
+para cargar en el navegador.
+
+## Creando función main
+Crearemos un `main.kt` con el siguiente código:
+
+{% highlight kotlin %}
+import kotlin.browser.document
+
+fun main(args:Array&lt;String>) {
+    val h1 = document.createElement("h1")
+    h1.textContent = "Hello World!"
+    document.body!!.appendChild(h1)
+    println("Hello World!")
+}
+{% endhighlight %}
+
+![](/images/kotlinjs/kotlin_js_configure_project1.png)
+
+> Las cosas que saquemos con println, acabarán saliendo por la consola consola de javascript.
+
+## Creando carpeta de assets
+
+Lo siguiente que necesitaremos es una carpeta marcada como `resources`
+para incluir ahí nuestros archivos adicionales: htmls, javascripts, css, imágenes...
+
+Tras crear la carpeta `assets`, crearemos un `index.html` nuevo con el siguiente contenido:
+
+{% highlight html %}
+<html>
+<head></head>
+<body>
+    <script src="lib/kotlin.js"></script>
+    <script src="kotlin-js-example.js"></script>
+</body>
+</html>
+{% endhighlight %}
+
+![](/images/kotlinjs/kotlin_js_configure_project2.png)
+![](/images/kotlinjs/kotlin_js_configure_project3.png)
+
+Donde aparece `kotlin-js-example.js` deberemos poner el nombre de nuestro proyecto.
+
+> Tras generar, si nos fijamos en la carpeta de salida, podremos ver cómo se llama
+> exáctamente nuestro archivo javascript.
+
+## Ejecutando
+
+Para poder ver el resultado necesitaremos compilar el proyecto a javascript.
+Eso lo podemos hacer mediante `Build -> Make Project` o su atajo correspondiente.
+
+Eso nos debería generar una carpeta `out/production/kotlin-js-example` con nuestro `index.html`
+copiado de la carpeta de assets y los javascripts generados.
+
+Si abrimos el `index.html` con nuestro navegador favorito. Deberíamos poder ver algo como esto:
+
+![](/images/kotlinjs/kotlin_js_run_project0.png)
+
+También nos podemos crear una run configuration que además de ejecutar nos abra un HTML.
+
+> El *gutter icon* de kotlin en la función main, no permite ejecutar todavía en kotlin js
+>
+> ![](/images/kotlinjs/kotlin_js_run_project1.png)
+
+# Experimentando un poco
+
+A partir de este momento ya deberíamos ser capaces de hacer cambios y verlos reflejados en el navegador.
+
+En la versión 1.0 de Kotlin, el target de JavaScript es experiemntal y tiene limitaciones.
+Y no se soporta algunas cosas como clases dentro de funciones o reflexión.
+Obviamente tampoco podremos acceder a librerías Java y no están disponibles todas las apis de Kotlin (aunque sí gran parte).
+
+## Particularidades del target de javascript
+
+Tenemos disponibles la anotación <code>&#64;native</code>, la propiedad global <code>noImpl</code>, la función global especial `js` y el tipo `:dynamic`.
+
+### Anotación <code>&#64;native</code> y <code>noImpl</code>
+
+<code>&#64;native</code> nos permite marcar clases, interfaces y funciones como nativas de forma que no se generará código para ellas
+y se utilizará como si existiese en javascript.
+Mientras que `noImpl` es un getter global que devuelve *:Nothing* y que lanza una excepción, y que utilizaremos junto a
+<code>&#64;native</code> en lugares donde debería haber código.
+
+{% highlight kotlin %}
+&#64;native("PIXI.Sprite") class Sprite(val texture: Texture) : DisplayObject() {
+    companion object {
+        &#64;native fun fromImage(url: String): Sprite = noImpl
+    }
+}
+{% endhighlight %}
+
+### Functión global `js`
+
+La función global `js` nos permite embeber cualquier código javascript en un punto específico.
+
+{% highlight kotlin %}
+js("alert('hello world!');")
+{% endhighlight %}
+
+### Tipo `:dynamic`
+
+El tipo `:dynamic` nos habilita un tipo dinámico con el que podemos acceder a cualquier propiedad como si existiese.
+Mientras que `Any` no expone ninguna propiedad y debemos convertirlo a otro objeto, :dynamic nos permite acceder a
+cualquier propiedad o método como si existiese. Obviamente deberíamos limitar el uso de esta característica para evitar
+perder las ventajas del tipado estricto.
+
+{% highlight kotlin %}
+&#64;native interface TextStyle
+
+fun TextStyle(font: String? = null, fill: String? = null): TextStyle {
+    var out: dynamic = js("({})")
+    if (font != null) out["font"] = font
+    if (fill != null) out["fill"] = fill
+    return out
+}
+
+{% endhighlight %}
+
+# Ejecutar con NW.js
+
+Con [NW.js](http://nwjs.io/) podemos probar html en una ventana propia y podremos ver los mensajes
+de la consola de javascript desde el propio intelliJ con mucha facilidad y nos evitará necesitar
+lanzar un servidor web para hacer cierto tipo de operaciones que violasen las políticas de seguridad
+de archivos locales (por ejemplo peticiones ajax o acceso a archivos locales).
+
+![](/images/kotlinjs/nwjs_result.png)
+
+## package.json
+
+NW.js requiere un archivo `package.json` que contiene información sobre nuestra aplicación.
+
+{% highlight json %}
+{
+    "name": "nw-demo",
+    "version": "0.0.1",
+    "main": "index.html"
+}
+{% endhighlight %}
+
+## Run configuration
+
+Para poder utilizar nw.js necesitamos crear una `run configuration` en la que haremos primero un `make`
+del proyecto y después lanzaremos nw.js pasándole la ruta de la salida donde está nuestro `package.json` y nuestro
+`index.html`.
+
+![](/images/kotlinjs/nwjs_config.png)
