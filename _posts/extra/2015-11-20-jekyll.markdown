@@ -6,6 +6,7 @@ category: blog
 tags: blog
 author: soywiz
 icon: /images/icons/jekyll.jpg
+edit: /_posts/extra/2015-11-20-jekyll.markdown
 permalink: /2015/11/nos-pasamos-a-jekyll/
 ---
 

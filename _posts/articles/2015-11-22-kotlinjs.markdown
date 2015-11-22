@@ -6,6 +6,7 @@ category: articulos
 tags: javascript
 author: soywiz
 icon: /images/icons/js.png
+edit: /_posts/articles/2015-11-22-kotlinjs.markdown
 permalink: /2015/11/kotlinjs/
 ---
 

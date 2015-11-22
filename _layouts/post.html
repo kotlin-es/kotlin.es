@@ -14,7 +14,6 @@ layout: twocolumn
                 {{ page.date | date: "%b %-d, %Y" }}
             </time>
 
-
             {% if page.author %} •
     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
     	<span itemprop="name">
@@ -25,6 +24,7 @@ layout: twocolumn
 		</span>
 	</span>
             {% endif %}
+
         </p>
     </header>
 
@@ -51,6 +51,14 @@ layout: twocolumn
     <li><a href="{{ relatedPost.url }}">{{ relatedPost.title }}</a></li>
     {% endfor %}
     </ul>
+
+    {% if page.edit %}
+    <h3>Meta</h3>
+    <ul>
+        <li><a href="https://github.com/kotlin-es/kotlin-es.github.io/blob/master/{{ page.edit }}" target="_blank"><i class="glyphicon glyphicon-zoom-in"></i> Ver markdown</a></li>
+        <li><a href="https://github.com/kotlin-es/kotlin-es.github.io/edit/master/{{ page.edit }}" target="_blank"><i class="glyphicon glyphicon-edit"></i> Editar</a></li>
+    </ul>
+    {% endif %}
 
     <h3>Comentarios</h3>
     <div id="fb-root"></div>

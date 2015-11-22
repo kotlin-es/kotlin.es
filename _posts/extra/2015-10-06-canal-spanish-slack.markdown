@@ -6,6 +6,7 @@ category: blog
 tags: chat
 author: soywiz
 icon: /images/icons/slack.png
+edit: /_posts/extra/2015-10-06-canal-spanish-slack.markdown
 permalink: /2015/10/canal-spanish-en-el-chat-slack-de-kotlin/
 ---
 

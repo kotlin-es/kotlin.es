@@ -6,6 +6,7 @@ category: articulos
 tags: recursive, tail, call, optimization
 author: vicboma1
 icon: /images/icons/tailcall.jpg
+edit: /_posts/articles/2015-11-05-tail-call-optimization.markdown
 permalink: /2015/11/tail-call-optimization/
 ---
 

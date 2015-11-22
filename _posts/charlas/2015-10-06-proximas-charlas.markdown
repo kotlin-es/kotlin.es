@@ -5,6 +5,7 @@ date:   2015-10-06 00:00:00 +0100
 category: blog
 tags: chat
 author: soywiz
+edit: /_posts/charlas/2015-10-06-proximas-charlas.markdown
 permalink: /2015/10/proximas-charlas-sobre-kotlin-en-espana/
 ---
 

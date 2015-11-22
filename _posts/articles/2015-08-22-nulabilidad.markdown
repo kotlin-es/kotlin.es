@@ -6,6 +6,7 @@ category: articulos
 tags: nulabilidad
 author: soywiz
 icon: /images/icons/nullability.png
+edit: /_posts/articles/2015-08-22-nulabilidad.markdown
 permalink: "/2015/08/nulabilidad-en-kotlin-y-en-java/"
 ---
 

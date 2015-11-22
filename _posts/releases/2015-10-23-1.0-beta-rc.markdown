@@ -5,6 +5,7 @@ date:   2015-10-23 00:00:00 +0100
 category: releases
 tags: releases
 author: soywiz
+edit: /_posts/releases/2015-10-23-1.0-beta-rc.markdown
 permalink: "/2015/10/kotlin-1-0-beta-rc/"
 ---
 

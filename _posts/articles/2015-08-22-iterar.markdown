@@ -5,6 +5,7 @@ date:   2015-08-22 00:00:00 +0100
 category: articulos
 tags: iterando
 author: soywiz
+edit: /_posts/articles/2015-08-22-iterar.markdown
 permalink: /2015/08/iteraciones-un-poco-de-historia-y-en-kotlin/
 ---
 

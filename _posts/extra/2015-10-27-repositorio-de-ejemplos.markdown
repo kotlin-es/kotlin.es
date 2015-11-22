@@ -6,6 +6,7 @@ category: blog
 tags: ejemplos, repositorio, tutorial, getting, started
 icon: /images/icons/gettingstarted.png
 author: soywiz
+edit: /_posts/extra/2015-10-27-repositorio-de-ejemplos.markdown
 permalink: /2015/10/repositorio-con-ejemplos-de-kotlin/
 ---
 

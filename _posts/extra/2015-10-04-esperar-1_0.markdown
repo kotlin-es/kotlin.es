@@ -5,6 +5,7 @@ date:   2015-10-04 00:00:00 +0100
 category: articulos
 tags: release
 author: soywiz
+edit: /_posts/extra/2015-10-04-esperar-1_0.markdown
 permalink: /2015/10/que-podemos-esperar-de-kotlin-1-0/
 ---
 

@@ -5,6 +5,7 @@ date:   2015-10-27 00:00:00 +0100
 category: blog
 tags:
 author: soywiz
+edit: /_posts/extra/2015-11-03-la-beta-1.0.markdown
 permalink: /2015/11/la-beta-1-0/
 ---
 
