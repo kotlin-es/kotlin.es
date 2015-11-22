@@ -45,13 +45,6 @@ layout: twocolumn
         {{ content }}
     </div>
 
-    <h3>Post relacionados</h3>
-    <ul>
-    {% for relatedPost in site.related_posts limit:3 %}
-    <li><a href="{{ relatedPost.url }}">{{ relatedPost.title }}</a></li>
-    {% endfor %}
-    </ul>
-
     {% if page.edit %}
     <h3>Meta</h3>
     <ul>
