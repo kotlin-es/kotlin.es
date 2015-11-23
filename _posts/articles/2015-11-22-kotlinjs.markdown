@@ -59,7 +59,7 @@ Crearemos un `main.kt` con el siguiente código:
 {% highlight kotlin %}
 import kotlin.browser.document
 
-fun main(args:Array&lt;String>) {
+fun main(args:Array <String>) {
     val h1 = document.createElement("h1")
     h1.textContent = "Hello World!"
     document.body!!.appendChild(h1)
