@@ -138,6 +138,7 @@ div.post-content td, div.post-content th {
 .post-list-entry-content {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     padding: 10px 12px;
+    min-height: 200px;
 }
 
 .post-list-entry-info {
