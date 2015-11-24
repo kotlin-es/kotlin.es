@@ -126,7 +126,7 @@ Finalmente nuestra aplicación "Hola Mundo" aparecerá en el display del disposi
 Como añadido os dejamos un video de como se ejecuta la aplicación en un dispositivo físico y una captura de pantalla del "logcat" .
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/vDVITRFEyCc" frameborder="0" allowfullscreen></iframe>
-<br>
+
 ![](/images/android/helloWorld/23.png)
 
 
