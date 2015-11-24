@@ -102,7 +102,7 @@ Pulsamos "next" para salir de la configuración y otra vez "next" para terminar 
 ![](/images/android/helloWorld/14.png)
 
 Seguidamente se nos muestra una ventana con el sistema de imagen que queremos para nuesta versión. Lo más recomendable para no tener errores es seleccionar la misma versión que pusimos en la configuración del proyecto inicial.
-En nuestro caso pusimos la Api 22, lollipop 5.1. Si nos fijamos debemos de seleccionar una de estas tres versiones dependiendo de la finalidad de nuestra App. En nuestro caso "x86". Pulsamos "Next" y en la siguiente ventana "Finish".
+En nuestro caso pusimos la "Api 22, lollipop 5.1". Si nos fijamos debemos de seleccionar una de estas tres versiones dependiendo de la finalidad de nuestra App. En nuestro caso "x86". Pulsamos "Next" y en la siguiente ventana "Finish".
 
 ![](/images/android/helloWorld/15.png)
 
@@ -123,7 +123,7 @@ Finalmente nuestra aplicación "Hola Mundo" aparecerá en el display del disposi
 ![](/images/android/helloWorld/22.png)
 
 
-Como añadido os dejamos un video de como se ejecuta la aplicación en un dispositivo físico y una captura de pantalla del "logcat" .
+Como añadido se os deja un video de como se ejecuta la aplicación en un dispositivo físico y una captura de pantalla del "logcat" .
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/vDVITRFEyCc" frameborder="0" allowfullscreen></iframe>
 
