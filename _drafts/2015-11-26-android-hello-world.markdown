@@ -10,8 +10,6 @@ edit: /_posts/articles/2015-11-26-android-hello-world.markdown
 permalink: /2015/11/android-hello-world/
 ---
 
-Me falta revisarla!
-
 Desde kotlin.es hoy vamos a mostrar como configurar un proyecto Android con Kotlin basado en un "Hola Mundo".
 La idea de esta pequeña entrada es acercar un poco más el alcance de Kotlin en los dispositivos móviles e ir iterando sobre pequeños proyectos poco a poco.
 
