@@ -14,7 +14,7 @@ Desde kotlin.es hoy vamos a mostrar como configurar un proyecto Android con Kotl
 La idea de esta pequeña entrada es acercar un poco más el alcance de Kotlin en los dispositivos móviles e ir iterando sobre pequeños proyectos poco a poco.
 
 Lo primero que necesitamos es descargarnos la versión de [Android Studio](https://developer.android.com/sdk/index.html) de la web oficial.
-Una vez instalado, hacemos doble click en el icono principal de la App y en el popup de entrada seleccionamos la primera opción para la creación de un nuevo proyecto.
+Una vez instalado, hacemos doble click en el icono principal de la App. Observaremos en pantalla un "pop-up" de entrada, aquí seleccionamos la primera opción para la creación de un nuevo proyecto.
 
 ![](/images/android/helloWorld/00.png)
 
@@ -118,9 +118,9 @@ Finálmente nuestra aplicación "Hola Mundo" aparecerá en el display del dispos
 
 ![](/images/android/helloWorld/22.png)
 
-La creación de un proyecto Android con Kotlin no requiere de conocimientos avanzados. En este tutorial se ha intentado dar pequeños pasos para llegar a la solución final de manera simple. La configuración manual de Kotlin dentro del proyecto esperemos que se pueda automatizar en el futuro con la opción directa en el "pop-up" de entrada.
+La creación de un proyecto Android con Kotlin no requiere de conocimientos avanzados. En este tutorial se ha intentado dar pequeños pasos para llegar a la solución final de manera simple. La configuración manual de Kotlin dentro del proyecto esperemos que se pueda automatizar en el futuro con una opción directa en el "pop-up" de entrada.
 
-Como añadido se os deja un video de cómo se ha ejecutado la aplicación en un dispositivo físico y una captura de pantalla del "logcat".
+Como añadido se os deja un video de la ejecución de la aplicación en un dispositivo físico y una captura de pantalla del "logcat".
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/vDVITRFEyCc" frameborder="0" allowfullscreen></iframe>
 
