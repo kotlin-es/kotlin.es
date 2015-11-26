@@ -10,8 +10,13 @@ edit: /_posts/articles/2015-11-27-nueva-comunidad-en-linkedin.markdown
 permalink: /2015/11/nueva-comunidad-en-linkedin/
 ---
 
-Desde Kotlin.es os comunicamos que hemos abierto una comunidad de Kotlin en español
+Desde Kotlin.es os comunicamos que hemos abierto una comunidad de Kotlin en español para linkedIn. Esto ofrece un nuevo lugar para compartir ideas, oportunidades de negocios y empleos.
 
+Ves al buscador y hazte miembro. Solo tienes que poner kotlin.es
+
+![]()
+
+Url: [https://www.linkedin.com/grp/home?gid=8444142](https://www.linkedin.com/grp/home?gid=8444142)
 
 Aquí os dejamos las reglas del grupo:
 
@@ -55,6 +60,10 @@ Moderación
 2 Por favor, no insulte o degrade al moderador de ninguna manera.
 
 ```
+
+
+Te esperamos!!!
+
 
 ## Referencias:
 * https://wiki.es.grepolis.com/wiki/Reglamento
