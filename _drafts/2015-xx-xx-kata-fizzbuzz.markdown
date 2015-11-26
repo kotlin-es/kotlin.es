@@ -199,4 +199,5 @@ Desde Kotlin.es te invitamos a que midas tu conocimiento a través de la shell o
 * Getting Started Kotlin - https://github.com/vicboma1/GettingStartedKotlin
 * Kotlin Koans - https://github.com/vicboma1/Kotlin-Koans
 * Kotlin online - http://try.kotlinlang.org/
+* Facebook - https://www.facebook.com/kotlin.es/
 
