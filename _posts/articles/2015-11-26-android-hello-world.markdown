@@ -130,7 +130,7 @@ Como añadido se os deja un video de la ejecución de la aplicación en un dispo
 ![](/images/android/helloWorld/23.png)
 
 
-Aquí podéis obtener el repositorio del proyecto: https://github.com/kotlin-es/kotlin-hello.world-android
+Aquí podéis obtener el repositorio del proyecto: [https://github.com/kotlin-es/kotlin-hello.world-android](https://github.com/kotlin-es/kotlin-hello.world-android)
 
 
 # Referencias :
@@ -139,3 +139,4 @@ Aquí podéis obtener el repositorio del proyecto: https://github.com/kotlin-es/
 * Gradle, [http://gradle.org/](http://gradle.org/)
 * Convert Java to Kotlin, [http://try.kotlinlang.org](http://try.kotlinlang.org)
 * Kotlin Android Extensions, [https://kotlinlang.org/docs/tutorials/android-plugin.html](https://kotlinlang.org/docs/tutorials/android-plugin.html)
+* Repositorio de proyecto, [https://github.com/kotlin-es/kotlin-hello.world-android](https://github.com/kotlin-es/kotlin-hello.world-android)
