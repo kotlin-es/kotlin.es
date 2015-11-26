@@ -16,11 +16,11 @@ Hoy en día muchas empresas de desarrollo de software suelen hacer filtros para 
 social que internet les brinda. Un candidato que llega a una oficina para hacer una entrevista de trabajo, normalmente ya está
 analizado por parte de la empresa/persona que lo va a entrevistar.
 
-Algunas veces pueden probarte técnicamente para verificar tus conocimientos reales. En otras buscan que seas tu mismo el que diga
+Algunas veces pueden probarte técnicamente para verificar tus conocimientos reales. En otras buscan que seas tú mismo el que diga
 que carencias tienes y, con bastante probalidad, se suelen hacer pequeñas katas o pruebas técnicas para saber si el candidato es la
-persona que dice ser en su carta de presentación. Un algoritmo con sentencias fáciles puede que sea el que filtre la primera toma de contacto, luego
-puede llegar la prueba de recursión. Más adelante alguna prueba de árboles binarios y finalmente la prueba de optimización de tiempos donde se tiene
-que refactorizar un algoritmo optimizando tiempos de ejecucion con "clean code". Hoy solo nos vamos a fijar en la primera fase. 
+persona que dice ser en su carta de presentación. Un algoritmo con sentencias fáciles puede ser el que filtre la primera toma de contacto, luego
+puede llegar la prueba de recursión. Más adelante una prueba de árboles binarios y finalmente una prueba de optimización donde se tiene
+que refactorizar un algoritmo optimizando tiempos de ejecución con "clean code" suelen ser las pruebas más comunes. Hoy solo nos vamos a fijar en la primera fase. 
 
 Rosetta code es un sitio de crestomatía de programación. Presenta diversidad de soluciones para algorimos descritos en multitud de lenguajes.
 
@@ -41,7 +41,7 @@ Si el número es divisible exactamente entre 3 y 5, en vez de imprimir el númer
 
 Lo primero que tenemos que hacer es un análisis semántico para extraer la máxima información posible. Saber qué nos piden es algo fundamental para llegar a la solución.
 (Pensar que no tenemos mucho tiempo).
-En la primera lecura se debe de extraer que vamos a necesitar un bucle que controle el flow de nuestro método. Éste debe de ir
+En la primera lectura se debe de extraer qué vamos a necesitar. Un bucle que controle el flow de nuestro método debe de ir
 desde 1 a 100 y debe de contener 2 ó 3 sentencias. 
 
 pseudocódigo
