@@ -13,6 +13,7 @@ permalink: /2015/11/android-hello-world/
 Desde kotlin.es hoy vamos a mostrar cómo configurar un proyecto Android con Kotlin basado en un "Hola Mundo".
 La idea de esta pequeña entrada es acercar un poco más el alcance de Kotlin en los dispositivos móviles e ir iterando sobre pequeños proyectos poco a poco.
 
+## Tutorial
 Lo primero que necesitamos es descargarnos la versión de [Android Studio](https://developer.android.com/sdk/index.html) de la web oficial.
 Una vez instalado, hacemos doble click en el icono principal de la App. Observaremos en pantalla un "pop-up" de entrada, aquí seleccionamos la primera opción para la creación de un nuevo proyecto.
 
@@ -61,7 +62,7 @@ Usamos la "short-cut" siguiente tanto para Windows o para Mac y abrimos una pequ
 
 ![](/images/android/helloWorld/19.png)
 
-Aqui escribimos "Convert Java File to Kotlin file" y le damos aceptar.
+Aquí escribimos "Convert Java File to Kotlin file" y le damos aceptar.
 
 ![](/images/android/helloWorld/10.png)
 
@@ -104,7 +105,7 @@ En nuestro caso pusimos la "Api 22, lollipop 5.1". Si nos fijamos debemos de sel
 
 ![](/images/android/helloWorld/16.png)
 
-Ahora cerramos la ventana modal de nuestros dispositivos virtuales. Seleccionamos arrancar nuestra aplicación con el dispositivo conectado en modo debug al ordenador o con el emulador creado.
+Ahora cerramos la ventana modal de nuestros dispositivos virtuales. Observaremos que podemos arrancar nuestra aplicación con el dispositivo conectado en modo debug al ordenador o con el emulador creado.
 Nosotros optamos por la opción "Launch emulator" y elegimos nuestro emulador.
 
 ![](/images/android/helloWorld/17.png)
@@ -117,6 +118,8 @@ Seguidamente se arrancará el emulador reiniciando el sistema operativo de andro
 Finálmente nuestra aplicación "Hola Mundo" aparecerá en el display del dispositivo emulado.
 
 ![](/images/android/helloWorld/22.png)
+
+## Conclusiones
 
 La creación de un proyecto Android con Kotlin no requiere de conocimientos avanzados. En este tutorial se ha intentado dar pequeños pasos para llegar a la solución final de manera simple. La configuración manual de Kotlin dentro del proyecto esperemos que se pueda automatizar en el futuro con una opción directa en el "pop-up" de entrada.
 
