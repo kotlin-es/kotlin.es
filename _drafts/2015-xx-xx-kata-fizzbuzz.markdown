@@ -89,7 +89,7 @@ Si el número es divisible exactamente entre 3, en vez de imprimir el número, i
 if(it % 3  == 0 ) ->  "Fizz"
 ```
 
-``` kotlin
+```kotlin
 Si el número es divisible exactamente entre 5, en vez de imprimir el número, imprimir la palabra Buzz.
 
 if(it % 5  == 0 ) ->  "Buzz"
@@ -98,7 +98,7 @@ if(it % 5  == 0 ) ->  "Buzz"
 ```kotlin
 Si el número es divisible exactamente entre 3 y 5, en vez de imprimir el número, imprimir la palabra FizzBuzz.
 
-*Aquí no hago nada. Si no anido las sentencias if con un if/else ya lo tengo!
+Aquí no hago nada. Si no anido las sentencias if con un if/else ya lo tengo!
 ```
 
 ```kotin
@@ -170,7 +170,33 @@ fun fizzbuzz() : Unit {
 Aún podríamos limpiar más el código quitando los datos númericos y de tipo string hardcodeados a pelo en el código.
 De todos modos, este pseudocódigo sirve como guía para medir tus conocimientos con kotlin.
 
-A continuación te muestro una versión que he hecho yo mediante TDD. Se basa en el ejemplo que he mostrado y como kotlin nos brinda muchas
-técnicas de definición de funciones he añadido una "Extension function" a mi solución.
+A continuación te muestro una versión que he hecho mediante TDD. Se basa en el ejemplo que he mostrado. Kotlin nos brinda muchas técnicas de definición de funciones y he añadido una "Extension function" a mi solución.
 
+![](https://github.com/kotlin-es/kotlin-katas/blob/master/fizzBuzz/src/main/resources/fizzBuzz.png)
+
+Las soluciones a este algoritmo "FizzBuzz" son muchisimas y muy diversas. Esta solución tal vez no es la mejor pero nos puede ayudar a utilizar muchas de las técnicas que Kotlin nos ofrece. Es expresiva y se lee con facilidad.
+
+Si quieres ver la solución final de este algoritmo entra en el repositorio oficial de kotlin.es a través de github mediante esta url: https://github.com/kotlin-es/kotlin-katas
+
+En este otro repositorio hay algunas versiones incrementales para llegar a la misma solución: https://github.com/vicboma1/Kata-FizzBuzz
+
+Si crees que este algoritmo es muy avanzado para tu nivel, puedes revisar estos respositorios:
+* Getting Started Kotlin - https://github.com/vicboma1/GettingStartedKotlin
+* Kotlin Koans - https://github.com/vicboma1/Kotlin-Koans
+
+Aquí podras encontrar multitud de ejercicios para elevar tu nivel. 
+
+El resumen de esta entrada ha sido presentar a Kotlin como un lenguaje muy expresivo y menos verboso que Java.
+Permite relucir buenas prácticas de programación.
+
+Desde Kotlin.es te invitamos a que midas tu conocimiento a través de la shell online: http://try.kotlinlang.org/
+
+## Referencias:
+* Rosseta Code - http://rosettacode.org
+* Fizz Buzz - https://en.wikipedia.org/wiki/Fizz_buzz
+* Rosseta FizzBuzz - http://rosettacode.org/wiki/FizzBuzz
+* CodingDojo - http://codingdojo.org
+* Getting Started Kotlin - https://github.com/vicboma1/GettingStartedKotlin
+* Kotlin Koans - https://github.com/vicboma1/Kotlin-Koans
+* Kotlin online - http://try.kotlinlang.org/
 
