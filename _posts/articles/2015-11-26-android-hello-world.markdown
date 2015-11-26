@@ -10,7 +10,7 @@ edit: /_posts/articles/2015-11-26-android-hello-world.markdown
 permalink: /2015/11/android-hello-world/
 ---
 
-Desde kotlin.es hoy vamos a mostrar como configurar un proyecto Android con Kotlin basado en un "Hola Mundo".
+Desde kotlin.es hoy vamos a mostrar cómo configurar un proyecto Android con Kotlin basado en un "Hola Mundo".
 La idea de esta pequeña entrada es acercar un poco más el alcance de Kotlin en los dispositivos móviles e ir iterando sobre pequeños proyectos poco a poco.
 
 Lo primero que necesitamos es descargarnos la versión de [Android Studio](https://developer.android.com/sdk/index.html) de la web oficial.
@@ -36,11 +36,11 @@ Seguidamente le damos a "Finish".
 
 ![](/images/android/helloWorld/05.png)
 
-A partir de aquí, podremos ver como Android Studio autogenera el proyecto.
+A partir de aquí, podremos ver la autogeneración el proyecto en Android Studio
 
 ![](/images/android/helloWorld/06.png)
 
-En esta imagen vemos como añade el framework "Gradle" automáticamente.
+En esta imagen vemos que añade el framework "Gradle" automáticamente.
 
 ![](/images/android/helloWorld/07.png)
 
@@ -132,7 +132,7 @@ Aquí podéis obtener el repositorio del proyecto: https://github.com/kotlin-es/
 
 # Referencias :
 
-* Android Studio, https://developer.android.com/sdk/index.html
-* Gradle, http://gradle.org/
-* Convert Java to Kotlin, http://try.kotlinlang.org
-* Kotlin Android Extensions, https://kotlinlang.org/docs/tutorials/android-plugin.html
+* Android Studio, [https://developer.android.com/sdk/index.html](https://developer.android.com/sdk/index.html)
+* Gradle, [http://gradle.org/](http://gradle.org/)
+* Convert Java to Kotlin, [http://try.kotlinlang.org](http://try.kotlinlang.org)
+* Kotlin Android Extensions, [https://kotlinlang.org/docs/tutorials/android-plugin.html](https://kotlinlang.org/docs/tutorials/android-plugin.html)
