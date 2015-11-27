@@ -1,24 +1,24 @@
 ---
 layout: post
 title:  "Nueva comunidad en LinkedIn"
-date:   2015-11-28 00:00:00 +0100
+date:   2015-11-27 00:00:00 +0100
 category: articulos
 tags: linkedin, comunidad
 author: vicboma1
-icon: /images/icons/linkedin/kotlin-logo-2.png
-edit: /_posts/articles/2015-11-28-nueva-comunidad-en-linkedin.markdown
+icon: /images/icons/linkedin/linkedin.png
+edit: /_posts/articles/2015-11-27-nueva-comunidad-en-linkedin.markdown
 permalink: /2015/11/nueva-comunidad-en-linkedin/
 ---
 
 
-Desde Kotlin.es os comunicamos que hemos abierto una comunidad de Kotlin en español para linkedIn. 
+Os comunicamos que hemos abierto una comunidad de Kotlin en español para linkedIn. 
 Esto ofrece un nuevo lugar para compartir ideas, oportunidades de negocios y empleos.
 
 Ves al buscador y hazte miembro. Solo tienes que poner kotlin.es
 
 ![](/images/linkedin/kotlin-es.png)
 
-Url: [https://www.linkedin.com/grp/home?gid=8444142](https://www.linkedin.com/grp/home?gid=8444142)
+Url: [https://www.linkedin.com/grp/home?gid=8444142](https://www.linkedin.com/grp/home?gid=8444142){:target="_blank"}
 
 Aquí os dejamos las reglas del grupo:
 
