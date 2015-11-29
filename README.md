@@ -22,5 +22,7 @@ open http://127.0.0.1:4000/
 ## Ejecutar este blog en tu ordenador (windows)
 
 Descargar e instalar ruby (probado con 2.2.3) para windows: [http://rubyinstaller.org/downloads/](http://rubyinstaller.org/downloads/)
+```
 gem install jekyll
 gem install jekyll-mentions jemoji jekyll-redirect-from jekyll-sitemap jekyll-feed 
+```
