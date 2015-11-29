@@ -36,7 +36,7 @@ Todo esto regado con rica cerveza Maier, cortesía de la gente de 47 degress.
 Miércoles, 9 de diciembre de 2015 desde las 19:00 hasta las 21:00 (Hora estándar de Europa central Hora de España (Madrid))
 
 ### SEDE
-Karumi HQ - C/ Campomanes 6. 4º Izquierda. Madrid, Madrid 28013 ES
+[Karumi](http://karumi.com/) HQ - C/ Campomanes 6. 4º Izquierda. Madrid, Madrid 28013 ES
 
 Enlace del evento:
 [https://www.eventbrite.es/e/entradas-karumi-talks-scala-vs-kotlin-for-android-by-javi-pacheco-and-antonio-leiva-19726542620](https://www.eventbrite.es/e/entradas-karumi-talks-scala-vs-kotlin-for-android-by-javi-pacheco-and-antonio-leiva-19726542620)
