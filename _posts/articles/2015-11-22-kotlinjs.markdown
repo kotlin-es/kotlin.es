@@ -124,19 +124,19 @@ Obviamente tampoco podremos acceder a librerías Java y no están disponibles to
 
 ## Particularidades del target de javascript
 
-Tenemos disponibles la anotación <code>&#64;native</code>, la propiedad global <code>noImpl</code>, la función global especial `js` y el tipo `:dynamic`.
+Tenemos disponibles la anotación <code>@native</code>, la propiedad global <code>noImpl</code>, la función global especial `js` y el tipo `:dynamic`.
 
-### Anotación <code>&#64;native</code> y <code>noImpl</code>
+### Anotación <code>@native</code> y <code>noImpl</code>
 
-<code>&#64;native</code> nos permite marcar clases, interfaces y funciones como nativas de forma que no se generará código para ellas
+<code>@native</code> nos permite marcar clases, interfaces y funciones como nativas de forma que no se generará código para ellas
 y se utilizará como si existiese en javascript.
 Mientras que `noImpl` es un getter global que devuelve *:Nothing* y que lanza una excepción, y que utilizaremos junto a
-<code>&#64;native</code> en lugares donde debería haber código.
+<code>@native</code> en lugares donde debería haber código.
 
 {% highlight kotlin %}
-&#64;native("PIXI.Sprite") class Sprite(val texture: Texture) : DisplayObject() {
+@native("PIXI.Sprite") class Sprite(val texture: Texture) : DisplayObject() {
     companion object {
-        &#64;native fun fromImage(url: String): Sprite = noImpl
+        @native fun fromImage(url: String): Sprite = noImpl
     }
 }
 {% endhighlight %}
@@ -157,7 +157,7 @@ cualquier propiedad o método como si existiese. Obviamente deberíamos limitar 
 perder las ventajas del tipado estricto.
 
 {% highlight kotlin %}
-&#64;native interface TextStyle
+@native interface TextStyle
 
 fun TextStyle(font: String? = null, fill: String? = null): TextStyle {
     var out: dynamic = js("({})")
