@@ -11,7 +11,7 @@ permalink: /2015/08/iteraciones-un-poco-de-historia-y-en-kotlin/
 
 # Iterando en lenguajes de pasada generación
 
-para repetir un código varias veces:
+Para repetir un código varias veces:
 
 El ***for*** es la estructura de control más flexible que suelen tener los lenguajes, permite definir un flujo completo de inicialización, condición de ejecución y actualización. El código de dentro del *for* se ejecuta de cero a más veces.
 
