@@ -1,0 +1,162 @@
+---
+layout: post
+title:  "Kotlin 1.0 Beta 3"
+category: releases
+tags: releases
+author: soywiz
+edit: /_posts/releases/2015-12-07-1.0-beta-3.markdown
+permalink: /2015/12/kotlin-1-0-beta-3/
+---
+
+Nos complace anunciar otra actualización beta de Kotlin 1.0. Estamos enfocados en finalizar
+la librería estándar y en deshacernos de las construcciones deprecadas del lenguaje, así como
+arreglar bugs, mejoras de rendimiento y comprobaciones en vistas al futuro.
+
+* Podéis encontrar la lista completa de cambios [aquí](https://github.com/JetBrains/kotlin/releases/tag/build-1.0.0-beta-3595).
+* Y la lista completa de tareas cerradas [aquí](https://youtrack.jetbrains.com/issues/KT?q=%23Major+%23Critical+%23Resolved+-Obsolete+-%7BEclipse+Plugin%7D+resolved+date%3A+2015-11-16+..+2015-11-30).
+
+## Cambios en la librería
+
+Estamos trabajando duro en la librería estándar para que esté en el mejor estado posible
+antes de la 1.0. Esto incluye algo de experimentación, así deprecamos algunas cosas y añadimos algunas funciones. Tenemos planeado hacer la última limpieza de la librería estándar en la build 1.0 (o en la RC): quitar todas las cosas legadas y deprecadas.
+
+En relación a esto únicamente vamos a destacar un [cambio](https://github.com/JetBrains/kotlin/releases/tag/build-1.0.0-beta-3595): `contains()`
+y otras extensiones similares ahora aceptan supertipos de los elementos de la colección.
+
+{% highlight kotlin %}
+// strs: Collection<String>
+// ns: String?
+// cs: CharSequence
+// i: Int
+strs.contains(ns) // accepted now
+strs.contains(cs) // accepted now
+str.contains(i) // ERROR (in fact, a deprecation warning, but will be an error soon)
+{% endhighlight %}
+ 
+Nos hemos dado cuenta de que la aproximación propuesta anteriormente `containsRaw` era ineficiente, y hemos optado por hacer `contains()` algo más permisivo, a la vez que
+mantenemos la seguridad que queríamos inicialmente. Nótese que la interfaz de las colecciones
+en sí misma se mantiene intacta, y que todo esto se hace exclusivamente mediante funciones de extensión. Usad *Code Cleanup* para migrar el código.
+
+## Cambios en el lenguaje
+
+Algunas cosas destacadas sobre los cambios en el lenguaje, la lista completa se puede
+encontrar [aquí](https://github.com/JetBrains/kotlin/releases/tag/build-1.0.0-beta-3595).
+Muchas de las cosas que habíamos deprecado ahora son errores. Usad *Code Cleanup* para migrar.
+
+### Expresiones when
+
+Tenemos comprobado que este tipo de código suele ser problemático y lo hemos deprecado:
+
+{% highlight kotlin %}
+when {
+    foo.isValid(), foo.isReady() -> process(foo)
+    ...
+}
+{% endhighlight %}
+
+Mucha gente solía pensar que la condición `foo.isValid(), foo.isReady()` significaba que foo era válido y a la vez estaba listo, pero en realidad la coma representa una disyunción. La solución es trivial: simplemente reemplazar la coma por ||.
+
+{% highlight kotlin %}
+when {
+    foo.isValid() || foo.isReady() -> process(foo)
+    ...
+}
+{% endhighlight %}
+ 
+*Code Cleanup* os ayudará a migrarlo.
+
+## Anotaciones
+
+Hemos arreglado un bug que nos impedía usar arrays en valores por defecto para los parámetros de las anotaciones:
+
+{% highlight kotlin %}
+annotation class Entry(val value: String)
+
+annotation class Example(
+        val entries: Array<Entry> = arrayOf(Entry("a"), Entry("b")) // OK now
+)
+{% endhighlight %}
+ 
+## Enum.values()
+
+Recientemente cambios el `Enum.values()` tradicional de Java para convertirse en una propiedad: `Enum.values`, pero vamos a revertir este cambio porque hay un caso límite bastante peliagudo: un enumerado podría tener un elemento llamado values, y entonces sería imposible acceder a alguno de los dos. Hemos considerado varias opciones, y hemos decidido que hacer que values vuelva a ser una función es el más limpio.
+
+Así que la propiedad values pasa ahora a estar deprecada y la función `values()` deja de estar deprecada.
+
+## Reglas de visibilidad y alcance
+
+Vamos a proceder a limpiar y arreglar problemas menores en las reglas de visibilidad y alcance (scopes), de forma que:
+
+* Se permiten miembros `protected` en los *companion object*
+* Llamar a miembros `protected` que no estén marcados con @JvmStatic desde subclases, ahora serán errores (no soportado)
+* Los setters `private` en las propiedades `open`
+* Hemos deprecado las clases locales `sealed` (nunca fueron usables)
+* No permitimos reducir la visibilidad en la sobrecarga de los setters
+* Ya no permitimos clases internas dentro de las entradas de los enum
+* No permitimos el uso de variables sin inicializar en lambdas / literales de objeto / funciones locales.
+
+
+## Extensiones de Android
+
+Hemos combinado el plugin principal de Kotlin para InteliJ IDEA con el plugin Kotlin Extensions For Android. El plugin de extensiones de android queda obsoleto ya que su funcionalidad está incluída en el plugin principal de Kotlin.
+
+También hemos añadido soporte para los `product flavors` de Android: ahora las propiedades de los distintos *flavours* están disponibles en diferentes paquetes.
+
+Por ejemplo, si tenemos dos `flavors` en el archivo `build.gradle`:
+
+{% highlight kotlin %}
+productFlavors {
+    free {
+        versionName "1.0-free"
+    }
+    pro {
+        versionName "1.0-pro"
+    }
+}
+{% endhighlight %}
+
+Ahora podemos usar propiedades sintéticas no solo para los layouts en el fuente principal, sino también en los layouts de los `flavor`:
+
+{% highlight kotlin %}
+
+// Import synthetic properties for the `activity_free.xml` layout in the `free` flavor
+import kotlinx.android.synthetic.free.activity_free.versionMarker
+
+class FreeActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        ...
+
+        setContentView(R.layout.activity_free)
+
+        ...
+
+        versionMarker.text = "Free version"
+    }
+}
+
+{% endhighlight %}
+
+Notad que todos los layouts para el set de fuentes principal está localizado en el paquete `kotlinx.android.synthetic.main`, y que hemos deprecado la convención de nombres de los viejos paquetes.
+
+# Novedades en el IDE
+
+* Hemos combinado el plugin de Extensiones de Android Extensions en el plugin principal y ya no hace falta instalarlo por separado
+* Hemos añadido la opción de elegir Kotlin cuando creamos un proyecto Gradle nuevo:
+![](/images/1.0-beta3/gradle.png)
+
+* Debugger: la navegación de stacktraces ahora permite ver los frames de las funciones inline. También hemos hecho un montón de mejoras a la hora de ir paso a paso en las funciones inline.
+
+* Hemos añadido tres *Quick Fixes* a la inicialización de propiedades:
+![](/images/1.0-beta3/propertyInitQuickFix.gif)
+
+* *Introduce Variable (Ctrl+Alt+V / Cmd+Alt+V)* soporta ahora expresiones milti-declaración:
+![](/images/1.0-beta3/destructuring.gif)
+
+
+* También permite elegir la expresión objetivo en las lambda/funciones anónimas:
+![](/images/1.0-beta3/container.gif)
+
+* La Beta 3 trae soporte para *Introduce Variable/Parameter/Property/Function* de fragmentos de templates de cadena
+![](/images/1.0-beta3/templates.gif)
+
+Finalmente, hemos añadido una característica experimental - soporte básico para archivos de scripting de kotlin (.kts) en el IDE.
