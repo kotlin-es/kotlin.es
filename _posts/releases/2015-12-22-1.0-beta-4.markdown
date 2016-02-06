@@ -1,0 +1,157 @@
+---
+layout: post
+title:  "Kotlin 1.0 Beta 4"
+category: releases
+tags: releases
+author: soywiz
+edit: /_posts/releases/2015-12-22-1.0-beta-4.markdown
+permalink: /2015/12/kotlin-1-0-beta-4/
+original: http://blog.jetbrains.com/kotlin/2015/12/kotlin-1-0-beta-4-is-out/
+---
+
+Nos alegar anunciar la Beta 4 de Kotlin; ¡otro paso más hacia la 1.0!
+Estamos mayormente enfocados en la infraestructura y cambios que aseguren el futuro.
+
+Podéis acceder a la lista completa de cambios [aquí](https://github.com/JetBrains/kotlin/releases/tag/build-1.0.0-beta-4583). Abajo tenéis más detalles.
+
+También es hora de haceros saber qué más cosas tenemos previstas para antes de la 1.0.
+
+# Compilación incremental mejorada (Experimental)
+
+Hemos desplegado un algoritmo preciso para la detección de dependencias que hace que la compilación incremental de Kotlin sea mucho más rápida. Todavía es experimental, pero ya funciona bastante bien en nuestros casos de uso. Para probarla:
+
+> Settings | Build, Execution, Deployment | Compiler | Kotlin Compiler | Enable precise incremental compilation (experimental)
+
+Muy pronto: ¡Vamos a llevar a Gradle el mismo soporte de compilación incremental! Estad atentos.
+
+# Lenguaje
+
+Algunas cosas destacadas de la [lista completa de cambios](https://github.com/JetBrains/kotlin/releases/tag/build-1.0.0-beta-4583).
+
+## Cambios en la resolución de sobrecarga
+
+Debido a una corrección en el algoritmo de resolución de sobrecargas, Kotlin trata ahora las funciones convertidas SAM de Java más como miembros (solían comportarse como extensiones). Esta corrección es importante, porque de otra formase interpretaban de formas extrañas por el compilador.
+
+Desafortunadamente, hay al menos un caso relativamente común que se ha roto como consecuencia. Aunque la corrección es muy sencilla. Ahora el compilador se queja sobre: `file.listFiles { it.name == "..." }`.
+El motivo es bastante complicado:
+
+* Hay tres sobrecargas de `listFiles` en `java.io.File`
+* Dos de ellas tienen una interfaz SAM, que convertirmos de forma que pueda usar un lambda
+* De forma que cuando se pasa una lambda sin parámetros, no sabemos cual de ellas deberíamos elegir
+* Antes esto funcionaba, porque había una vieja función extensión (de antes de cuando apareció SAM) que se seleccionaba en vez del miembro SAM convertido.
+* La corrección*  es sencilla, simplemente especificsad el parámetro. Por ejemplo:
+
+{% highlight kotlin %}
+file.listFiles { it -> ... }
+{% endhighlight %}
+ 
+## Las propiedades se pueden usar como objetos función sin parámetros
+
+Ejemplo: en Kotlin `String::length` es una propiedad, no una función. Pero resulta conveniente poder usarla en lugares donde se espera una función. Por ejemplo:
+
+{% highlight kotlin %}
+val lengths = strs.map(String::length)
+{% endhighlight %}
+ 
+Así que ahora permitimos esto. En otras palabras, en cualquier sitio que un API espere una función del tipo `(R) -> T` ahora podemos usar una referencia a una propiedad de `R` cuyo valor de retorno es `T`.
+
+## Reservando keywords para uso futuro
+
+Tenemos planeado añadir nuevas características en futuras versiones de Kotlin, así que hemos decidido reservar los keywords necesarios por adelantado. Somos conscientes que nadie es capaz de predecir el futuro, pero nosotros apostamos por esto (todavía no tenemos un diseño detallado del futuro, pero lo haremos lo mejor posible para hacerlos lo más útiles posible):
+
+* `yield` pasa a ser una palabra reservada
+* `sealed` pasa a estar reservado delante de “`when`“
+* `typeof` pasa a estar reservado tabién. En JS, usad jsTypeOf()
+* `async` está reservado delante de “{” y “fun“
+
+De forma que ahora, en vez de `async {...}` pasaríamos a usar async () {...}. Somos conscientes de que n oes tan limpio, pero no hemos encontrado ninguna opción mejor. El completado de código insertará () automáticamente.
+
+*Code Cleanup* os ayudará a migrar el código existente.
+
+# Java Wildcards
+
+Habían problemas con cómo Kotlin traducía tipos variantes, por ejemplo:
+sia List<Foo> debería ser `List<? extends Foo>` en Java o simplemente List<Foo>. Sutilezas aparte, hicimos lo siguiente:
+
+* Por defecto, no generamos *wildcards* en los valores de retorno y donde no tenían sentido
+* Cuando se necesita un *wildcard*, uno puede forzar su presencia con una anotación de tipo: `List<@JvmWildcard String>` es siempre `List<? extends String>` en Java
+* Cuando necesitamos encargarnos de un *wildcards*, podemos usar `@JvmSuppressWildcards` (esto se puede usar en un tipo o en cualquier declaración que lo contenga)
+
+Ejemplo:
+
+{% highlight kotlin %}
+fun foo(l: List<String>) // in Java: List<String> (String is final)
+fun foo(l: List<@JvmWildcard String>) // in Java: List&lt;? extends String>
+
+interface Open
+fun bar(p: List&lt;Open>) // in Java: List&lt;? extends Open> (Open is not final)
+@JvmSuppressWildcards
+fun bar(p: List&lt;Open>) // in Java: List<Open>
+
+{% endhighlight %}
+
+NOTA: esto concierne no solo a colecciones, sino también a todos los tipos que involucren variancia en sitios de declaración.
+
+## Cambios en la librería
+
+Estamos limpiando la librería estándar, y esto incluye algunos cambios paquete:
+
+Hemos movido el paquete de `kotlin.test` a un archivo jar separado: `kotlin-test.jar`. Hay disponible un quick-fix en el IDE para añadir esta dependencia automáticamente.
+Para preparar la reordenación de paquetes en la librería estándar, hemos creado nuevos paquetes y copiado todas las funciones allí.
+Mantenemos las viejas funciones para compatibilidad binaria. No se requiere migración para el código Kotlin, pero está disponible el *Code Cleanup* para código Java.
+
+Posteriormente planteamos extraer un JAR más de la librería: contendrá todas las utilidades de array que no se usan tan frecuentemente, que nos gustaría tener fuera del JAR principal para reducir su tamaño.
+
+### Algunas cosas destacadas más:
+
+El `Int::class`de Kotlin puede corresponder a `int.class` o `Integer.class`de java en contextos diferentes (y está justificado). Para facilitar casos de uso cuando se requiere uno específico de los dos, hemos introducido dos nuevas propiedades:
+
+* `Int::class.javaPrimitiveType` devuelve `Int.class`
+* `Int::class.javaObjectType` devuelve `Integer.class`
+
+Ahora también podemos hacer cosas como `IntArray(5) { it * 3 }` para crear arrays primitivas inicializadas.
+
+## Cambios para el futuro: significado de null en las colecciones
+
+Las posteriores versiones del JDK están haciendo las colecciones más y más intolerantes a nulos. Por ejemplo, aquí lo que dice el JavaDoc sobre `java.util.Map.computeIfAbsent`:
+
+Si la clave especificada no está ya asociada a un valor (o si está mapeada a nulo), intenta computar su valor usando la función de mapeado dada y lo introduce en el mapa siempre que no sea nulo.
+
+Dichos contratos son intrínsecos a la atomicidad de dichas operaciones, así que hemos decidido que también tenemos que encontrarlas, de otra forma no seríamos capaces de garantizar el correcto comportamiento de las funciones de extensión de Kotñin cuando operan sobre colecciones concurrentes sin nulos.
+Así que vamos a cambiar el comportamiento de `getOrPut` y otras funciones similares de forma que traten los valores nulos como si el valor no estuviese presente.
+
+Para actualizar vuestro código, seguid las recomendaciones dadas en los avisos de deprecación.
+
+## ¿Qué novedades hay en el IDE?
+
+Se ha añadido un Quick-fix para renombrar las referencias sin resolver. Es útil para ajustar nombres de símbolos cuando se ha pegado el código desde un contexto diferente:
+
+Ahora el IDE te permite crear funciones desde referencias llamables sin resolver:
+
+Las acciones `Go to Test` y `Create Test` ahora funcionan para funciones libres:
+
+Se ha añadido la intención `Convert anonymous function to lambda expression`:
+
+
+`Go to class` y `Search everywhere` ahora muestran los tipos incluídos de Kotlin
+
+En el debugger: ahora se soporta la opción `‘Skip simple getters`, que sigifnica que el debugger no parará en propiedades dfeinidas en constructores, propiedades sin getters o aquellos getters que devuelven el valor de algún campo.
+
+
+# ¿Qué sigue?
+
+Cuando se complete el periodo Beta, habrá una RC y después de eso la 1.0.
+
+Nos encantaría estar seguros de que no queda ningún código compilado con versiones experimentales de Kotlin tras la 1.0, así que el compilador de la RC forzará la recompilación de todo el código viejo. Nos coordinaremos con la gente que mantiene las librerías fuera de JetBrains para asegurarnos que las librerías ampliamente utilizadas se recompilan a tiempo.
+
+También aprovecharemos la oportunidad para borrar cosas legadas en este punto:
+
+* Borrar todas las cosas deprecadas que hemos acumulado en el proceso de evolucionar nuestras librerías
+* Borrar todas las cosas deprecadas del código generado (puede que no hayáis oído hablar de ellas, ¡pero existen!)
+* Encargarnos de algunas peculiaridades del bytecode que encontramos durante la beta
+* Mover parte del código de la stdlib de paquetes para que tengan una mejor estructura.
+
+Tras este punto, los únicos cambios de compatibilidad en relación a la librería estándar serán cosas deprecadas y adiciones (esto no incluye las APIs de reflexión). Estamos ejecutando una review abierta para el API de la librería para asegurarnos que no nos dejamos nda importante.
+
+**¡Felices Kotlin-vidades!** :)
+

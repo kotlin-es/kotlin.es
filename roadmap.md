@@ -14,8 +14,11 @@ En la siguiente tabla podemos ver las versiones que han ido saliendo y sus fecha
 
 |Milestone|Versión|Fecha de salida|Cambios|En español|
 |-----------|:---------------:|:-----------:|---|---|
+|           |                 |  **2016**   |   |   |
+| 1.0-RC    | 1.0-RC          |  04-02-2016 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/10/kotlin-m14-is-out/)  | [kotlin.es](http://kotlin.es/2015/10/kotlin-m14/)  |
 |           |                 |  **2015**   |   |   |
-| 1.0-beta2 | 1.0.0-beta-2423 |  16-11-2015 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/11/kotlin-1-0-beta-2-is-out/)  | [kotlin.es](http://kotlin.es/2015/11/kotlin-1-0-beta-2/)  |
+| 1.0-beta4 | 1.0.0-beta-**** |  22-12-2015 | [oficial en inglés](http://blog.| 1.0-beta4 | 1.0.0-beta-**** |  16-11-2015 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/11/kotlin-1-0-beta-2-is-out/)  | [kotlin.es](http://kotlin.es/2015/12/kotlin-1-0-beta-4/)  |
+| 1.0-beta3 | 1.0.0-beta-**** |  07-12-2015 | [oficial en inglés](http://blog.| 1.0-beta2 | 1.0.0-beta-**** |  16-11-2015 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/11/kotlin-1-0-beta-2-is-out/)  | [kotlin.es](http://kotlin.es/2015/12/kotlin-1-0-beta-3/)  |
 | 1.0-beta1 | 1.0.0-beta-1103 |  02-11-2015 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/11/the-kotlin-language-1-0-beta-is-here/)  | [kotlin.es](http://kotlin.es/2015/11/la-beta-1-0/)  |
 | M14       | 0.14.449        |  01-10-2015 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/10/kotlin-m14-is-out/)  | [kotlin.es](http://kotlin.es/2015/10/kotlin-m14/)  |
 | M13       | 0.13.1514       |  16-09-2015 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/09/kotlin-m13-is-out/)  | [kotlin.es](http://kotlin.es/2015/09/kotlin-m13/)  |
