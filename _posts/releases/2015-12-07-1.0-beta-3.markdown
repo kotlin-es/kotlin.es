@@ -7,6 +7,7 @@ author: soywiz
 edit: /_posts/releases/2015-12-07-1.0-beta-3.markdown
 permalink: /2015/12/kotlin-1-0-beta-3/
 original: http://blog.jetbrains.com/kotlin/2015/12/kotlin-1-0-beta-3-is-out/
+icon: /images/1.0-beta3/icon.svg
 ---
 
 Nos complace anunciar otra actualización beta de Kotlin 1.0. Estamos enfocados en finalizar

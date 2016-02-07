@@ -7,6 +7,7 @@ author: soywiz
 edit: /_posts/releases/2015-12-22-1.0-beta-4.markdown
 permalink: /2015/12/kotlin-1-0-beta-4/
 original: http://blog.jetbrains.com/kotlin/2015/12/kotlin-1-0-beta-4-is-out/
+icon: /images/1.0-beta4/icon.svg
 ---
 
 Nos alegar anunciar la Beta 4 de Kotlin; ¡otro paso más hacia la 1.0!

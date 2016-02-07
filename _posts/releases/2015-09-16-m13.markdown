@@ -7,6 +7,7 @@ tags: releases
 author: soywiz
 edit: /_posts/releases/2015-09-16-m13.markdown
 permalink: "/2015/09/kotlin-m13/"
+icon: /images/m13/icon.svg
 ---
 
 Este post es una traducción de su artículo original en inglés.

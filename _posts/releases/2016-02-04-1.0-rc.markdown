@@ -7,6 +7,7 @@ author: soywiz
 edit: /_posts/releases/2016-02-04-1.0-rc.markdown
 permalink: /2016/02/kotlin-1-0-rc/
 original: http://blog.jetbrains.com/kotlin/2016/02/kotlin-1-0-release-candidate-is-out/
+icon: /images/1.0-rc/icon.svg
 ---
 
 ¡Por fin Kotlin ha pasado la fase Beta y ahora estamos enormemente complacidos de presentar la RC (Release Candidate)!

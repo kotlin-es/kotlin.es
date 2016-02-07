@@ -7,6 +7,7 @@ tags: releases
 author: soywiz
 edit: /_posts/releases/2015-11-16-1.0-beta-2.markdown
 permalink: /2015/11/kotlin-1-0-beta-2/
+icon: /images/1.0-beta2/icon.svg
 ---
 
 Hoy el equipo de Kotlin ha liberado la segunda beta de kotlin 1.0, que corresponde con la versión: **1.0.0-beta-2423**.

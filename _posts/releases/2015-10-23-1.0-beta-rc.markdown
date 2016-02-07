@@ -7,6 +7,7 @@ tags: releases
 author: soywiz
 edit: /_posts/releases/2015-10-23-1.0-beta-rc.markdown
 permalink: "/2015/10/kotlin-1-0-beta-rc/"
+icon: /images/1.0-beta-rc/icon.svg
 ---
 
 Nos complace presentar el candidato a beta de Kotlin. Pronto saldrá la versión 1.0 beta. Por lo pronto, el formato binario se ha finalizado, así que no hay planes de ningún cambio a nivel de lenguajemás, y solo se harán unos pocos cambios en la librería estándar.

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 256 264" enable-background="new 0 0 256 264" xml:space="preserve">
+<g style="overflow:hidden; text-anchor: middle; font-size:70; font-weight: bold; font-family: Arial, Helvetica, sans-serif">
+	<path fill="#4971A9" d="M8,215.3v0.9c0,22,17.8,39.8,39.8,39.8s39.8-17.8,39.8-39.8v-43.9L8,215.3L8,215.3z"/>
+	<path fill="#4971A9" d="M248.7,215.5c-0.7-8.5-4.3-16.4-10.3-22.5v-0.2l-71.5-63.2L97.3,167l89.7,79.8c6.7,5.8,15.3,9,24.3,9l0,0
+		c1.1,0,2.2,0,3.1-0.2c9.9-0.9,18.9-5.6,25.2-13C246.4,235.1,249.4,225.4,248.7,215.5L248.7,215.5z"/>
+	<path fill="#4971A9" d="M87.6,53.6v-4.3v-0.9c0-22-18-39.8-39.8-39.8C25.8,8.6,8,26.4,8,48.5v48.8L87.6,53.6L87.6,53.6z"/>
+	<path fill="#F58A1F" d="M8,114.3L194,12.9c5.4-2.9,11.5-4.3,17.5-4.3c3.8,0,7.6,0.7,11.5,1.8c19.6,6.3,30.1,27.2,23.8,46.8
+		c-2.7,8.1-7.9,15.1-15.1,19.8v0.2l-2.2,1.3L8,198.2V114.3L8,114.3z"/>
+
+		<defs>
+			<filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+			<feGaussianBlur stdDeviation="2 2" result="shadow"/>
+			<feOffset dx="6" dy="6"/>
+			</filter>
+		</defs>
+
+		<text text-anchor="end" x="230" y="230" style="filter: url(#shadow); fill: black">M14</text>
+		<text text-anchor="end" x="230" y="230" style="fill: white">M14</text>
+</g>
+
+</svg>

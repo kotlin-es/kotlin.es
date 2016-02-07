@@ -7,6 +7,7 @@ tags: releases
 author: soywiz
 edit: /_posts/releases/2015-10-01-m14.markdown
 permalink: "/2015/10/kotlin-m14/"
+icon: /images/m14/icon.svg
 ---
 
 Con la versión final cada vez más cerca, hemos empezado a reducir el tiempo entre versiones. Y ahora presentamos la M14, que trae los siguientes cambios:
