@@ -1,0 +1,142 @@
+---
+layout: post
+title:  "Kotlin 1.0 RC"
+category: releases
+tags: releases
+author: soywiz
+edit: /_posts/releases/2016-02-04-1.0-rc.markdown
+permalink: /2016/02/kotlin-1-0-rc/
+original: http://blog.jetbrains.com/kotlin/2016/02/kotlin-1-0-release-candidate-is-out/
+---
+
+¡Por fin Kotlin ha pasado la fase Beta y ahora estamos enormemente complacidos de presentar la RC (Release Candidate)!
+
+**NOTA:** como [anunciamos previamente](http://blog.jetbrains.com/kotlin/2015/12/kotlin-1-0-beta-4-is-out/), **la RC requiere que se recompile todo el código** para asegurarnos de que no queda código de versiones antiguas por ahí (¡por favor, recompilad incluso si estabais en versiones EAP!).
+
+Este blog da una visión de conjunto de los cambios que han ocurrido desde la Beta 4. Esta es la build con más cambios en la librería. Y también hemos corregido algunos bugs. Podéis encontrar la lista completa de cambios [aquí](https://github.com/JetBrains/kotlin/releases/tag/build-1.0.0-rc-1036).
+
+![](/images/1.0-rc/RC-Banner.png)
+
+*Discursiones en [Hacker News](https://news.ycombinator.com/item?id=11034273) y [Reddit](https://www.reddit.com/r/programming/comments/445jih/jvm_languages_news_kotlin_10_release_candidate_is/).*
+
+
+# Lenguaje
+
+En primer lugar, como ya prometimos, ha habido una limpieza:
+
+* Las construcciones del lenguaje que habíamos deprecado ahora son errores en vez de avisos.
+* Hemos borrado todas las declaraciones deprecadas previamente en el código generado a nivel de byte code (como campos estáticos en interfaces y similares).
+
+La mayor parte de los cambios en el lenguaje son pequeños ajustes y correcciones de errores. Vamos a destacar algunos, y podéis ver la lista completa [aquí](https://github.com/JetBrains/kotlin/releases/tag/build-1.0.0-rc-1036).
+
+
+## Anotaciones en los campos delegados
+
+Ahora soportamos un nuevo objetivo de anotación: `@delegate:`. Por ejemplo, para marcar el objeto delegado como `@Transient`, podemos usar lo siguiente:
+
+{% highlight kotlin %}
+class Example {
+    @delegate:Transient
+    val foo by Lazy { ... }
+}
+{% endhighlight %}
+
+A nivel de *byte code*, se anotará el campo que sustenta el delegado.
+
+
+## Comprobación de tipos en la variancia en sitios de uso
+
+Hemos arreglado un conjunto de bugs relacionados con la variancia en sitios de uso (proyecciones de tipo). Como resultado, el compilador puede encontrar algunos bugs que se había escapado en el código.
+Por ejemplo, en el siguente caso:
+
+{% highlight kotlin %}
+val ints = mutableListOf(1, 2, 3)
+val strs = mutableListOf("abc", "def")
+val comps: MutableList&lt;out Comparable<*>> = ints
+comps.addAll(strs) // ?! Adding strings to a list of ints
+{% endhighlight %}
+
+Antes el compilador aceptaba este c´ódigo por error y ahora produce un error en la última línea con el siguiente mensaje:
+
+`Projected type MutableList<out Comparable<*>> restricts the use of addAll()`
+
+
+## Interoperabilidad con Java
+
+Hemos hecho algunas mejoras a las propiedades sintéticas derivadas de los pares get/set de Java.
+
+* Dichas declaraciones (así como los métodos convertidos SAM) se resuelven a la par con miembros
+* Hemos añadido soporte a los setters de Java que devuelven valores.
+
+Hemos añadido soporte para las anotaciones `@Nullable/NotNull` de varias librerías populares como `javax.annotations`, Android SDK, etc.
+
+Los usuarios de EAP informan:
+
+> Las anotaciones de Android reconocidas me rompen un montón de código en el buen sentido
+
+Y correcciones de errores destacadas:
+
+* Las clases de Kotlin privadas sin paquete ahora se compilan a clases Java privadas de paquete
+* Ahora no se puede acceder a los miembros privados de la clases desde funciones inline no privadas
+
+
+
+# Librería estándar
+
+* El código de la librería ahora está reordenado en paquetes más granulares (no debería hacer falta cambios en el código)
+* Hemos hecho *inline* algunas funciones
+* Muchas funciones inline (la mayor parte de una sola línea) ya no se pueden llamar desde Java. Esto nos ayudará a reducir el tamaño de la librería de *runtime*  en un futuro.
+* Hemos borrado todas las cosas que habíamos deprecado previamente.
+* Ahora `Map.getOrElse()` y `Map.getOrPut()` tratan las claves asociativas con valores `null` como *no encontradas*.
+* Añadidas `mutableListOf`, `mutableSetOf` y `mutableMapOf` para construir colecciones mutables.
+* Añadida `toMutableList` en vez de `toArrayList`. La última está deprecada.
+* Se han añadido `associate` y `associateBy`para ayudar en la construcción de mapas (reemplazando a `toMap`/`toMapBy`)
+* *Comparator* y funciones relacionadas como comparaciones se han movido al paquete `kotlin.comparisons` (que no se importa por defecto).
+
+Más cambios [aquí](https://github.com/JetBrains/kotlin/releases/tag/build-1.0.0-rc-1036).
+
+
+
+# Herramientas
+
+Para habilitar las extensiones de Android en Gradle de una forma más ideomática, ahora podemos poner:
+
+{% highlight kotlin %}
+apply plugin: 'kotlin-android-extensions'
+{% endhighlight %}
+
+in el archivo `build.gradle` (de cada proyecto individual).
+
+La forma antigua ya no funciona e imprime instrucciones para arreglarlo en la salida.
+
+
+
+# Cambios en el IDE
+
+* Intención para reemplazar la iteración sobre entradas de un mapa, con un bucle usando una destructuración
+* Inspección y quickfix para limpiar modificadores de visibilidad redundantes
+* Inspección para reemplazar llamadas `assert` con comprobaciones de variables nulables o no nulables con `!!` o `?: error(...)`
+* Mostrar una notificación de "Kotlin not configured" al abrir un archivo .kt en el IDE si no está configurado el runtime de Kotlin en el módulo correspondiente
+* Acción para generar el método `toString()`
+* Soporte para implementar miembros mediante parámetros primarios de construcción
+* El popup con información de parámetros funciona para mostrar los parámetros genéricos
+* El competado ofrece variantes de nombre basados en identificadores sin resolver en el archivo actual
+* *Quickfix* para añadir ramas restantes en expresiones `when`
+* Soporte para mover clases anidadas al nivel superior o en otra clase raíz
+* Ya funciona `@Supress` en las inspecciones del IDE
+
+# Instrucciones de instalación
+
+para los usuarios de IntelliJ IDEA, puede que las actualizaciones automáticas no funcionen en el IDE, así que necesitaréis descargar el plugin e instalarlo desde un archivo zip:
+
+* Descargarlo [aquí](https://plugins.jetbrains.com/plugin/download?pr=&updateId=23813)
+* Ir a *Preferences | Plugins and click Install plugin from disk…* 
+
+Sentimos las molestias
+
+# Estad atentos
+
+La versión final se acerca... Mientras tanto: ¡que tengáis un buen Kotlin! 
+
+*P.D: Ved las discursiones en [Hacker News](https://news.ycombinator.com/item?id=11034273) y [Reddit](https://www.reddit.com/r/programming/comments/445jih/jvm_languages_news_kotlin_10_release_candidate_is/).*
+
