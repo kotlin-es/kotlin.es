@@ -15,6 +15,7 @@ En la siguiente tabla podemos ver las versiones que han ido saliendo y sus fecha
 |Milestone|Versión|Fecha de salida|Cambios|En español|
 |-----------|:---------------:|:-----------:|---|---|
 |           |                 |  **2016**   |   |   |
+| 1.0       | 1.0.0           |  15-02-2016 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2016/02/kotlin-1-0-released-pragmatic-language-for-jvm-and-android/)  | [kotlin.es](http://kotlin.es/2016/02/kotlin-1-0/)  |
 | 1.0-RC    | 1.0.0-rc-1036   |  04-02-2016 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/10/kotlin-m14-is-out/)  | [kotlin.es](http://kotlin.es/2015/10/kotlin-m14/)  |
 |           |                 |  **2015**   |   |   |
 | 1.0-beta4 | 1.0.0-beta-**** |  22-12-2015 | [oficial en inglés](http://blog.| 1.0-beta4 | 1.0.0-beta-**** |  16-11-2015 | [oficial en inglés](http://blog.jetbrains.com/kotlin/2015/12/kotlin-1-0-beta-4-is-out/)  | [kotlin.es](http://kotlin.es/2015/12/kotlin-1-0-beta-4/)  |
