@@ -11,24 +11,24 @@ icon: /images/1.0.1/icon.svg
 ---
 
 Ya ha pasado un mes desde que liberaramos Kotlin 1.0, y mientras nuestra base de usuarios
-se ha duplicado, hemos preparado la primera actualización con correcciones.
+se ha duplicado, hemos preparado la primera actualización con algunas correcciones.
 
-Kotlin 1.0.1 empieza una serie de versiones 1.0.X que traerán consigo correciones seguras y mejoras de rendimiento (así como en otras partes del proyecto), y nuevas características para nuestras herramientas e integraciones.
-En esta ocasión solo hay unas relativamente pequeñas características del IDE, pero hay planes grandes en el horizonte para la 1.0.2 y posteriores.
+Kotlin 1.0.1 es la primera versión una serie de versiones 1.0.X que traerá consigo correciones seguras y mejoras de rendimiento (así como en otras partes del proyecto), y nuevas características para nuestras herramientas e integraciones.
+En esta ocasión solo hay unas características del IDE relativamente pequeñas, pero tenemos grandes planes para la 1.0.2 y posteriores.
 
 ## Cambios en la 1.0.1
 
 Podéis encontrar la lista completa de cambios [aquí](https://github.com/JetBrains/kotlin/blob/1.0.1/Changelog.md).
 Algunas cosas destacadas:
 
-* Hay 47 correcciones en el compilador, la librería y mejoras en plugin de gradle (rendimiento)
+* Hay 47 correcciones en el compilador, la librería y mejoras de rendimiento en plugin de gradle
 * Compatibilidad con Gradle 2.12
 * Características del IDE:
-** Compatibilidad con IDEA 2016
-** Kotlin Education Plugin (para IDEA 2016),
-** KT-9752 Un selector de archivo más usable para “Mover declaración a otro archivo”
-** KT-9697 Mover método de y hacia un companion object
+  * Compatibilidad con IDEA 2016
+  * Kotlin Education Plugin (para IDEA 2016),
+  * KT-9752 Un selector de archivo más usable para “Mover declaración a otro archivo”
+  * KT-9697 Mover método de y hacia *companion objects*
 * Y 39 correciones en el IDE
 
-Nos gustaría agradecer a los participantes de la EAP que han probado la versión preview y han dado feedback.
+Nos gustaría agradecer a los participantes de la EAP que han probado la versión preeliminar y han dado feedback.
 Por favor, uníos a la EAP ¡y hagamos un Kotlin mejor, juntos!
