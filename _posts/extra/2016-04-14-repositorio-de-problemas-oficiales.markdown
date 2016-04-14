@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Repositorio con problemas oficiales de Kotlin"
+title:  "Repositorio con ejercicios de problemas oficiales de Kotlin"
 date:   2016-04-14 00:00:00 +0100
 category: blog
 tags: ejemplos, repositorio, tutorial, getting, started, problemas
