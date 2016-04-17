@@ -24,15 +24,14 @@ layout: twocolumn
 		</span>
 	</span>
             {% endif %}
-
-            {% if page.original %}
-             • <a href="{{ page.original }}" target="_blank">Artículo original</a>
-            {% endif %}
-
         </p>
     </header>
 
     <div class="post-content" itemprop="articleBody">
+      {% if page.original %}
+        <p><em><strong>NOTA:</strong> Este artículo es una traducción manual de <a href="{{ page.original }}" target="_blank">este otro artículo</a>.</em></p>
+      {% endif %}
+
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <!-- Kotlin posts -->
         <ins class="adsbygoogle"

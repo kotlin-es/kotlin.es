@@ -1,0 +1,85 @@
+---
+layout: post
+title:  "Hoja de ruta posterior a la 1.0"
+date:   2016-04-17 08:00:00 +0100
+category: articulos
+tags: roadmap
+author: soywiz
+edit: /_posts/articles/2016-04-17-post-1.0-roadmap.markdown
+original: https://blog.jetbrains.com/kotlin/2016/04/kotlin-post-1-0-roadmap/
+permalink: /2016/04/post-1.0-roadmap/
+---
+
+Ya han pasado casi dos meses desde que liberásemos Kotlin 1.0, y nuestro equipo está empezando a pasar de la fase de estabilización y corrección de fallos a implementar nuevas características. Así que es un momento estupendo para hablar sobre nuestros planes de futuro.
+
+Ya habíamos publicado nuestra hoja de ruta sobre Android, pero hay otras muchas áreas donde estamos invirtiendo esfuerzo. Nuestro desarrollo actual está organizado en dos ramas principales:
+
+* **Kotlin 1.0.x** que mantendrá una serie de versiones con correcciones de errores, con actualizaciones en las herramientas, y soporte del IDE así como otras áreas que no afectan al núcleo del lenguaje. Publicaremos versiones 1.0.x periódicamente cada varias semanas.
+* **Kotlin 1.1** contendrá características nuevas del lenguaje junto a todas las mejoras de la rama 1.0.x. Esta versión estará enfocada en características nuevas, y de momento no vamos a concretar fechas sobre ellla.
+
+Y ahora, echemos un ojo a los planes que tenemos en más detalle, empezando por los más gordos:
+
+## Nuevas características del lenguaje
+
+Antes de empezar a hablar sobre características específicas, vamos a avisar de antemano: todo lo que escribamos aquí está todavía en fase de diseño, y puede cambiar dramáticamente o descartarse completamente conforme avancemos con el diseño, la implementación y con la retroalimentación que obtengamos en el proceso.
+
+Así que, antes de nada: no hay nada seguro todavía.
+
+### async/await/yield
+
+La característica más importante que estamos diseñando ahora mismo es el soporte para corrutinas (async/await/yield). El patrón async/await se ha ido incorporando a diferentes lenguajes, incluyendo C#, Python y Dart, y también lo queremos incluir en Kotlin. Pero eso no es todo: queremos poner la semática de ejecución de código en la librería en vez de en el compilador.
+
+El compilador se encargará de transformar las funciones usadas como corrutinas en una forma que permitirá suspender y retomar su ejecución. La ejecución en sí de las corrutinas (la invocación inicial, así como el retomar la ejecución tras un punto de suspensión) será responsabilidad de la librería de soporte. De dicha forma, el mismo mecanismo nos permitirá soportar muchos patrones diferentes: generadores (yield), funciones ejecutadas asíncronamente (async/await), canales como los de Go y gorrutinas, y potencialmente otros mecanismos que no se hayan inventado todavía.
+
+Nótese que todavía estamos en proceso de estimar el esfuerzo necesario para implementar esta característica y no sabemos si será razonable o no soportarla en la 1.1 o si la postpondremos a una versión posterior.
+
+### Otras características del lenguaje
+
+Hemos recibido un montón de sugerencias y comentarios tras Kotlin 1.0, y nos ha puesto muy contentos que muchas de las peticiones eran sobre las mismas características. Hemos elegido las que salían más amenudo y las hemos priorizado para Kotlin 1.1. Y las que estamos más seguros son:
+
+* Sobre la **jerarquía de data classes**: reduciremos las restricciones sobre la herencia, por ejemplo, permitiremos representar tipos de datos algebraicos como una serie de data classes anidados en una clase sellada:
+{% highlight java %}
+sealed class C {
+    data class A(val x: X, val y: Y) : C() { ... }
+}
+{% endhighlight %}
+* Los **alias de tipo**, permitirán asignar nombres cortos a ciertos tipos (por ejemplo, un tipo de función, o un tipo genérico con una firma muy larga):
+`typealias MouseEventHandler = (MouseEvent) -> Unit`
+* La **destructuración en lambdas** (*Lambda destructuring*) permitirá desempaquetar fácilmente una instancia de una *data class* u otro objeto soportando el protocolo de destructuración cuando se pasa como parámetro a una lambda:
+`myMap.forEach { (key, value) -> println(key+value) }``
+* Las **referencias de método ligadas** (*Bound method references*) permitirán crear una referencia a un método qe invoque a un método con una instancia específica sin requerir pasarlo como parámetro:
+`letters.filter("abc"::contains)``
+* Las **propiedades locales delegadas** (Local delegated properties) permitirán definir una variable local como una propiedad delegada:
+`fun foo() { val x by lazy { … } }``
+
+
+## Soporte para Java 8/9
+
+La versión 1.0 de Kotlin, targetea únicamente a Java 6. Esto significa que el bytecode generado no hace uso de ninguna de las características incluídas en Java 7 u 8, y la librería estándar expone únicamente APIs que existían ya en Java 6.
+
+Sobre el curso de las versiones 1.0.x y la 1.1 y posteriores, tenemos planteado eliminar dichas restricciones y permitirte elegir la versión de la JVM a la que quieres targetear. Vamos a seguir soportando Java 6, pero si eliges targetear a Java 8, haremos uso de eso. La librería estándar te permitirá usar las APIs de nuevas de Java 8, como la API de *streams*, y el compilador usará las nuevas características del bytecode, como el soporte para los métodos por defecto en interfaces. También tenemos pensado soportar el Project Jigsaw (el sistema de módulos del JDK 9) para cuando se libere el JDK 9.
+
+## Soporte para JavaScript
+
+Cuando empezamos a finalizar la versión 1.0, decidimos pausar el soporte para JavaScript y enfocarnos en la JVM como la plataforma principal soportada. Ahora que la 1.0 ha salido, hemos retomado nuestro trabajo con JS, y nos hemos puesto una meta para permitir escribir la lógica de negocio de tu aplicación una única vez y ejecutarla tanto en el servidor como en el navegador del usuario.
+
+Nuestra prioridad a corto plazo son completar las características que faltan del lenguaje y mejorar la integración con la infrastructura general de JavaScript (empezando con soportar los sistemas de módulos de JS).
+También tenemos planeado aprovechar la enorme cantidad de definiciones de API fuertemente tipadas para la mayor parte de librerías de JS que ha ido acumulando la comunidad de TypeScript. Proporcionaremos una herramienta para convertir dichas definiciones en código Kotlin, permitiendo usar las librerías desde Kotlin con un API completamente tipada invirtiendo muy poco esfuerzo en integración.
+
+## Características del IDE
+
+En lo que respecta al IDE, nuestras prioridades actuales son las siguientes:
+
+* **Soporte de frameworks**: Tenemos intención de extender el nivel incomparable de soporte para frameworks Java para empresas que ofrecemos con IntelliJ IDEA Ultimate para que funcione igual de bien con Kotlin.
+Esto será un proceso gradual que ocurrirá en paralelo dentro de IntelliJ IDEA y dentro del plugin de Kotlin; el primer bloque de soporte para Spring ya está disponible en Kotlin 1.0.2 EAP.
+* ***Intentions* y *Quickfixes***: Para nosotros, uno de los roles principal del IDE es enseñar cómo usar el lenguaje bien y ayudarte a recuperarte rápido tras un error, proporcionando mejoras en el código, sugerencias y *quickfixes* automáticos. Kotlin 1.0 ya contiene un buen conjunto de herramientas en esta dirección, y vamos a expandirlas en las actualizaciones 1.0.x y 1.1.
+Como ejemplo, estamos haciendo erramientas para convertir bucles escritos de forma imperativa en código funcional usando funciones como map y filter.
+* **Otras mejoras**: nuestra hoja de ruta se incluyen nuevas refactorizaciones como permitir hacer *inlining* de métodos, un formateador más robusto y flexible, soporte de diagramas para código Kotlin, entre otras cosas.
+
+## Otras mejoras de herramientas
+
+En el post sobre la hoja de ruta de Android, mencionamos algunas de las mejoras que tenemos intención de hacer en nuestras herramientas, como la compilación incremental con Gradle, y el soporte de los *Lint checks* de Android. Ambas características ya están disponibles en Kotlin 1.0.2 EAP, y se mejorarán más adelante.
+
+## Resumiendo
+
+Como podéis ver, se acercan un montón de cosas emocionantes, y hay un montón de oportunidades para que os involucréis. Pasaros por nuestro [chat de Slack](http://kotlinslackin.herokuapp.com/), probad nuestras [versiones EAP](https://discuss.kotlinlang.org/c/eap), [informad sobre problemas](http://youtrack.jetbrains.com/issues/KT) - el futuro de Kotlin depende de vosotros, nuestros usuarios, y siempre esamos encantados de escuchar lo que tengáis que decirnos.
