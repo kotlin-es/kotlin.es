@@ -23,7 +23,7 @@ layout: page
           {% if post.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name"><a href="{{ postAuthorInfo.web }}" target="_blank">{{ postAuthorInfo.name }}</a></span></span>{% endif %}
         </div>
         <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 160 }}</p>
-          <a href="{{ post.url | prepend: site.baseurl }}" class="btn btn-primary read-more-link">Leer más</a>
+          <a href="{{ post.url | prepend: site.baseurl }}" class="btn btn-primary read-more-link">Leer más</a> - <a href="{{ post.url | prepend: site.baseurl }}#disqus_thread">0 Comentarios</a>
           </div>
       </div>
     {% endfor %}
