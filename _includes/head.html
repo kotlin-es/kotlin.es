@@ -57,4 +57,12 @@
     ga('send', 'pageview');
 
     </script>
+
+    <script>
+    var disqus_config = function () {
+      this.language = "es";
+      this.page.url = "{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}"; // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    </script>
 </head>
