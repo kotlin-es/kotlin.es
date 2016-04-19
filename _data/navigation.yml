@@ -1,26 +1,37 @@
 # Site navigation links
 
 - title: Inicio
+  external: false
   url: /
   class: glyphicon glyphicon-home
   fixed: false
 
 - title: Artículos
+  external: false
   url: /articles/
   class: fa fa-file-text-o
   fixed: false
 
+- title: Disqus
+  external: true
+  url: https://disqus.com/home/channel/kotlines/
+  class: fa fa-comment
+  fixed: false
+
 - title: Releases
+  external: false
   url: /releases/
   class: fa fa-code-fork
   fixed: false
 
 - title: Roadmap
+  external: false
   url: /roadmap/
   class: glyphicon glyphicon-time
   fixed: false
 
 - title: Eventos
+  external: false
   url: /eventos/
   class: glyphicon glyphicon-calendar
   fixed: false

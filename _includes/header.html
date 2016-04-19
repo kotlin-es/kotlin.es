@@ -29,10 +29,17 @@
                     <img class="nav-logo" src="/images/kotlin.svg" width="32" height="32" />
                         {% for my_page in site.data.navigation %}
                         {% if my_page.fixed == true %}
+                            {% if my_page.external == true %}
+                            <a href="{{ my_page.url }}" target="_blank" class="navbar-brand">
+                                <span class="{{ my_page.class }}"></span>
+                                {{ my_page.title }}
+                            </a>
+                            {% else %}
                             <a href="{{ my_page.url | prepend: site.baseurl }}" class="navbar-brand">
                                 <span class="{{ my_page.class }}"></span>
                                 {{ my_page.title }}
                             </a>
+                            {% endif %}
                         {% endif %}
                         {% endfor %}
                 </div>
