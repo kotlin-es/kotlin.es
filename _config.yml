@@ -14,6 +14,7 @@ url: "http://kotlin.es" # the base hostname & protocol for your site
 twitter_username: kotlin-es
 github_username:  kotlin-es
 facebook_username: kotlin.es
+last_kotlin_version: 1.0.3
 
 # Build settings
 markdown: kramdown

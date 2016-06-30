@@ -1,0 +1,68 @@
+---
+layout: post
+title:  "Kotlin 1.0.3"
+category: releases
+tags: releases
+author: soywiz
+edit: /_posts/releases/2016-06-30-1.0.3.markdown
+permalink: /2016/06/kotlin-1.0.3/
+original: https://blog.jetbrains.com/kotlin/2016/06/kotlin-1-0-3-is-here/
+icon: /images/1.0.3/icon.svg
+---
+
+Estamos encantados de presentar **Kotlin 1.0.3**. Esta actualización no está repleta de funcionalidades nuevas y molonas, y va más sobre corrección de bugs, y mejoras de rendimiento y en las herramientas.
+Y os va a encantar 😉. Echad un vistazo a la [lista completa de cambios](https://github.com/JetBrains/kotlin/blob/1.0.3/ChangeLog.md) y a las estadísticas de tareas resueltas por subsistema:
+
+![Kotlin 1.0.3. Fixed issues](/images/1.0.3/Pasted-image-at-2016_06_28-07_25-PM.png)
+
+Queremos agradecer especialmente a la gente que ha contribuido con commits a la 1.0.3, concretamente [Yaroslav Ulanovych](https://github.com/yarulan), [Jake Wharton](https://github.com/JakeWharton) y [Kirill Rakhman](https://github.com/cypressious).
+Kirill ha hecho más de una decena de mejoras al formateador y ha hecho más de 20 commits — gran trabajo, Kirill, estamos muy agradecidos.
+Y también nos gustaría agradecer a todos los usuarios de las EAP que han probado y proporcionado su invaluable feedback para las versiones preeliminares
+de la 1.0.3.
+
+Aunque esta actualización no sea muy rica en características nuevas, hay muchas mejoras impotantes y características que valen la pena destacar aquí:
+
+## ¿Qué hay de nuevo en el compilador?
+
+* Hay una nueva opción `-jdk-home` para especificar el JDK contra el que se va a compilar el código.
+* Hemos añadido la posibilidad de especificar la versión del lenguaje de Kotlin (`-language-version`) y para al versión de la JVM (`-jvm-target`) (que tendrán efecto a partir de la 1.1, pero que hemos añadido ya para tener compatibilidad hacia adelante)
+* Bytecode más eficiente (ya no se usa iterator en los bucles sobre índices (array.`indices`), y evitamos operaciones innecesarias con `Unit`)
+* Hemos hecho varias mejoras en los mensajes de diagnóstico
+
+## ¿Qué novedades incluye el IDE?
+
+* Sugerimos automáticamente convertir automáticamente de Java a Kotlin a partir de código Java a partir de fuentes externas al IDE como navegadores y otras fuentes
+
+![](/images/1.0.3/copypaste.gif)
+
+* Inyección de lenguajes en cadenas anotado con `@Language`. También las inyecciones predefinidas de Java aplican a código Kotlin. Leed más sobre [inyecciones de lenguajes en la documentación](https://www.jetbrains.com/help/idea/2016.1/using-language-injections.html). 
+
+![](/images/1.0.3/inject.gif)
+
+* El completado ahora muestra clases y métodos no importados y añade los *imports* automáticamente al seleccionarse. 
+
+![](/images/1.0.3/import-1.gif)
+
+* El autocompletado inteligente (*smart completion*) ya funciona detrás de los operadores `by` e `in`.
+
+![](/images/1.0.3/smart.gif)
+
+* La acción de mover elemento de izquierda/derecha ya funciona en Kotlin.
+
+![](/images/1.0.3/move.gif)
+
+* El botón de decompilar ya está disponible en la ventana de herramientas de bytecode de Kotlin y para los archivos .class compilados con Kotlin,
+
+![](/images/1.0.3/decompile.png)
+
+* Ahora puedas navegar desde una *stacktrace* al lugar de la llamada en una función *inline*. 
+* Inspecciones e intenciones para verificar y ajustar la configuración de Kotlin en los archivos `pom.xml`
+* Diversas mejoras para el soporte de Spring
+
+## Cómo actualizar
+
+Para actualizar el plugin, utilizad `Tools | Kotlin | Configure Kotlin Plugin Updates` y pulsad el botón `Check for updates now`. Y no olvidéis de actualizar la versión del compilador y la librería estándar en vuestro Maven y scripts de Gradle.
+
+Como de costumbre, si tenéis cualquier problema con la nueva versión, estaremos encantados de ayudaros en nuestros foros, en Slack ([invitación aquí](http://kotlinslackin.herokuapp.com/)) o a reportar problemas en nuestro [gestor de incidencias](https://youtrack.jetbrains.com/issues/KT).
+
+¡Kotlineemos! :)
