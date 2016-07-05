@@ -1,0 +1,96 @@
+---
+layout: post
+title:  "Cómo probar la EAP de Kotlin 1.1 + Versiones GIT"
+category: blog
+tags: repositorio, plugin, eap, configuración
+author: soywiz
+edit: /_posts/extra/2016-07-05-probar-1.1.markdown
+permalink: 2016/07/probar-1.1/
+---
+
+Kotlin 1.1 va a traer novedades muy interesantes, y ya se está preparando la primera **EAP** (*Early Access Preview*):
+Desde tipos alias *typealias*, pasando por *Bound callable references*, sealed classes en el mismo archivo, data classes pudiendo heredar, locales delegadas y las tan deseadas corrutinas (await/async, generadores, etc.).
+
+Podéis ver la lista completa de cambios para el primer milestone aquí:
+[Kotlin 1.1-M01 (EAP-1)](https://github.com/JetBrains/kotlin/blob/3b290ce3ddc034e3070bf1682015351fdf64f610/ChangeLog.md) 
+
+¿Tenéis ganas de probarlo? Yo tenía muchas ganas. Así que he preparado una pequeña guía sobre cómo probar esta versión (y cómo depurar Kotlin).
+Y prepararé un pequeño vídeo enseñando las novedades.
+
+## Versión corta:
+
+### Versión de desarrollo de la 1.1:
+
+* Accedemos a `File | Settings | Plugins | Browse Repositories... | Manage Repositories... | +`
+* Añadimos [https://teamcity.jetbrains.com/guestAuth/repository/download/bt345/bootstrap.tcbuildtag/updatePlugins.xml](https://teamcity.jetbrains.com/guestAuth/repository/download/bt345/bootstrap.tcbuildtag/updatePlugins.xml
+) (esta URL está disponible en el [README.md de Kotlin](https://github.com/JetBrains/kotlin/blob/master/ReadMe.md))
+* Accedemos a `Tools | Kotlin | Configure Kotlin Plugin Updates | Check for Updates Now`
+
+Para desinstalar la versión de prueba y volver a una anterior, basta con elimintar el repositorio de teamcity y buscar actualizaciones de Kotlin de nuevo.
+
+### Probar versión de Git:
+
+**Prerequisitos:**
+
+* Primero e importante o si no no funcionará, tenemos que instalar la última versión de desarrollo disponible en el repositorio de teamcity especificado en la sección anterior.
+* Obviamente también tenemos que descargarnos el [repositorio git de Kotlin](https://github.com/JetBrains/kotlin).
+* Tenemos que tener ANT 1.8 o superior en el path y el JDK instalado
+
+**Preparación:**
+
+Nota: Esto llevará un buen rato.
+
+* Ejecutar: `ant -f update_dependencies.xml`  
+* Ejecutar: `ant -f build.xml`
+
+A partir de este momento ya deberíamos poder abrir con intelliJ (la community edition es suficiente) el proyecto.
+
+* Tenemos que tener el JDK 1.6 configurado (o el 1.8 renombrado como 1.6)
+* Tenemos que añadir la SDK el archivo `tools.jar` que está disponible en la carpeta del `$JDK/lib/tools.jar`.
+
+El proyecto incluye unas Run Configurations predefinidas. Una de ellas es IDEA donde al ejecutar podremos probar el
+IDE entero a la vez que colocamos puntos de interrupción.
+
+Es importante saber que con este proceso podremos probar el IDE, autocompletado sintaxis, pero que el proceso de compilación
+se ejecuta en un servicio a parte (está el plugin jps y el daemon de Kotlin). Para probar cosas de la compilación,
+[debemos seguir la siguiente guía](http://www.jetbrains.org/intellij/sdk/docs/reference_guide/frameworks_and_external_apis/external_builder_api.html#debugging-a-plugin-for-external-builder). 
+
+## Versión detallada:
+
+### Versión de desarrollo de la 1.1:
+
+Accedemos a `File | Settings`
+
+![](/images/probar-1.1/settings.png)
+
+Accedemos a `Plugins`
+
+![](/images/probar-1.1/plugins_kotlin.png)
+
+Pulsamos sobre `Browse Repositories...`
+
+![](/images/probar-1.1/browse_repositories.png)
+
+Luego sobre `Manage repositories...`
+![](/images/probar-1.1/pre_manage_repositories.png)
+
+Luego con el botón `+` añadimos la URL: [https://teamcity.jetbrains.com/guestAuth/repository/download/bt345/bootstrap.tcbuildtag/updatePlugins.xml](https://teamcity.jetbrains.com/guestAuth/repository/download/bt345/bootstrap.tcbuildtag/updatePlugins.xml
+) (esta URL está disponible en el [README.md de Kotlin](https://github.com/JetBrains/kotlin/blob/master/ReadMe.md))
+
+![](/images/probar-1.1/manage_repositories.png)
+
+En el menú principal accedemos a `Tools | Kotlin | Configure Kotlin Plugin Updates`
+
+![](/images/probar-1.1/configure_kotlin_plugin_updates.png)
+
+Tras darle a `Check for updates now`, con el repositorio de teamcity añadido, nos debería salir la versión 1.1.0-dev-1436 (cuando se ha escrito este artículo).
+Si queremos desinstalar la versión, basta con quitar el repositorio de plugins de teamcity.
+
+![](/images/probar-1.1/eap_1.1.png)
+
+### Probar versión de Git:
+
+**Nota:** Para probar/depurar la versión de Git, es importante que tengamos instalado el plugin de la última versión de desarrollo porque en ocasiones utilizan
+características que no están disponibles todavía. Concretamente en este momento están utilizando herencia de sealed classes en el mismo archivo que solo está disponible en la 1.1,
+con lo que si no estamos en la versión 1.1 de desarrollo, no podremos depurar la versión de git.
+
