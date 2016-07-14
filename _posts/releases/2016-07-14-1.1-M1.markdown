@@ -1,0 +1,183 @@
+---
+layout: post
+title: "Kotlin 1.1-M1: Primer acercamiento a la 1.1: Corrutinas, alias de tipos y más"
+category: releases
+tags: releases
+author: soywiz
+edit: /_posts/releases/2016-07-14-1.1-M1.markdown
+permalink: /2016/07/kotlin-1.1-M1/
+original: https://blog.jetbrains.com/kotlin/2016/07/first-glimpse-of-kotlin-1-1-coroutines-type-aliases-and-more/
+icon: /images/1.1-M1/icon.svg
+---
+
+Mientras que las versiones de Kotlin 1.0.X traen mejoras incrementales y características para el tooling, estamos trabajando en nuevas características en Kotlin 1.1.
+Hoy presentamos nuestra primera versión preeliminar de la 1.1, que se puede considerar muy preeliminar, pero los intrépidos y los curiosos pueden empezar a jugar
+con las nuevas características emocionantes que trae (y con suerte retroalimentarnos con feedback muy valioso).
+
+## Compatibilidad
+
+Esta no es una versión estable de Kotlin, y **no damos ningún tipo de garantías sobre la compatibilidad**: ni en futuras previews de la 1.1, ni sobre la sintaxis,
+ni las APIs, ni los switches de los comandos, ni ninguna otra cosa. Todo puede cambiar. Si necesitáis una versión estable de Kotlin, por favor, permaneced
+en la 1.0.X hasta próximos avisos.
+
+## Feedback
+
+La parte buena sobre esta falta de garantía temporal es que podemos hacer uso inmediato de todo el feedback que nos proporcionéis! La mejor forma de indicarnos vuestras opiniones es a través de [KEEP](https://github.com/Kotlin/KEEP): por favor, dejad vuestros comentarios en las tareas asociadas a las propuestas mencionadas abajo.
+Las implementaciones en Kotlin 1.1 M01 son prototipos de las funcionalidades descritas en los *KEEPs*.
+
+## Overview
+
+El changelog completo para la 1.1 M01 está disponible [aquí](https://github.com/JetBrains/kotlin/blob/1.1-M1/ChangeLog.md#11-m01-eap-1).
+
+## Corrutinas
+
+Todos sabemos que bloquear es malo bajo una carga alta, que hacer *polling* no tiene sentido y que el mundo está dirigiéndose más hacia un planteamiento push y asíncrono. Diversos lenguajes (empezando con C# en 2012) soportan programación ascríncrona a través de una construcción dedicada del lenguaje como las palabras clave reservadas `async`/`await`. En Kotlin, hemos generalizado este concepto de forma que las librerías pueden definir sus propias versiones de dichas construcciones, y `async` no es una palabra clave reservada, sino una función normal y corriente.
+
+Este diseño admite la integración de diferentes APIs asíncronas: futures/promesas, paso de callbacks, etc. Y es lo suficiente general para expresar generadores vagos (`yield`) y cubrir otro tipo de casos.
+
+Así que, os presentamos una de las características más relevantes de Kotlin 1.1: las ***corrutinas***. En ciencias de la computación se conoce como "componetes de programa que generalizan las subrutinas para multitarea no preemtiva", pero no vamos a entrar aquí en teoría :)
+
+{% highlight kotlin %}
+fun main(args: Array<String>) {
+    val future = async<String> {
+        (1..5).map {
+            await(startLongAsyncOperation(it)) // se suspende mientras el método grande está en ejecución
+        }.joinToString("\n")
+    }
+
+    println(future.get())
+}
+{% endhighlight %}
+
+Lo bueno de las corrutinas es que se pueden ***suspender*** sin bloquear el hilo, y aún se parecen al código secuencial normal.
+Por favor, ved una [descripción detallada](https://github.com/Kotlin/kotlin-coroutines/blob/master/kotlin-coroutines-informal.md)
+y ejemplos en el repositorio [KEEP](https://github.com/Kotlin/kotlin-coroutines) dedicado y [poned ahí el feedback](https://github.com/Kotlin/kotlin-coroutines/issues).
+
+Estamos prototipando librerías basadas en corrutinas aquí, para incluirlas posteriormente en la librería estándar. Esto incluye
+`CompletableFuture` del JDK, IO asíncrono de NIO, RxJava y liberando tareas del hilo de la UI en Swing. Este repo contiene, ademeás de las librerías, ejemplos.
+Para experimentar con ello, seguid las instrucciones en el [archivo readme](https://github.com/Kotlin/kotlinx.coroutines/blob/master/README.md).
+
+## Alias de tipos (Type aliases)
+
+En Kotlin 1.1 podemos escribir:
+
+{% highlight kotlin %}
+typealias Action<T> = (T) -> Unit
+{% endhighlight %}
+
+Esto significa que podemos usar indistintamente `Action<T>` y `(T) -> Unit`: de forma que es un **alias** verdadero. Los alias de tipo son muy útiles para abreviar
+tipos que se usan en varios lugares del código:
+
+* Tipos de función con firmas complejas: `UserAction = (User, Context) -> ActionResponse`
+* Tipos genéricos complejos: `Multimap<K, V> = Map<K, List<V>>`
+
+Y anticipándonos a vuestras preguntas: esta característica no cubre los casos de uso donde los alias no se pueden asignar al tipo original(similar a newtype en Haskell). De forma que si implementamos unidades de medida, por ejemplo:
+
+{% highlight kotlin %}
+typealias Length = Double
+typealias Weight = Double
+{% endhighlight %}
+
+No será muy útil, porque `Length` se podrá asignar libremente a `Weight` y al revés. De hecho, ambos se pueden asignar a partir de un `Double` normal.
+Somos conscientes de la importancia de estos casos de uso, y tenemos planeado cubrirlos en un futuro, probablemente a través de clases valor, pero eso es otra historia. Por el momento solo tenemos alias de tipos.
+
+[Más información y comentarios aquí](https://github.com/Kotlin/KEEP/issues/4).
+
+## Bound callable references
+
+En Kotlin 1.0 se puede obtener una referencia a una función (o propiedad) de esta forma: `String::length`, por ejemplo usando un nombre de la clase que
+lo contiene. En 1.1 añadimos referencias ligadas (***bound references***): podemos escribir: `mystr::length` donde `mystr` es una variable
+(o cualquier otra expresión). Dicha referencia está vinculada a su receptor, y de esa manera son un caso especial de aplicación parcial de
+función (que no soportamos en su caso general, al menos por el momento).
+
+[Más información y comentarios aquí.](https://github.com/Kotlin/KEEP/issues/5)
+
+## Propiedades locales delegadas y propiedades inline
+
+Las propiedades delegadas han demostrado ser una abstracción muy útil, y ahora también las permitimos dentro de bloques de función/código., Por ejemplo, podemos escribir:
+
+{% highlight kotlin %}
+fun example(foo: (Bar) -> Foo, bar: Bar) {
+    val memoizedFoo by lazy { foo(bar) }
+
+    // Usar memoizedFoo en vez de foo para calcularlo una vez como mucho
+    if (someCondition && memoizedFoo.isValid()) {
+        memoizedFoo.doSomething()
+    }
+}
+{% endhighlight %}
+
+Tanto los DSLs como los scripts se beneficiarán de esta característica.
+
+[Más información y comentarios aquí.](https://github.com/Kotlin/KEEP/issues/25)
+
+También permitimos [hacer inlining en los accesores de propiedad](https://github.com/Kotlin/KEEP/issues/34) (property accessors).
+
+## Relajación de restricciones para clases selladas (sealed classes) y clases de datos (data clases)
+
+Hemos levantado algunas restricciones relacionadas con las clases de datos y las clases selladas.
+
+Ahora las clases de dato pueden heredar de otras clases. Nótese que los métodos generados automáticamente pueden sobreescribir los definidos en las superclases!
+
+En relación a las clases selladas hemos ampliado el ámbito en el que se pueden definir las subclases: antes únicamente se permitía dentro de la propia clase sellada. Ahroa se pueden poner en cualquier punto del mismo archivo.
+
+Más información y comentarios [aquí](https://github.com/Kotlin/KEEP/issues/29) y [aquí](https://github.com/Kotlin/KEEP/issues/31).
+
+## Scripting
+
+Como es posible que hayáis escuchado ya, pronto todos podremos escribir scripts de construcción de Gradle en Kotlin lo que mejorará considerablemente la mejora del IDE editando dichos scripts y los hará más confiables a través de tipado estático.
+Este proyecto nos ha motivado a trabaja más en el scripting de Kotlin en general: estamos trabajando en infraestructura para habilitar los scripts de Kotlin en diferentes herramientas, así como en la línea de comandos normal.
+
+[Más detalles en la propuesta.](https://github.com/Kotlin/KEEP/issues/28)
+
+## Soporte para Java 7/8
+
+Estamos trabajando en mejorar el soporte de Java 8. La 1.1 arregla los problemas con el API de Stream que solíamos tener (y los mitiga con una librería de soporte) y añade soporte para generar métodos por defecto en las interfaces de Kotlin, de forma que los clientes Java puedan implementarlos sin problemas.
+Lee y comenta aquí.
+
+Para habilitar la generación de archivos de clase para la versión 8, proporcionar el switch `-jvm-target 1.8` en la línea de comandos.
+
+También vamos a añadir más funciones a la librería estándar, y como hacen uso de APIs de java más recientes a la 1.6, introducimos nuevos artefactos:
+`kotlin-stdlib-jre7` y `kotlin-stdlib-jre8` que llevan funcionalidad extra como `AutoCloseable.use()`, soporte para nombres de grupo en las expresiones
+regulares y funciones relacionadas con streams. Usad estos artefactos en lugar de `kotlin-stdlib` en vuestras builds de Maven/Gradle si necesitáis las APIs que añaden.
+
+[Leer y discutir las propuestas relacionadas con la stdlib aquí.](https://github.com/Kotlin/KEEP/labels/stdlib)
+
+## JavaScript
+
+Estamos trabajando activamente en el backend de JavaScript: todas las características del lenguaje disponibles en la 1.0 están ya cubiertas,
+y estamos cerca de obtener el sistema de módulos de runtime de JavaScript integrado en toda la foto. Nótese que toda esta funcionalidad también
+está disponible en Kotlin 1.0.X.
+
+[Encuentra las propuestas relacionadas con JavaScript aquí.](https://github.com/Kotlin/KEEP/labels/JS)
+
+## Colaboradores
+
+Estamos muy agradecidos con los usuarios de GitHub:
+[dotlin](https://github.com/dotlin),
+[Valdemar0204](https://github.com/Valdemar0204),
+[ensirius](https://github.com/ensirius)
+y
+[geoand](https://github.com/geoand)
+por sus contribuciones a esta versión!
+
+## Cómo probarlo
+
+**En Maven/Gradle**. Añadid [https://bintray.com/kotlin/kotlin-eap-1.1](https://bintray.com/kotlin/kotlin-eap-1.1)
+(ver las instrucciones bajo ***“Set me up!”***) como un repositorio a vuestro proyecto. Y usad la versión 1.1-M01 en vuestros artefactos de Kotlin.
+
+**En el IDE**. Si estáis ejecutando Kotlin 1.0.3, id a ***Tools → Kotlin → Configure Kotlin Plugin Updates***, y seleccionad “Early Access Preview 1.1”
+en el ***Update channel*** en la lista desplegable:
+
+![](/images/1.1-M1/Configure-Plugin-Updates.png)
+
+Press Check for updates in the same dialog, and, when the new version is show, Install.
+
+En try.kotlinlang.org.
+Usad el desplegable de la esquina inferior derecha para cambiar la versión del compilador:
+
+![](/images/1.1-M1/Screen-Shot-2016-07-14-at-20.23.48.png)
+
+Como siempre, todo vuestro feedback es muy bien recibido.
+
+**¡Que tengáis un buen Kotlin!**
