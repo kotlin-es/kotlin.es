@@ -173,7 +173,7 @@ en el ***Update channel*** en la lista desplegable:
 
 Press Check for updates in the same dialog, and, when the new version is show, Install.
 
-En try.kotlinlang.org.
+En [try.kotlinlang.org](http://try.kotlinlang.org/).
 Usad el desplegable de la esquina inferior derecha para cambiar la versión del compilador:
 
 ![](/images/1.1-M1/Screen-Shot-2016-07-14-at-20.23.48.png)
