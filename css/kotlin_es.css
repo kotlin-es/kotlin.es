@@ -179,6 +179,10 @@ a.post-link {
     overflow: hidden;
 }
 
+.post-content img {
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+}
+
 .highlight { background: #fff; }
 .highlight.highlighter-rouge { background: #eef; }
 
