@@ -9,14 +9,14 @@
             <!--
             <input type="text" name="q" id="q" placeholder="Búsqueda" autofocus />
             -->
-            <input type="text" name="q" id="q" placeholder="Búsqueda" />
+            <input type="text" name="q" id="q" placeholder="Búsqueda" style="width:calc(100% - 106px);padding:2px 4px;" />
             <script type="text/javascript">
                 var results = /q=(.*)/.exec(document.location.search);
                 if (results && results[1]) {
                     document.getElementById('q').value = results[1];
                 }
             </script>
-            <input type="submit" value="Buscar" />
+            <input type="submit" value="Buscar" style="width:100px;" />
         </form>
     </div>
 

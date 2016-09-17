@@ -9,6 +9,8 @@ layout: page
 
   <h1 class="page-heading">Posts</h1>
 
+  {% include pagination.html %}
+
   <div class="row post-list">
     {% for post in paginator.posts %}
     <div class="post-list-entry col-xs-12 col-md-6">
@@ -32,32 +34,6 @@ layout: page
     {% endfor %}
   </div>
 
-  <nav aria-label="Page navigation">
-  <ul class="pagination">
-    <li>
-      {% if paginator.previous_page %}
-      <a href="{{ paginator.previous_page_path }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-      {% else %}
-      <span aria-hidden="true" style="background:#fcfcfc;color:#777;">&laquo;</span>
-      {% endif %}
-    </li>
-    {% for page in (1 .. paginator.total_pages) %}
-      {% if page == paginator.page %}
-        <li><span aria-hidden="true" style="background:#f7f7f7;color:#333;">{{ page }}</span></li>
-      {% elsif page == 1 %}
-        <li><a href="/">{{ page }}</a></li>
-      {% else %}
-        <li><a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a></li>
-      {% endif %}
-    {% endfor %}
-    <li>
-      {% if paginator.next_page %}
-      <a href="{{ paginator.next_page_path }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-      {% else %}
-      <span aria-hidden="true" style="background:#fcfcfc;color:#777;">&raquo;</span>
-      {% endif %}
-    </li>
-  </ul>
-</nav>
+  {% include pagination.html %}
 
 </div>
