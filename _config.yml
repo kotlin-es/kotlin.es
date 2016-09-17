@@ -25,6 +25,13 @@ gems:
 - jekyll-redirect-from
 - jekyll-sitemap
 - jekyll-feed
+- jekyll-paginate
+
+permalink: /:year/:month/:title/
+
+paginate: 6
+paginate_path: "/page/:num/"
+
 
 # sudo gem install jekyll-mentions jemoji jekyll-redirect-from jekyll-sitemap jekyll-feed
 
