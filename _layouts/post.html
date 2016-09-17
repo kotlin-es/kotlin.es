@@ -47,7 +47,9 @@ layout: twocolumn
         <h3></h3>
         {% if page.icon%}<img src="{{ page.icon }}" class="post-entry-icon" />{% endif %}
 
-        {{ content }}
+        <div class="post-actual-content">
+            {{ content }}
+        </div>
     </div>
 
     {% if page.path %}

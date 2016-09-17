@@ -138,8 +138,17 @@ div.post-content td, div.post-content th {
 .post-list-entry-content {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     padding: 10px 12px;
-    height: 250px;
     overflow: hidden;
+}
+
+@media (min-width: 992px) {
+    .post-list-entry-content {
+        height: 250px;
+    }
+}
+
+.post-list-entry-content h2 {
+    font-size: 1.4em;
 }
 
 .post-list-entry-info {
@@ -179,7 +188,7 @@ a.post-link {
     overflow: hidden;
 }
 
-.post-content img {
+.post-actual-content img {
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
 }
 
