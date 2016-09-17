@@ -3,6 +3,7 @@ layout: post
 title:  "Hoja de ruta posterior a la 1.0"
 date:   2016-04-17 08:00:00 +0100
 category: articulos
+icon: /images/icons/next.svg
 tags: roadmap
 author: soywiz
 edit: /_posts/articles/2016-04-17-post-1.0-roadmap.markdown
