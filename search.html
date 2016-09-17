@@ -4,6 +4,21 @@ title: Búsqueda
 permalink: /search/
 ---
 
+<form action="/search" method="get">
+    <input type="text" name="q" id="q" placeholder="Búsqueda" autofocus style="width:calc(100% - 106px);padding:2px 4px;" />
+    <script type="text/javascript">
+        var results = /q=(.*)/.exec(document.location.search);
+        if (results && results[1]) {
+            var q = document.getElementById('q'); 
+            q.value = results[1];
+            {% if page.url == '/search/' %}
+                q.select();
+            {% endif %}
+        }
+    </script>
+    <input type="submit" value="Buscar" style="width:100px;" />
+</form>
+
 <script>
   (function() {
     var cx = '001447907640164080602:dqart81d7ug';

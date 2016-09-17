@@ -4,11 +4,9 @@
 -->
 
 <aside>
+    {% if page.path != 'search.html' %}
     <div class="well">
         <form action="/search" method="get">
-            <!--
-            <input type="text" name="q" id="q" placeholder="Búsqueda" autofocus />
-            -->
             <input type="text" name="q" id="q" placeholder="Búsqueda" style="width:calc(100% - 106px);padding:2px 4px;" />
             <script type="text/javascript">
                 var results = /q=(.*)/.exec(document.location.search);
@@ -19,6 +17,7 @@
             <input type="submit" value="Buscar" style="width:100px;" />
         </form>
     </div>
+    {% endif %}
 
     <div class="well">
         <div>
