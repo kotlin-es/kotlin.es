@@ -5,6 +5,19 @@
 
 <aside>
     <div class="well">
+        <form action="/search" method="get">
+            <input type="text" name="q" id="q" placeholder="Búsqueda" autofocus />
+            <script type="text/javascript">
+                var results = /q=(.*)/.exec(document.location.search);
+                if (results && results[1]) {
+                    document.getElementById('q').value = results[1];
+                }
+            </script>
+            <input type="submit" value="Buscar" />
+        </form>
+    </div>
+
+    <div class="well">
         <div>
         <a href="https://kotlinlang.org/#get-kotlin" style="font-size:1.3em;">Última versión de kotlin</a> <span
             class="badge">{{ site.last_kotlin_version }}</span>
