@@ -1,0 +1,109 @@
+---
+layout: post
+title: "¡Kotlin 1.1-M02 ya está aquí!"
+category: releases
+tags: releases
+author: soywiz
+permalink: /2016/10/kotlin-1.1-M02/
+original: https://blog.jetbrains.com/kotlin/2016/10/kotlin-1-1-m02-is-here/
+icon: /images/1.1-M02/icon.svg
+---
+
+Nos complace anunciar el segundo hito de Kotlin 1.1.
+Esta versión trae una característica muy esperada: destructuración (destructuring)
+en lambdas, así como numerosas mejoras a las características introducidas en la 1.1-M1,
+incluyendo alias de tipos (type aliases), corrutinas (coroutines) y referencias vinculadas (bound references).
+Esta nueva versión también incluye todas las mejoras sobre el tooling introducidas en Kotlin 1.0.4
+y 1.0.5-eap-66, y es totalmente compatible con IntelliJ IDEA 2016.3 EAP y Android Studio 2.2.
+
+Como con Kotlin 1.1-M01, no garantizamos la compatibilidad hacia atrás para características
+del lenguaje y librerías.
+Cualquier cosa introducida en los hitos de la 1.1, está sujeto a cambio antes de la versión
+final de la 1.1.
+
+Y de nuevo: por favor, compartid vuestro feedback sobre las nuevas características del lenguaje
+o cualquier problema que tengáis con esta versión, via YouTrack, foros y Slack.
+
+El changelog completo para la 1.1-M02 está disponible aquí.
+
+## Destructuración de Lambdas
+
+Kotlin 1.0 soporta destructuración de declaraciones – una característica que permite
+"desempaquetar" un valor compuesto (como una clase de datos (data class)) y asignar
+sus componentes a diversas variables. Kotlin 1.1 extiende esto a los parámetros de
+las lambdas, permitiéndote desempaquetar una variable pasada a una lambda y acceder
+a sus componentes bajo diversos nombres. Por ejemplo, puedes usar esto para iterar
+sobre una lista de pares:
+
+```
+listOfPairs.map {
+    (a, b) -> a + b
+}
+```
+
+Encontraréis más detalles en el KEEP. Tened en cuenta que esta característica está
+implementada únicamnente en el backend de la JVM y que no incluye soporte para la
+destructuración anidada, ni la destructuración de argumentos pasados a funciones
+y constructores normales.
+
+## Librería estándar
+
+Kotlin 1.1-M02 añade nuevas APIs a la librería estándar:
+
+* Diferentes jerarquías AbstractCollection y AbstractMutableCollection para usar como
+clases base para implementar las nuevas clases de colección de Kotlin (KEEP-53);
+* Métodos de extensión `Map.toMap()` y `Map.toMutableMap()` para copiar mapas (KEEP-13)
+
+## Reflexión
+
+Se han añadido una cantidad importante de nuevas características a la librería de reflexión.
+Ahora podéis obtener información más útil de las instancias de KType y crear instancias
+personalizadas de KType, instrospeccionar modificadores en declaraciones, obtener las superclases
+o comprobar los subtipos, etc. Para ver qué hay de nuevo podéis echar un ojo al siguiente commit.
+
+## IDE
+
+El plugin de IntelliJ IDEA se ha extendido para soportar las nuevas características de la 1.1,
+con las nuevas refactorizaciones `Introduce type alias` y `Inline type alias`, como intenciones
+para crear un alias de tipo a partir de su uso, así como *quickfixes*  para aplicar destructuración
+de lambdas automáticamente.
+
+## Scripting
+
+A partir de esta versión, Kotlin soporta JSR-223 (el API de javax.script), permitiendo
+ejecutar scripts de Kotlin en tu aplicación y usar Kotlin como un lenguaje de scripting
+embebible. También continúa el trabajo requerido para soportar el scripting de Kotlin
+en los archivos de build de Gradle.
+
+## JavaScript
+
+El soporte de JavaScript 1.1-M02 se ha extendido para soportar alias de tipo y
+literales de clase (Foo::class).
+
+Además de eso, estamos trabajando para habilitar más APIs de Kotlin en proyectos
+multiplataforma. Con ese fin, hemos definido todas las clases de excepciones estándar
+al paquete de Kotlin. Cuando se targetea a la JVM, las excepciones de Kotlin se definen
+como alias de tipo sobre las correspondientes excepciones de Java, y en el backend de JS
+se proporciona una implementación completa. También proporcionamos una implementación completa
+de Kotlin de las clases de la librería estándar de las colecciones, que ahora se usan en los proyectos JS.
+(Kotlin en la JVM todavía usa las clases de colección estándar de Java).
+
+## Cómo probarlo
+
+En Maven/Gradle: Añadid http://dl.bintray.com/kotlin/kotlin-eap-1.1 como repositorio
+para el *build script* y vuestros proyectos; y usad 1.1-M02 como el número de versión
+para el compilador y la librería estándar.
+
+En IntelliJ IDEA: Id a *Tools* → *Kotlin* → *Configure Kotlin Plugin Updates*, y seleccionad
+“Early Access Preview 1.1” en el desplegable de *Update channel*, y pulsad *Check for updates*.
+
+En `try.kotlinlang.org`. Usad el desplegable de la esquina inferior derecha para cambiar
+la versión del compilador a la 1.1-M02.
+
+Con SDKMan. Ejecutad `sdk install kotlin 1.1-M02`.
+
+Si estáis usando la librería `kotlinx.coroutines` por favor usad la versión `0.1-alpha-2`,
+que es casi igual, pero está recompilada con el compilador 1.1-M02. Podéis seguir las actualizaciones
+en el archivo readme.
+
+¡Que tengáis un buen Kotlin!
