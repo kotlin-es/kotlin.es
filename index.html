@@ -7,6 +7,7 @@ layout: page
     {% include carousel.html %}
   {% endif %}
 
+  <div id="pagination_content">
   {% include pagination.html %}
 
   <div class="row post-list">
@@ -33,5 +34,20 @@ layout: page
   </div>
 
   {% include pagination.html %}
+  </div>
+
+<script type="text/javascript">
+  function updatePaginationLinks() {
+    $('#pagination_content .pagination a').click(function () {
+      history.pushState({}, "Kotlin.es", this.href);
+
+      $("#pagination_content").load(this.href + ' #pagination_content', function() {
+        updatePaginationLinks();
+      });
+      return false;
+    });
+  }
+  updatePaginationLinks();
+</script>
 
 </div>
