@@ -3,3 +3,5 @@
 /.jekyll-metadata/
 /.idea/
 /.jekyll-metadata
+
+*.lock

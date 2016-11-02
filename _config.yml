@@ -21,8 +21,8 @@ markdown: kramdown
 
 gems:
 #- jekyll-mentions
-- jemoji
-- jekyll-redirect-from
+#- jemoji
+#- jekyll-redirect-from
 - jekyll-paginate
 - jekyll-sitemap
 - jekyll-feed
