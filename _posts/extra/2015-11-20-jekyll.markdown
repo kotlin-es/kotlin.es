@@ -16,6 +16,6 @@ que se puede publicar en cualquier sitio incluyendo github.
 De hecho, github permite tener repositorios con jekyll directamente sin tener que subir el contenido generado.
 
 Si queréis **escribir o corregir** algo en kotlin.es basta con que hagáis **un fork y una PR** al repositorio del blog:
-[https://github.com/kotlin-es/kotlin-es.github.io](https://github.com/kotlin-es/kotlin-es.github.io)
+[https://github.com/kotlin-es/kotlin.es](https://github.com/kotlin-es/kotlin.es)
 
 Una vez mergeado, el blog se actualizará automáticamente.
