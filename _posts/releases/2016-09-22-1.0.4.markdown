@@ -1,0 +1,108 @@
+---
+layout: post
+title:  "Kotlin 1.0.4"
+category: releases
+tags: releases
+author: soywiz
+original: https://blog.jetbrains.com/kotlin/2016/09/kotlin-1-0-4-is-here/
+icon: /images/1.0.4/icon.svg
+---
+
+Nos complace anunciar la liberación de una nueva versión de Kotlin, la **1.0.4**, centrada en corrección de errores y mejoras de las herramientas.
+
+Nuevamente nos gustaría agradecer a nuestros colaboradores externos que han implementado alguna de las características de esta versión, [Kirill Rakhman](https://github.com/cypressious) y [Toshinori Isogai](https://github.com/shiraji), así como a todos los que han probado las versiones EAP de la 1.0.4 y nos han proporcionado feedback. 
+
+Podéis encontrar la lista completa de correcciones y mejoras en el [*changelog*](https://github.com/JetBrains/kotlin/blob/1.0.4/ChangeLog.md). Y algunos de esos cambios se merecen una mención especial:
+
+### Cambio del lenguaje: Asignación de `val` en `try/catch`
+
+En versiones previas a Kotlin 1.0.4, podíais inicializar el mismo `val` tanto en el `try` como en las ramas `catch`. Por ejemplo, el siguiente código era válido:
+
+{% highlight kotlin %}
+try {
+    x = 1
+}
+catch(e: Exception) {
+    x = 2
+}
+{% endhighlight %}
+
+Y eso implicaba que una variable final se podía asignar dos veces. Y era posible observar dos valores diferentes para la misma variable (por ejemplo, si el valor en la sentencia `try` se capturaba en una lambda). En Java, el código equivalente es inválido.
+
+Para mantener semánticas consistentes, el código que asigna el mismo `val` en ambios sitios: las ramas `try` y `catch` **pasan a ser una advertencia** en Kotlin 1.0.4 y se **convertirán en un error** en la versión 1.0.5. En la mayor parte de los casos, el código se puede arreglar fácilmente convirtiendo el código a expresión, y el IDE **ofrecerá un *quickfix*** para convertir este código automáticamente. El ejemplo de arriba puede convertirse a:
+
+{% highlight kotlin %}
+val x = try { 
+    1
+}
+catch(e: Exception) {
+    2
+}
+{% endhighlight %}
+
+### Nuevo procesado de anotaciones experimental
+
+Kotlin 1.0.4 incluye una nueva implementación experimental del api de procesado de anotaciones. Para habilitarlo, añadid lo siguiente a vuestro build.gradle:
+
+`apply plugin: 'kotlin-kapt'`
+
+También tendréis que **eliminar** el snippet que habilita el procesado antiguo de anotaciones:
+
+{% highlight kotlin %}
+kapt {
+    generateStubs = true
+}
+{% endhighlight %}
+
+El nuevo procesado de anotaciones todavía tiene problemas conocidos y puede no ser compatible con todos los procesadores de anotaciones. Deberíais habilitarlo solo si tenéis problemas con la implementación por defecto del procesado de anotaciones `kapt`.
+
+### Mejoras en el backend de JavaScript
+
+El backend de JavaScript ahora es capaz de compilar código a sistemas de módulos compatibles con AMD, CommonJS y UMD. Echad un vistazo a [la documentación](http://kotlinlang.org/docs/reference/js-modules.html).
+
+Además de eso, se soporta una forma limitada de reflexión: ahora podéis usar la propiedad `jsClass` para acceder la clase de cualquier objeto en runtime, y `jsClass<TypeName>()` para coger la representación en runtime de una clase específica. Aquí hay un ejemplo más completo:
+
+{% highlight kotlin %}
+class A
+class B
+class C
+ 
+inline fun <reified T> foo() {
+    println(jsClass<T>().name)
+}
+ 
+println(A().jsClass.name) // prints "A"
+println(jsClass<B>().name) // prints "B"
+foo<C>() // prints "C"
+{% endhighlight %}
+
+### Mejoras de compilador
+
+* Mejor inferencia de tipos para expresiones *callable*
+* Mejor eficiencia de bytecode en varios casos para expresiones `when` y `for`
+* Mejor recuperación de parseo tras errores sintácticos
+* Corregidos varios casos donde "el casteo nunca tiene éxito" que se informaba incorrectamente
+
+### Mejoras en las herramientas de construcción
+
+* Completamente compatible con Gradle 2.14 y posteriores
+* La compilación incremental de gradle ahora puede llevar la pista de cambios entre subproyectos.
+* Las builds de CLI (Command Line Interface) y Ant añaden la librería de reflexión de Kotlin al classpath por defecto; usad el *switch* `no-reflect` para deshabilitar.
+
+### Nuevas características en el IDE
+
+![](/images/1.0.4/KotlinEvaluate.png)
+
+* Ahora tenéisla opción de usar la sintaxis de Kotlin al evaluar expresiones y *watches* in los archivos Java
+* Nueva inspección para detectar "leaking `this`" - posibles problemas con NullPointerException causados por acceder a datos que no estaban completamente inicializados.
+* Intención para convertir una lambda en una referencia de función
+* Inspección para detectar discordancias entre la versión de Gradle y la versión del plugin de Kotlin
+* Otras muchas intenciones, inspecciones y quickfixes nuevos.
+
+### ¿Cómo actualizar?
+
+Para actualizar el plugin, usad Tools | Kotlin | Configure Kotlin Plugin Updates y pulsad el botón "Check for updates now". Y no olvidéis actualizar las veriones del compilador y la librería estándar en vuestros build scripts de Maven y Kotlin.
+
+Como de costumbre, si os encontráis con cualquier problema en esta nueva versión, os invitamos a pedir ayuda en nuestros [foros](https://discuss.kotlinlang.org/), en slack ([invitaciones automáticas aquí](http://kotlinslackin.herokuapp.com/)), o reportar problemas en el [*issue tracker*](https://youtrack.jetbrains.com/issues/KT).
+
+¡A Kotlinear!

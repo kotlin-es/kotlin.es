@@ -1,11 +1,9 @@
 ---
 layout: post
 title:  "Kotlin M11"
-date:   2015-03-19 00:00:00 +0100
 category: releases
 tags: releases
 author: soywiz
-edit: /_posts/releases/2015-03-19-m11.markdown
 permalink: "/2015/03/kotlin-m11/"
 ---
 

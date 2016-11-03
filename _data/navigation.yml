@@ -12,12 +12,6 @@
   class: fa fa-file-text-o
   fixed: false
 
-- title: Disqus
-  external: true
-  url: https://disqus.com/home/channel/kotlines/
-  class: fa fa-comment
-  fixed: false
-
 - title: Releases
   external: false
   url: /releases/
