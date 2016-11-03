@@ -4,7 +4,6 @@ title:  "Kotlin 1.0"
 category: releases
 tags: releases
 author: soywiz
-edit: /_posts/releases/2016-02-15-1.0.markdown
 permalink: /2016/02/kotlin-1-0/
 original: http://blog.jetbrains.com/kotlin/2016/02/kotlin-1-0-released-pragmatic-language-for-jvm-and-android/
 icon: /images/1.0/icon.svg

@@ -4,7 +4,6 @@ title:  "Cómo probar la EAP de Kotlin 1.1 + Versiones GIT"
 category: blog
 tags: repositorio, plugin, eap, configuración
 author: soywiz
-edit: /_posts/extra/2016-07-05-probar-1.1.markdown
 permalink: 2016/07/probar-1.1/
 icon: /images/beta/icon.svg
 ---

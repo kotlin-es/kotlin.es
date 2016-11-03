@@ -1,12 +1,10 @@
 ---
 layout: post
 title:  "GDG Mallorca TekTalk 4 - Kotlin para Android"
-date:   2015-11-22 13:00:00 +0100
 category: blog
 tags: charlas
 icon: /images/icons/gdg.png
 author: soywiz
-edit: /_posts/charlas/2015-11-22-gdc-mallorca-tektalk4-kotlin-android.markdown
 permalink: /2015/11/gdc-mallorca-tektalk4-kotlin-android/
 ---
 

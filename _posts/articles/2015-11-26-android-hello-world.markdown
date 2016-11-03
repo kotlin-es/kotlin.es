@@ -1,12 +1,10 @@
 ---
 layout: post
 title:  "Hello World - Android"
-date:   2015-11-26 08:00:00 +0100
 category: articulos
 tags: android, hello, world
 author: vicboma1
 icon: /images/icons/android/android.png
-edit: /_posts/articles/2015-11-26-android-hello-world.markdown
 permalink: /2015/11/android-hello-world/
 ---
 

@@ -1,12 +1,10 @@
 ---
 layout: post
 title:  "Karumi Talks: Scala vs Kotlin for Android by Javi Pacheco and Antonio Leiva"
-date:   2015-11-29 10:00:00 +0100
 category: blog
 tags: charlas
 icon: /images/icons/karumi.png
 author: soywiz
-edit: /_posts/charlas/2015-11-29-karumi-talks-scala-vs-kotlin.markdown
 permalink: /2015/11/karumi-talks-scala-vs-kotlin/
 ---
 

@@ -1,12 +1,10 @@
 ---
 layout: post
 title:  "Kotlin JavaScript"
-date:   2015-11-22 00:00:00 +0100
 category: articulos
 tags: javascript
 author: soywiz
 icon: /images/icons/js.png
-edit: /_posts/articles/2015-11-22-kotlinjs.markdown
 permalink: /2015/11/kotlinjs/
 ---
 

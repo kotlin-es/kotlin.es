@@ -1,12 +1,10 @@
 ---
 layout: post
 title:  "Tail Call Optimization"
-date:   2015-11-05 08:00:00 +0100
 category: articulos
 tags: recursive, tail, call, optimization
 author: vicboma1
 icon: /images/icons/tailcall.jpg
-edit: /_posts/articles/2015-11-05-tail-call-optimization.markdown
 permalink: /2015/11/tail-call-optimization/
 ---
 

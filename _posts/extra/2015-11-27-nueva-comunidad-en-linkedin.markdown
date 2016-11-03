@@ -1,12 +1,10 @@
 ---
 layout: post
 title:  "Nueva comunidad en LinkedIn"
-date:   2015-11-27 00:00:00 +0100
 category: articulos
 tags: linkedin, comunidad
 author: vicboma1
 icon: /images/icons/linkedin/linked_in.png
-edit: /_posts/articles/2015-11-27-nueva-comunidad-en-linkedin.markdown
 permalink: /2015/11/nueva-comunidad-en-linkedin/
 ---
 

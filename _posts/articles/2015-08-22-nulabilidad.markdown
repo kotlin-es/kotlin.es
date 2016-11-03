@@ -1,12 +1,10 @@
 ---
 layout: post
 title:  "Nulabilidad en #kotlin y #java"
-date:   2015-08-22 00:00:00 +0100
 category: articulos
 tags: nulabilidad
 author: soywiz
 icon: /images/icons/nullability.png
-edit: /_posts/articles/2015-08-22-nulabilidad.markdown
 permalink: "/2015/08/nulabilidad-en-kotlin-y-en-java/"
 ---
 

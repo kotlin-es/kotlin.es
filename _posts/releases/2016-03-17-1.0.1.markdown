@@ -4,7 +4,6 @@ title:  "Kotlin 1.0.1"
 category: releases
 tags: releases
 author: soywiz
-edit: /_posts/releases/2016-03-17-1.0.1.markdown
 permalink: /2016/03/kotlin-1.0.1/
 original: https://blog.jetbrains.com/kotlin/2016/03/kotlin-1-0-1-is-here/
 icon: /images/1.0.1/icon.svg
