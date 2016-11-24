@@ -10,6 +10,27 @@ author: soywiz
 
 En la siguiente tabla podemos ver las versiones que han ido saliendo y sus fechas de salida.
 
+## Versiones preeliminares de kotlin 1.1:
+
+|Milestone|Fecha de salida|Cambios|En español|
+|-----------|:-----------:|---|---|
+|           |  **2016**   |   |   |
+| 1.1-M03   | 24-11-2016 | [oficial en inglés](https://blog.jetbrains.com/kotlin/2016/11/kotlin-1-1-m03-is-here/)  | [kotlin.es](/2016/11/kotlin-1.1-M03/)  |
+| 1.1-M02   | 20-10-2016 | [oficial en inglés](https://blog.jetbrains.com/kotlin/2016/10/kotlin-1-1-m02-is-here/)  | [kotlin.es](/2016/10/kotlin-1.1-M02/)  |
+| 1.1-M1    | 14-07-2016 | [oficial en inglés](https://blog.jetbrains.com/kotlin/2016/07/first-glimpse-of-kotlin-1-1-coroutines-type-aliases-and-more/)  | [kotlin.es](/2016/07/kotlin-1.1-M1/)  |
+
+## Versiones de kotlin 1.0:
+
+|Milestone|Fecha de salida|Cambios|En español|
+|-----------|:-----------:|---|---|
+|           |  **2016**   |   |   |
+| 1.0.5    | 08-11-2016 | [oficial en inglés](https://blog.jetbrains.com/kotlin/2016/11/kotlin-1-0-5-is-here/)  | [kotlin.es](/2016/11/kotlin-1.0.5/)  |
+| 1.0.4    | 22-09-2016 | [oficial en inglés](https://blog.jetbrains.com/kotlin/2016/09/kotlin-1-0-4-is-here/)  | [kotlin.es](/2016/09/kotlin-1.0.4/)  |
+| 1.0.3    | 30-06-2016 | [oficial en inglés](https://blog.jetbrains.com/kotlin/2016/06/kotlin-1-0-3-is-here/)  | [kotlin.es](/2016/06/kotlin-1.0.3/)  |
+| 1.0.2    | 13-05-2016 | [oficial en inglés](https://blog.jetbrains.com/kotlin/2016/05/kotlin-1-0-2-is-here/)  | - |
+| 1.0.1    | 16-03-2016 | [oficial en inglés](https://blog.jetbrains.com/kotlin/2016/03/kotlin-1-0-1-is-here/)  | [kotlin.es](/2016/03/kotlin-1.0.1/)  |
+| 1.0.0    | 15-02-2016 | [oficial en inglés](https://blog.jetbrains.com/kotlin/2016/02/kotlin-1-0-released-pragmatic-language-for-jvm-and-android/)  | [kotlin.es](http://kotlin.es/2016/02/kotlin-1-0/)  |
+
 ## Versiones de kotlin:
 
 |Milestone|Versión|Fecha de salida|Cambios|En español|

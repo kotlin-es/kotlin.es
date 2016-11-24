@@ -7,6 +7,7 @@ author: soywiz
 permalink: /2016/07/kotlin-1.1-M1/
 original: https://blog.jetbrains.com/kotlin/2016/07/first-glimpse-of-kotlin-1-1-coroutines-type-aliases-and-more/
 icon: /images/1.1-M1/icon.svg
+eap: true
 ---
 
 Mientras que las versiones de Kotlin 1.0.X traen mejoras incrementales y características para el tooling, estamos trabajando en nuevas características en Kotlin 1.1.

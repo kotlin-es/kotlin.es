@@ -1,0 +1,22 @@
+<div class="row post-list">
+{% for post in include.posts %}
+<div class="post-list-entry col-xs-12 col-md-6">
+    <div class="post-list-entry-content">
+        {% if post.icon %}
+        <img class="post-list-entry-icon" src="{{ post.icon }}" />
+        {% endif %}
+    <h2 class="post-list-entry-header">
+        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+    </h2>
+    <div class="post-list-entry-info">
+        <span style="white-space: nowrap;"><span class="post-meta"><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.date | date: "%b %-d, %Y" }}</span></span>
+        {% assign postAuthorInfo = site.data.authors[post.author] %}
+        &nbsp;<span style="white-space: nowrap;">{% if post.author %}<i class="fa fa-user" aria-hidden="true"></i> <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name"><a href="{{ postAuthorInfo.web }}" target="_blank">{{ postAuthorInfo.name }}</a></span></span>{% endif %}</span>
+        &nbsp;<span style="white-space: nowrap;"><i class="fa fa-comments" aria-hidden="true"></i> <a href="{{ post.url | prepend: site.baseurl }}#disqus_thread">0 Comentarios</a></span>
+    </div>
+    <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 160 }}</p>
+        <a href="{{ post.url | prepend: site.baseurl }}" class="btn btn-primary read-more-link">Leer más</a>
+        </div>
+    </div>
+{% endfor %}
+</div>

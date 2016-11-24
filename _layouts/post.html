@@ -44,7 +44,13 @@ layout: twocolumn
         <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
+
+        {% if page.eap %}
+        {% include eap.html %}
+        {% endif %}
+        
         <h3></h3>
+
         {% if page.icon%}<img src="{{ page.icon }}" class="post-entry-icon" />{% endif %}
 
         <div class="post-actual-content">
