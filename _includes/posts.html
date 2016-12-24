@@ -2,11 +2,14 @@
 {% for post in include.posts %}
 <div class="post-list-entry col-xs-12 col-md-6">
     <div class="post-list-entry-content">
-        {% if post.icon %}
+        {% if post.youtube %}
+        <img class="post-list-entry-icon" src="https://img.youtube.com/vi/{{ post.youtube }}/0.jpg" />
+        {% elsif post.icon %}
         <img class="post-list-entry-icon" src="{{ post.icon }}" />
         {% endif %}
     <h2 class="post-list-entry-header">
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        {% if post.youtube %}[Vídeo]{% endif %}
+        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{% if post.youtube %}<i class="fa fa-video-camera"></i>{% endif %} {{ post.title }}</a>
     </h2>
     <div class="post-list-entry-info">
         <span style="white-space: nowrap;"><span class="post-meta"><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.date | date: "%b %-d, %Y" }}</span></span>

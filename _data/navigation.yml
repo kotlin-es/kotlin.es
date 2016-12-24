@@ -18,6 +18,12 @@
   class: fa fa-code-fork
   fixed: false
 
+- title: Vídeos
+  external: false
+  url: /videos/
+  class: fa fa-video-camera
+  fixed: false
+
 - title: Roadmap
   external: false
   url: /roadmap/
