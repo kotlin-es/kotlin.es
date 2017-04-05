@@ -81,7 +81,7 @@ no tiene sentido en esta fase.
 más adelante.
 * [Leer más sobre la *release*](https://github.com/JetBrains/kotlin-native/blob/v0.1.0/RELEASE_NOTES.md).
 
-### Planes futuros
+### Planes futuros
 
 Actualmente estamos trabajando en el núcleo tecnológico de Kotlin/Native que es el mismo para todas las plataformas destino (compilador, núcleo de runtime y librería). Algunas posibles ideas que tenemos para
 desarrollar cubren los siguientes posibles casos de uso:

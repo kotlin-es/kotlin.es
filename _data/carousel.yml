@@ -1,3 +1,8 @@
+- title: Kotlin/Native
+  description: ¡Primera technical Preview de Kotlin/Native!
+  image: /images/native/KotlinNative.png
+  url: /2017/04/kotlin-native-tech-preview/
+
 - title: 1.1
   description: ¡Versión final de Kotlin 1.1!
   image: /images/1.1.0/Kotlin11blogbannerCarousel.png
@@ -9,7 +14,7 @@
   url: /2016/04/repositorio-de-problemas-oficiales/
 
 - title: 1.0
-  description: ¡Versión final de Kotlin 1.0! 
+  description: ¡Versión final de Kotlin 1.0!
   image: /images/1.0/1_0_Banner.png
   url: /2015/11/kotlin-koans/
 
@@ -27,5 +32,3 @@
   description: Ya disponible, ¡y con soporte para kotlin!
   image: /images/carousel/intelliJ15.png
   url: http://blog.jetbrains.com/idea/2015/11/intellij-idea-15-released-adds-kotlin-to-the-family-of-supported-jvm-languages/
-
-
