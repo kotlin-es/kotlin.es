@@ -28,8 +28,7 @@ gems:
 
 permalink: /:year/:month/:title/
 
-paginate: 6
+paginate: 10
 paginate_path: "/page/:num/"
 
 # sudo gem install jekyll-mentions jemoji jekyll-redirect-from jekyll-sitemap jekyll-feed
-
