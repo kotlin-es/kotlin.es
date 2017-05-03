@@ -1,4 +1,4 @@
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="15000">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         {% for item in site.data.carousel %}
@@ -10,7 +10,12 @@
     <div class="carousel-inner" role="listbox">
         {% for item in site.data.carousel %}
         <div class="item {% if forloop.index0 == 0 %}active{% endif %}">
-            <a href="{{ item.url }}"><img src="{{ item.image }}" alt="{{ item.title }}"></a>
+            <a href="{{ item.url }}">
+              <img src="{{ item.image }}" alt="{{ item.title }}"
+                {% if item.transformOrigin %}
+                style="transform-origin:{{ item.transformOrigin }}"
+                {% endif %}
+              /></a>
             <div class="carousel-caption">
                 <a href="{{ item.url }}">
                     <h3>{{ item.title }}</h3>

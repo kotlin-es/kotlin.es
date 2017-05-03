@@ -1,11 +1,17 @@
+- title: Charla en Valencia el próximo 11 de mayo
+  description: En la ETSINF por @geekshubs a las 19:00. Entrada gratuita. ¡No te la pierdas!
+  image: /images/carousel/valencia-etsinf-2017-05-11.jpg
+  url: /2017/05/kotlin-produccion-geekshubs-valencia/
+  transformOrigin: 0% 100%
+
 - title: Kotlin/Native
   description: ¡Primera technical Preview de Kotlin/Native!
-  image: /images/native/KotlinNative.png
+  image: /images/carousel/KotlinNative.png
   url: /2017/04/kotlin-native-tech-preview/
 
 - title: 1.1
   description: ¡Versión final de Kotlin 1.1!
-  image: /images/1.1.0/Kotlin11blogbannerCarousel.png
+  image: /images/carousel/Kotlin11blogbannerCarousel.png
   url: /2017/03/1.1.0/
 
 - title: Kotlin Problems
@@ -15,7 +21,7 @@
 
 - title: 1.0
   description: ¡Versión final de Kotlin 1.0!
-  image: /images/1.0/1_0_Banner.png
+  image: /images/carousel/1_0_Banner.png
   url: /2015/11/kotlin-koans/
 
 - title: Kotlin Koans

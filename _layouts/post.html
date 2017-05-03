@@ -7,9 +7,14 @@ layout: twocolumn
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
     <header class="post-header" style="margin-bottom:32px;">
-        <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
+        <h1 class="post-title" itemprop="name headline">
+          {% if page.iconinheader %}
+          <img src="{{ page.icon }}" class="post-entry-icon" style="float:left;" />
+          {% endif %}
+          {{ page.title }}
+        </h1>
 
-        <p class="post-meta">
+        <p class="post-meta" style="clear: both;">
             <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
                 {{ page.date | date: "%b %-d, %Y" }}
             </time>
@@ -46,12 +51,12 @@ layout: twocolumn
         </script>
 
         {% if page.eap %}
-        {% include eap.html %}
+          {% include eap.html %}
         {% endif %}
-        
-        <h3></h3>
 
-        {% if page.icon%}<img src="{{ page.icon }}" class="post-entry-icon" />{% endif %}
+        {% unless page.noiconinpost %}
+          {% if page.icon %}<img src="{{ page.icon }}" class="post-entry-icon" />{% endif %}
+        {% endunless %}
 
         <div class="post-actual-content">
             {{ content }}

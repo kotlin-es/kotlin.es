@@ -83,7 +83,9 @@ div.post-content td, div.post-content th {
 }
 
 #carousel-example-generic .item {
+  /*
     height: 320px;
+    */
     overflow: hidden;
 }
 
@@ -92,10 +94,13 @@ div.post-content td, div.post-content th {
 }
 
 #carousel-example-generic .item img {
-    width: 100%;
-    opacity: 1.0;
-    transform: scale(0.1);
-    transition: all .2s ease-in-out;
+  transform-origin: 50% 50%;
+  width: 100%;
+  opacity: 1.0;
+  transform: scale(0.1);
+  transition: all .2s ease-in-out;
+  position: relative;
+  bottom: 0;
 }
 
 #carousel-example-generic .item a {
@@ -107,9 +112,9 @@ div.post-content td, div.post-content th {
 }
 
 #carousel-example-generic .item.active img {
-    opacity: 1.0;
-    transform: scale(1.2);
-    transition: all .2s ease-in-out;
+  opacity: 1.0;
+  transform: scale(1.1);
+  transition: all .2s ease-in-out;
 }
 
 #carousel-example-generic .item.next img, #carousel-example-generic .item.prev img {
