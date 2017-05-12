@@ -12,7 +12,7 @@ El sistema de templates de jekyll es liquid. Puedes ver los filtros y tags dispo
 ## Ejecutar este blog en tu ordenador (mac)
 ```
 sudo gem install jekyll 
-sudo gem install jekyll-mentions jemoji jekyll-redirect-from jekyll-sitemap jekyll-feed 
+sudo gem install jekyll-mentions jemoji jekyll-redirect-from jekyll-sitemap jekyll-feed jekyll-paginate jekyll-sitemap jekyll-feed
 git clone git@github.com:kotlin-es/kotlin.es.git
 cd kotlin.es.git
 jekyll s

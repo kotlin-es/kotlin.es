@@ -1,8 +1,14 @@
+
+- title: Charla en Valencia el próximo 18 de mayo
+  description: En la ETSINF por @Capgemini a las 12:30. !Entrada gratuita!. 
+  image: /images/carousel/2017-05-18.png
+  url: /2017/05/oop-y-fp-con-programacion-asincrona/
+  transformOrigin: 0% 100%
+
 - title: Charla en Valencia el próximo 11 de mayo
   description: En la ETSINF por @geekshubs a las 19:00. Entrada gratuita. ¡No te la pierdas!
   image: /images/carousel/valencia-etsinf-2017-05-11.jpg
   url: /2017/05/kotlin-produccion-geekshubs-valencia/
-  transformOrigin: 0% 100%
 
 - title: Kotlin/Native
   description: ¡Primera technical Preview de Kotlin/Native!
