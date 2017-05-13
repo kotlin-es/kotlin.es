@@ -11,7 +11,7 @@ author: vicboma1
 
 Dentro del ciclo de las charlas de empresa que acuden a la [ETSINF](https://www.upv.es/entidades/ETSINF/indexc.html), [Capgemini](https://www.capgemini.com) me ha elegido para realizar una ponencia el próximo jueves 18 de Mayo en el salón de actos de la facultad de informática de la UPV a las 12:30. 
 
-La charla se centrará en el poder que tiene el paradigma de la programación asíncrona. Abarcando varias tecnologías como son Java 8 y Kotlin mostraré varios proyectos personales y destriparé algunos secretos de mi [Emulador de GameBoy](https://github.com/vicboma1/GameBoyEmulatorEnvironment).
+La charla se centrará en el poder que tiene el paradigma de la programación asíncrona. Abarcando varias tecnologías como son Java 8 y Kotlin mostraré varios proyectos personales y destriparé algunos secretos de mi [Emulador de GameBoy](https://goo.gl/s41hSW).
 
 ### Super Mario Land 1
 
@@ -23,7 +23,7 @@ La charla se centrará en el poder que tiene el paradigma de la programación as
 
 
 
-Por lo que a *Kotlin* se refiere, explicaré todas aquellas ventajas que da este poderoso lenguaje usando coroutinas y su asíncrono lineal con mi último proyecto [GameBoy Emulator Environment - GBEE](https://github.com/vicboma1/GameBoyEmulatorEnvironment) siendo éste, un front-end para el emulador.
+Por lo que a *Kotlin* se refiere, explicaré todas aquellas ventajas que da este poderoso lenguaje usando coroutinas y su asíncrono lineal con mi último proyecto [GameBoy Emulator Environment - GBEE](https://goo.gl/4EDSok) siendo éste, un front-end para el emulador.
 
 ### Grid Async
 
@@ -34,7 +34,7 @@ Por lo que a *Kotlin* se refiere, explicaré todas aquellas ventajas que da este
 ![](/images/upv-oop-fp/GBEE_v.0.2.2-4.png)
 
 
-La motivación de la charla la veremos con este juego, [Doodle  Jump Xbox360 for Web](https://github.com/vicboma1/doodleJumpxbox360ForWeb). Es un clon exacto del primer mundo del juego original kinect xbox360 portado al browser con JS + Html5 en mis ratos libres.
+La motivación de la charla la veremos con este juego, [Doodle  Jump Xbox360 for Web](https://goo.gl/2pmQCl). Es un clon exacto del primer mundo del juego original kinect xbox360 portado al browser con JS + Html5 en mis ratos libres.
 
 ### Cover Game
 
