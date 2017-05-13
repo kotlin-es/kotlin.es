@@ -59,11 +59,11 @@ Jueves 18 de Mayo de 2017 - 12:30
 
 ### **Lugar**
 
-[ETSINF - Escuela Técnica Superior de Ingeniería Informática UPV, Universitat Politècnica de València, Camí de Vera, s/n, 46022 Valencia, Valencia (mapa)](https://maps.google.com/maps?f=q&hl=en&q=+1E+y+1G%2C+Universitat+Polit%C3%A8cnica+de+Val%C3%A8ncia%2C+Cam%C3%AD+de+Vera%2C+s%2Fn%2C+46022+Valencia%2C+Valencia%2C+es)
+[ETSINF - Antigua Facultad de Informática, Universitat Politècnica de València, Camí de Vera, s/n, 46022 Valencia, Valencia (mapa)](https://maps.google.com/maps?f=q&hl=en&q=+1E+y+1G%2C+Universitat+Polit%C3%A8cnica+de+Val%C3%A8ncia%2C+Cam%C3%AD+de+Vera%2C+s%2Fn%2C+46022+Valencia%2C+Valencia%2C+es)
 
 *Salón de actos ETSINF - UPV - Totalmente gratuita*
 
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3079.410642633572!2d-0.34856678463226415!3d39.48264117948468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604883326cd6c7%3A0xded925519ef13eaf!2sUPV%3A+Escuela+T%C3%A9cnica+Superior+de+Ingenier%C3%ADa+Inform%C3%A1tica+(ETSINF)!5e0!3m2!1sen!2sus!4v1493835498187" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1381.3275014486867!2d-0.3478292399429306!3d39.48247369506603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd60489cef6443d1%3A0x7eea51c7b8d4f192!2sFacultad+de+Inform%C3%A1tica!5e1!3m2!1ses!2sus!4v1494711986783" width="400" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 
 ### **Descripción:**
 
