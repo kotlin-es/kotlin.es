@@ -1,15 +1,13 @@
 ---
 layout: post
-title: "18-05-2017     Paradigmas OOP y FP con técnicas avanzadas de programación asíncrona | UPV"
+title: "18-05-2017 Paradigmas OOP y FP con técnicas avanzadas de programación asíncrona"
 category: blog
 tags: charlas
-icon: /images/upv-oop-fp/b1.png
+icon: /images/upv-oop-fp/victor.png
 noiconinpost: true
 iconinheader: true
 author: vicboma1
 ---
-
-[![](/images/carousel/2017-05-18.png)]()
 
 Dentro del ciclo de las charlas de empresa que acuden a la [ETSINF](https://www.upv.es/entidades/ETSINF/indexc.html), [Capgemini](https://www.capgemini.com) me ha elegido para realizar una ponencia el próximo jueves 18 de Mayo en el salón de actos de la facultad de informática de la UPV a las 12:30. 
 
@@ -36,7 +34,7 @@ Por lo que a *Kotlin* se refiere, explicaré todas aquellas ventajas que da este
 ![](/images/upv-oop-fp/GBEE_v.0.2.2-4.png)
 
 
-La motivación de la charla la veremos con este juego, [Doodle  Jump Xbox360 for Web](https://github.com/vicboma1/doodleJumpxbox360ForWeb). Es un clon exacto del primer mundo del juego original de la xbox360 portado al browser con JS + Html5 en mis ratos libres.
+La motivación de la charla la veremos con este juego, [Doodle  Jump Xbox360 for Web](https://github.com/vicboma1/doodleJumpxbox360ForWeb). Es un clon exacto del primer mundo del juego original kinect xbox360 portado al browser con JS + Html5 en mis ratos libres.
 
 ### Cover Game
 
@@ -47,10 +45,10 @@ La motivación de la charla la veremos con este juego, [Doodle  Jump Xbox360 for
 ![](/images/upv-oop-fp/wingsDoodle.gif)
 
 
-Dicho ejemplo servirá para ver la importancia de trabajar con procesos asíncronos en segundo plano y obtener 60 fps en el renderizado del juego.
+Dicho ejemplo servirá para ver la importancia de trabajar con procesos asíncronos en segundo plano y obtener 60 fps en el renderizado del juego. También explicaré cual es la motivación de usar Kotlin JS en el contexto del juego.
 
 
-Os espero a todos! 
+Os espero a todos! y recordad, es gratis!
 
 
 ### **Título**
@@ -83,6 +81,7 @@ Apasionado por dar valor a las cosas construidas mediante Software, es amante de
 
 Technical lead, Diseño y desarrollo de arquitecturas, Construcción de motores de videojuegos, Desarrollo de Micro Frameworks, Programación Asíncrona, uso de clevers.
 
-Github: vicboma1
-Twitter: @vicboma1
+* Github: [vicboma1](https://github.com/vicboma1)
+
+* Twitter: [@vicboma1](https://twitter.com/vicboma1)
 
