@@ -11,7 +11,7 @@ author: vicboma1
 
 Dentro del ciclo de las charlas de empresa que acuden a la [ETSINF](https://www.upv.es/entidades/ETSINF/indexc.html), [Capgemini](https://www.capgemini.com) me ha elegido para realizar una ponencia el próximo jueves 18 de Mayo en el salón de actos de la facultad de informática de la UPV a las 12:30. 
 
-La charla se centrará en el poder que tiene el paradigma de la programación asíncrona. Abarcando varias tecnologías como son Java 8 y Kotlin mostraré varios proyectos personales y destriparé algunos secretos de mi [Emulador de GameBoy](https://goo.gl/2pmQCl).
+La charla se centrará en el poder que tiene el paradigma de la programación asíncrona. Abarcando varias tecnologías como son Java 8 y Kotlin mostraré varios proyectos personales y destriparé algunos secretos de mi [Emulador de GameBoy](https://goo.gl/s41hSW).
 
 ### Super Mario Land 1
 
