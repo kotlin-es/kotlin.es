@@ -47,6 +47,8 @@ La motivación de la charla la veremos con este juego, [Doodle  Jump Xbox360 for
 
 Dicho ejemplo servirá para ver la importancia de trabajar con procesos asíncronos en segundo plano y obtener 60 fps en el renderizado del juego. También explicaré cual es la motivación de usar Kotlin JS en el contexto del juego.
 
+![](/images/upv-oop-fp/syncVSasync.png)
+
 
 Os espero a todos! y recordad, es gratis!
 
