@@ -1,6 +1,10 @@
+- title: Kotlin en Android. Ahora oficial
+  description: Y Android Studio 3.0
+  image: /images/carousel/android_kotlin.png
+  url: /2017/05/kotlin-android-oficial
 
-- title: Charla en Valencia el próximo 18 de mayo. Programación asíncrona. 
-  description: En la ETSINF por @Capgemini a las 12:30. !Entrada gratuita!. 
+- title: Charla en Valencia el próximo 18 de mayo. Programación asíncrona
+  description: En la ETSINF por @Capgemini a las 12:30. !Entrada gratuita!
   image: /images/carousel/2017-05-18.gif
   url: /2017/05/oop-y-fp-con-programacion-asincrona/
   transformOrigin: 0% 100%

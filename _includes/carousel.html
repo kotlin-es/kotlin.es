@@ -12,6 +12,7 @@
         <div class="item {% if forloop.index0 == 0 %}active{% endif %}">
             <a href="{{ item.url }}">
               <img src="{{ item.image }}" alt="{{ item.title }}"
+                width="900" height="500"
                 {% if item.transformOrigin %}
                 style="transform-origin:{{ item.transformOrigin }}"
                 {% endif %}
