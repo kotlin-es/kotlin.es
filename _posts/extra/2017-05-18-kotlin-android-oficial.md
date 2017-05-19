@@ -3,7 +3,7 @@ layout: post
 title:  "Kotlin en Android. Ahora oficial"
 category: blog
 author: soywiz
-original: https://blog.jetbrains.com/kotlin/2017/05/kotlinnative-v0-2-is-out/
+original: https://blog.jetbrains.com/kotlin/2017/05/kotlin-on-android-now-official/
 icon: /images/android/android_kotlin.png
 ---
 
