@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Valencia: Charla gratuita sobre Kotlin en la  ETSINF por @geekshub el próximo 11 de mayo"
+title: "Valencia: Charla gratuita sobre Kotlin en la ETSINF por @geekshub el próximo 11 de mayo"
 category: blog
 tags: charlas
 icon: /images/talks/valencia_icon.jpg
