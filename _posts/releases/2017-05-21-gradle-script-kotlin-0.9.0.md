@@ -5,7 +5,7 @@ category: releases-tools
 tags: releases-tools
 author: soywiz
 original: https://github.com/gradle/gradle-script-kotlin/releases/tag/v0.9.0
-icon: /images/icons/gradle.png
+icon: /images/gradle-kotlin/gradle-kotlin.png
 ---
 
 Hace un par de días salió [Gradle Script Kotlin 0.9.0](https://github.com/gradle/gradle-script-kotlin/releases/tag/v0.9.0).
