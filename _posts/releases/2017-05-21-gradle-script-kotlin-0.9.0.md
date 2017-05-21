@@ -63,7 +63,7 @@ val someBuild by tasks.creating(GradleBuild::class) {
 
 ** **La navegación de código fuente ahora funciona con todo en Gradle** ([#281](https://github.com/gradle/gradle-script-kotlin/issues/281))
 
-![](/images/gradle-kotlin-0.9-screenshot1.gif)
+![](/images/gradle-kotlin/gradle-kotlin-0.9-screenshot1.gif)
 
 ** **Navegación en código de librerías Kotlin incluídas** ([#96](https://github.com/gradle/gradle-script-kotlin/issues/96)). Siempre y cuando haya al menos un repositorio en el `buildscript` configurado para resolver artefactos de código fuente de Kotlin.
 
