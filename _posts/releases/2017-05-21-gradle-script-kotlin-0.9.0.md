@@ -55,21 +55,21 @@ val someBuild by tasks.creating(GradleBuild::class) {
 
 * **Documentación del API** ([#209](https://github.com/gradle/gradle-script-kotlin/issues/209)). Primera aproximación a esta parte importante de la documentación, generada usando [Dokka](https://kotlinlang.org/docs/reference/kotlin-doc.html) y disponible desde ya en [https://gradle.github.io/gradle-script-kotlin-docs/api/](https://gradle.github.io/gradle-script-kotlin-docs/api/).
 
-* **Mejoras en intelliJ**
+### **Mejoras en intelliJ**
 
-** **El cómputo de los classpath es ahora asíncrono** ([#249](https://github.com/gradle/gradle-script-kotlin/issues/249)). Así que ya no debería bloquear más la UI (pendiente de una [corrección en intelliJ](https://youtrack.jetbrains.com/issue/KT-17771))
+  * **El cómputo de los classpath es ahora asíncrono** ([#249](https://github.com/gradle/gradle-script-kotlin/issues/249)). Así que ya no debería bloquear más la UI (pendiente de una [corrección en intelliJ](https://youtrack.jetbrains.com/issue/KT-17771))
 
-** **Los *accesors* tipados se incluyen correctamente en el classpath pasado a intelliJ** ([#340](https://github.com/gradle/gradle-script-kotlin/issues/340)). Sobre los cambios al bloque `plugins` (pendiente de una [corrección en intellij](https://youtrack.jetbrains.com/issue/KT-17770))
+  * **Los *accesors* tipados se incluyen correctamente en el classpath pasado a intelliJ** ([#340](https://github.com/gradle/gradle-script-kotlin/issues/340)). Sobre los cambios al bloque `plugins` (pendiente de una [corrección en intellij](https://youtrack.jetbrains.com/issue/KT-17770))
 
-** **La navegación de código fuente ahora funciona con todo en Gradle** ([#281](https://github.com/gradle/gradle-script-kotlin/issues/281))
+  * **La navegación de código fuente ahora funciona con todo en Gradle** ([#281](https://github.com/gradle/gradle-script-kotlin/issues/281))
 
 ![](/images/gradle-kotlin/gradle-kotlin-0.9-screenshot1.gif)
 
-** **Navegación en código de librerías Kotlin incluídas** ([#96](https://github.com/gradle/gradle-script-kotlin/issues/96)). Siempre y cuando haya al menos un repositorio en el `buildscript` configurado para resolver artefactos de código fuente de Kotlin.
+  * **Navegación en código de librerías Kotlin incluídas** ([#96](https://github.com/gradle/gradle-script-kotlin/issues/96)). Siempre y cuando haya al menos un repositorio en el `buildscript` configurado para resolver artefactos de código fuente de Kotlin.
 
 * **Variado**
 
-** **Pulido ejemplo de Android** ([#351](https://github.com/gradle/gradle-script-kotlin/issues/351)). Con todas las mejoras en esta versión, nuestro [ejemplo hello-android](https://github.com/gradle/gradle-script-kotlin/tree/master/samples/hello-android) ya está libre de morralla:
+  * **Pulido ejemplo de Android** ([#351](https://github.com/gradle/gradle-script-kotlin/issues/351)). Con todas las mejoras en esta versión, nuestro [ejemplo hello-android](https://github.com/gradle/gradle-script-kotlin/tree/master/samples/hello-android) ya está libre de morralla:
 
 {% highlight kotlin %}
 buildscript {
@@ -121,10 +121,9 @@ repositories {
 
 Y funciona con el último Android Studio (2.3.2).
 
-** **Eliminado el *overhead* de inicialización de Gradle** ([#320](https://github.com/gradle/gradle-script-kotlin/issues/320)). La implementación de los *accessors* tipados in `0.8.0` añadieron una carga excesiva a la configuración del proyecto, aún cuando no habían build scripts de Kotlin de por medio. Esto ya está arreglado.
+  * **Eliminado el *overhead* de inicialización de Gradle** ([#320](https://github.com/gradle/gradle-script-kotlin/issues/320)). La implementación de los *accessors* tipados in `0.8.0` añadieron una carga excesiva a la configuración del proyecto, aún cuando no habían build scripts de Kotlin de por medio. Esto ya está arreglado.
 
-** **Soporte idiomático para las propiedades `PropertyState<T>` y `ConfigurableFileCollection`** ([#344](https://github.com/gradle/gradle-script-kotlin/issues/344)). Haciendo uso de las propiedades delegadas de Kotlin:
-
+  * **Soporte idiomático para las propiedades `PropertyState<T>` y `ConfigurableFileCollection`** ([#344](https://github.com/gradle/gradle-script-kotlin/issues/344)). Haciendo uso de las propiedades delegadas de Kotlin:
 {% highlight kotlin %}
 open class GreetingPluginExtension(project: Project) {
 
@@ -148,12 +147,12 @@ open class GreetingPluginExtension(project: Project) {
 
 Echad un ojo al ejemplo [provider-properties](https://github.com/gradle/gradle-script-kotlin/blob/v0.9.0/gradle/gradle-script-kotlin/tree/master/samples/provider-properties) para más información.
 
-** **Mejor comportamiento de cacheo para los *accesors* tipados** ([#338](https://github.com/gradle/gradle-script-kotlin/issues/338))
+  * **Mejor comportamiento de cacheo para los *accesors* tipados** ([#338](https://github.com/gradle/gradle-script-kotlin/issues/338))
 
 * **Correcciones de Bugs**
 
-** **Poner un *Kotlin build script* inexistente en `settings.gradle` ya no causa que la build falle** ([#302](https://github.com/gradle/gradle-script-kotlin/issues/302), [#331](https://github.com/gradle/gradle-script-kotlin/issues/331)) siguiendo con el comportamiento estándar de Gradle.
+  * **Poner un *Kotlin build script* inexistente en `settings.gradle` ya no causa que la build falle** ([#302](https://github.com/gradle/gradle-script-kotlin/issues/302), [#331](https://github.com/gradle/gradle-script-kotlin/issues/331)) siguiendo con el comportamiento estándar de Gradle.
 
-** **Los accesos de extensión generadas para la extensión `publishing` ahora funcionarán como se espera** ([#327](https://github.com/gradle/gradle-script-kotlin/issues/327), [#328](https://github.com/gradle/gradle-script-kotlin/issues/328)). Y difieren configuraciones hasta ser necesario.
+  * **Los accesos de extensión generadas para la extensión `publishing` ahora funcionarán como se espera** ([#327](https://github.com/gradle/gradle-script-kotlin/issues/327), [#328](https://github.com/gradle/gradle-script-kotlin/issues/328)). Y difieren configuraciones hasta ser necesario.
 
-** **Los proyectos con build scripts de Kotlin en `buildSrc` se pueden editar con el classpath correcto en intelliJ** ([#339](https://github.com/gradle/gradle-script-kotlin/issues/339)). Los *build scripts* se ejecutarán de la mejor forma cuando se está computando el *classpath*.
+  * **Los proyectos con build scripts de Kotlin en `buildSrc` se pueden editar con el classpath correcto en intelliJ** ([#339](https://github.com/gradle/gradle-script-kotlin/issues/339)). Los *build scripts* se ejecutarán de la mejor forma cuando se está computando el *classpath*.
