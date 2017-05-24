@@ -18,7 +18,7 @@ La parte de Kotlin se centró en una pequeña introducción sobre el lenguaje y 
 
 Como ejemplo práctico, mostré el desarrollo WIP de mi frontend [Gameboy Emulator Environment - GBEE](https://github.com/vicboma1/GameBoyEmulatorEnvironment) con kotlinJVM.
 
-Expliqué la eficiencia de usar coroutines en el contexto de la aplicación frente al uso de Threads con Java. Así como la agilidad de programar con kotlin frente al uso de Java
+Expliqué la eficiencia de usar coroutines en el contexto de la aplicación frente al uso de Threads. Destacar sobretodo la agilidad de programar con kotlin frente al uso de Java en proyectos escalares.
 
 Por último, kotlinJS estuvo presente en la parte final de la presentación de OOP.
 
