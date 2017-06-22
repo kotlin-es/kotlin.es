@@ -1,8 +1,14 @@
-- title: Transparencias 
+- title: Nuevo logo de Kotlin.es
+  description: Cambiamos de logo
+  image: /images/carousel/kotlines_newlogo.png
+  url: 2017/06/kotlines-nuevo-logo
+  transformOrigin: 50% 50%
+
+- title: Transparencias
   description: Charla de Programación asíncrona
   image: /images/upv-oop-fp/traspas.png
   url: 2017/05/oop-y-fp-con-programacion-asincrona-resumen
-  transformOrigin: 0% 100%
+  transformOrigin: 50% 50%
 
 - title: Kotlin en Android. Ahora oficial
   description: Y Android Studio 3.0
