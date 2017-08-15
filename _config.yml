@@ -18,7 +18,7 @@ facebook_username: kotlin.es
 # Build settings
 markdown: kramdown
 
-gems:
+plugins:
 #- jekyll-mentions
 #- jemoji
 #- jekyll-redirect-from

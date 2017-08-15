@@ -4,10 +4,10 @@
     <p>Esta es una versión preeliminar. Para poder utilizarla en maven o en gradle, tienes que incluir el repositorio de gradle <strong><code>http://dl.bintray.com/kotlin/kotlin-eap-1.2</code></strong>:</p>
     <pre>
 buildscript {
-    ext.kotlin_version = '1.2-M1'
+    ext.kotlin_version = '{{ page.kotlin_version }}'
 
     repositories {
-        maven { url "http://dl.bintray.com/kotlin/kotlin-eap-1.2" }
+        maven { url "{{ page.maven_repo }}" }
         mavenCentral()
     }
     dependencies {

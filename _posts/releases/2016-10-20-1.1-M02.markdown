@@ -8,6 +8,8 @@ permalink: /2016/10/kotlin-1.1-M02/
 original: https://blog.jetbrains.com/kotlin/2016/10/kotlin-1-1-m02-is-here/
 icon: /images/1.1-M02/icon.svg
 eap: true
+kotlin_version: 1.1-M02
+maven_repo: http://dl.bintray.com/kotlin/kotlin-eap-1.1
 ---
 
 Nos complace anunciar el segundo hito de Kotlin 1.1.
