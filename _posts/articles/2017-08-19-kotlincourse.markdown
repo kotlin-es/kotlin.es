@@ -13,6 +13,7 @@ Presentamos un nuevo curso para el desarrollo de aplicaciones Android en kotlin.
 # Curso de Android en Kotlin
 
 Buenas, me llamo Aris y soy desarrollador de aplicaciones móviles en Android y creador del blog [CursoKotlin](https://cursokotlin.com) . Hoy vengo a presentaros un curso que estoy
+
 desarrollando en Udemy para aprender a crear aplicaciones Android desde 0 en Kotlin.
 
 Muchos se preguntarán el porqué de este curso, y es muy simple. Yo, como muchísimos desarrolladores profesionales he empezado 
@@ -34,6 +35,7 @@ Este curso está diseñado para todo tipo de personas, en especial para gente qu
 * Acepto peticiones. Si tienes interés en que explique algo concreto en Kotlin, solo tienes que pedirlo :)
 
 El curso tiene un precio de 70€ que irá aumentando a medida que se vaya añadiendo más contenido, pero todos los usuarios de Kotlin.es 
+
 tendrán un descuento automático de 30€ usando el código ( **KOTLIN.ES** ) o simplemente accediendo desde [el siguiente link] (https://www.udemy.com/curso-programacion-kotlin-aprende-kotlin-desde-0/?couponCode=KOTLIN.ES)
 
 Así que os animo a probarlo (tenéis 30 días para devolverlo) y si tenéis cualquier duda podéis preguntarmela por aquí, a través de mi blog o desde mi twitter [@arisguimera](https://twitter.com/arisguimera) .
