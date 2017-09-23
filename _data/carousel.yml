@@ -1,3 +1,9 @@
+- title: "Charla en Barcelona el próximo 26 de Septiembre"
+  description: "En las oficinas de Infojobs ¡y por streaming! a las 19:00"
+  image: /images/talks/barcelona-infojobs-talk-2017-09-26.jpg
+  url: 2017/09/charla-kotlin-de-cero-a-produccion
+  transformOrigin: 0% 50%
+
 - title: Nuevo logo de Kotlin.es
   description: Cambiamos de logo
   image: /images/carousel/kotlines_newlogo.png

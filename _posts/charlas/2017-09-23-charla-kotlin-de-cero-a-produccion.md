@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Barcelona: Charla gratuita 'Kotlin: de cero a producción'"
+title: "Barcelona: Charla gratuita el próximo martes 26: 'Kotlin: de cero a producción' (Actualizado)"
 category: blog
 tags: charlas
 icon: /images/talks/barcelona_icon.jpg
@@ -8,6 +8,8 @@ noiconinpost: true
 iconinheader: true
 author: soywiz
 ---
+
+![](/images/talks/barcelona-infojobs-talk-2017-09-26.jpg)
 
 ### Kotlin: de cero a producción
 
