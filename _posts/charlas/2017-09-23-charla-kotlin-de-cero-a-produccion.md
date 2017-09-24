@@ -23,11 +23,15 @@ author: soywiz
 
 ## Lugar:
 
-En streaming: [https://www.youtube.com/watch?v=7cDGD0vEP_E](https://www.youtube.com/watch?v=7cDGD0vEP_E)
-
 Presencial: [Oficinas InfoJobs - Carrer de Numància n.46, 08029 Barcelona](https://www.google.es/maps/place/Infojobs/@41.3831724,2.1374014,17z/data=!3m1!4b1!4m5!3m4!1s0x12a4987dc5129b3d:0x689eb48521f573c4!8m2!3d41.3831724!4d2.1395901?dcr=0)
 
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.581683540798!2d2.1374014154256633!3d41.383172379264636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4987dc5129b3d%3A0x689eb48521f573c4!2sInfojobs!5e0!3m2!1ses!2ses!4v1506167339543" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+## Streaming:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7cDGD0vEP_E?rel=0" frameborder="0" allowfullscreen></iframe>
+
+[https://www.youtube.com/watch?v=7cDGD0vEP_E](https://www.youtube.com/watch?v=7cDGD0vEP_E)
 
 ## Descripción:
 
