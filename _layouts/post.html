@@ -5,6 +5,9 @@ layout: twocolumn
 {% assign authorInfo = site.data.authors[page.author] %}
 
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    {% if page.header_image %}
+      <div><img src="{{ page.header_image }}" style="width:100%;height:auto;" /></div>
+    {% endif %}
 
     <header class="post-header" style="margin-bottom:32px;">
         <h1 class="post-title" itemprop="name headline">
