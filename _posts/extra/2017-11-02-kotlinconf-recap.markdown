@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Repaso de la Keynote de KotlinConf
+title: "Keynote de KotlinConf: Kotlin 1.2-RC, Kotlin/Native 0.4 + iOS + IDE, Ktor 0.9, Kotlin React y futuro"
 category: releases
 tags: releases
 author: soywiz
