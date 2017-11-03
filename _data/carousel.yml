@@ -2,7 +2,7 @@
   description: "Ya ha sido la keynote de la KotlinConf de 2017, echemos un vistazo a lo anunciado"
   image: /images/carousel/kotlinconf.jpg
   url: 2017/11/kotlinconf-recap/
-  transformOrigin: 0% 50%
+  transformOrigin: 0% 0%
 
 - title: "Charla en Barcelona el próximo 26 de Septiembre"
   description: "En las oficinas de Infojobs ¡y por streaming! a las 19:00"

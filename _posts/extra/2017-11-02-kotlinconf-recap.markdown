@@ -5,7 +5,7 @@ category: releases
 tags: releases
 author: soywiz
 original: https://blog.jetbrains.com/kotlin/2017/11/kotlinconf-keynote-recap/
-icon: /images/1.2/1.2-rc/icon.svg
+icon: /images/kotlinconf_icon.png
 eap: true
 kotlin_version: 1.2-rc-39
 maven_repo: http://dl.bintray.com/kotlin/kotlin-eap-1.2
