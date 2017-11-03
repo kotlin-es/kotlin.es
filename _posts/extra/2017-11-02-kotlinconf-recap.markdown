@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Repaso a la Keynote de KotlinConf
+title: Repaso de la Keynote de KotlinConf
 category: releases
 tags: releases
 author: soywiz
@@ -10,6 +10,8 @@ eap: true
 kotlin_version: 1.2-rc-39
 maven_repo: http://dl.bintray.com/kotlin/kotlin-eap-1.2
 ---
+
+![](/images/carousel/kotlinconf.jpg)
 
 Hoy es un gran día para la comunidad de Kotlin. KotlinConf, la conferencia inaugural de Kotlin, abre hoy sus puertas. Y estamos muy impresionados de que casi 1200 personas de todo el mundo se hayan unido a nosotros en San Francisco. Durante la *keynote* de la conferencia, Andrey Breslav, el diseñador líder de Kotlin, ha anunciado varios desarrollos importantes sobre Kotlin, y ahora vamos a compartir dichas noticias con todo el mundo.
 

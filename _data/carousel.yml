@@ -1,3 +1,9 @@
+- title: "Repaso de la Keynote de KotlinConf"
+  description: "Ya ha sido la keynote de la KotlinConf de 2017, echemos un vistazo a lo anunciado"
+  image: /images/carousel/kotlinconf.jpg
+  url: 2017/11/kotlinconf-recap/
+  transformOrigin: 0% 50%
+
 - title: "Charla en Barcelona el próximo 26 de Septiembre"
   description: "En las oficinas de Infojobs ¡y por streaming! a las 19:00"
   image: /images/talks/barcelona-infojobs-talk-2017-09-26.jpg
@@ -55,13 +61,3 @@
   description: Repositorio de ejercicios online
   image: /images/carousel/2015-11-19-kotlin-koans.png
   url: /2015/11/kotlin-koans/
-
-- title: Jekyll
-  description: Hemos migrado a jekyll
-  image: /images/carousel/jekyllrb.png
-  url: /2015/11/nos-pasamos-a-jekyll/
-
-- title: intelliJ 15
-  description: Ya disponible, ¡y con soporte para kotlin!
-  image: /images/carousel/intelliJ15.png
-  url: http://blog.jetbrains.com/idea/2015/11/intellij-idea-15-released-adds-kotlin-to-the-family-of-supported-jvm-languages/
