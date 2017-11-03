@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Keynote de KotlinConf: Kotlin 1.2-RC, Kotlin/Native 0.4 + iOS + IDE, Ktor 0.9, Kotlin React y futuro"
+title: "Repaso de la Keynote de KotlinConf"
 category: releases
 tags: releases
 author: soywiz
@@ -11,6 +11,7 @@ kotlin_version: 1.2-rc-39
 noiconinpost: true
 iconinheader: true
 maven_repo: http://dl.bintray.com/kotlin/kotlin-eap-1.2
+description: "Keynote de KotlinConf: Kotlin 1.2-RC, Kotlin/Native 0.4 + iOS + IDE, Ktor 0.9, Kotlin React y futuro"
 ---
 
 Hoy es un gran día para la comunidad de Kotlin. KotlinConf, la conferencia inaugural de Kotlin, abre hoy sus puertas. Y estamos muy impresionados de que casi 1200 personas de todo el mundo se hayan unido a nosotros en San Francisco.
