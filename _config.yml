@@ -15,6 +15,8 @@ twitter_username: kotlin-es
 github_username:  kotlin-es
 facebook_username: kotlin.es
 
+excerpt_separator: <!--more-->
+
 # Build settings
 markdown: kramdown
 
