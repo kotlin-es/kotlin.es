@@ -1,3 +1,8 @@
+- title: 1.2
+  description: ¡Versión final de Kotlin 1.2!
+  image: /images/1.2.0/cake3-1.jpg
+  url: /2017/11/1.2.0/
+
 - title: "Repaso de la Keynote de KotlinConf"
   description: "Keynote de KotlinConf: Kotlin 1.2-RC, Kotlin/Native 0.4 + iOS + IDE, Ktor 0.9, Kotlin React y futuro"
   image: /images/carousel/kotlinconf.jpg
