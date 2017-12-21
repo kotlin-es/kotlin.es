@@ -10,7 +10,7 @@ title: Kotlin.es
 email: your-email@domain.com
 description: La primera comunidad de Kotlin en español
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://kotlin.es" # the base hostname & protocol for your site
+url: "https://old.kotlin.es" # the base hostname & protocol for your site
 twitter_username: kotlin-es
 github_username:  kotlin-es
 facebook_username: kotlin.es
